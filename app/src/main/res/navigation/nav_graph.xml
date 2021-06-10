@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_main">
+
+    <fragment
+        android:id="@+id/navigation_main"
+        android:name="kg.kyrgyzcoder.altaydillerisozlugu.ui.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_wordsFragment"
+            app:destination="@id/wordsFragment" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_navigation_main_to_navigation_choosen"
+            app:destination="@id/navigation_choosen" />
+        <action
+            android:id="@+id/action_navigation_main_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_navigation_main_to_navigation_settings"
+            app:destination="@id/navigation_settings" />
+    </fragment>
+    <fragment
+        android:id="@+id/wordsFragment"
+        android:name="kg.kyrgyzcoder.altaydillerisozlugu.ui.main.words.WordsFragment"
+        android:label="fragment_words"
+        tools:layout="@layout/fragment_words" >
+        <action
+            android:id="@+id/action_wordsFragment_to_mainFragment"
+            app:destination="@id/navigation_main"
+            app:popUpTo="@id/navigation_main" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_choosen"
+        android:name="kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.ChosenFragment"
+        android:label="fragment_chosen"
+        tools:layout="@layout/fragment_chosen" >
+        <action
+            android:id="@+id/action_navigation_choosen_to_navigation_main"
+            app:destination="@id/navigation_main" />
+        <action
+            android:id="@+id/action_navigation_choosen_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_navigation_choosen_to_navigation_settings"
+            app:destination="@id/navigation_settings" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="kg.kyrgyzcoder.altaydillerisozlugu.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_navigation_settings_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_navigation_settings_to_navigation_main"
+            app:destination="@id/navigation_main" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_settings"
+            app:destination="@id/navigation_settings" />
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_choosen"
+            app:destination="@id/navigation_choosen" />
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_main"
+            app:destination="@id/navigation_main" />
+    </fragment>
+</navigation>

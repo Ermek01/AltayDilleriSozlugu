@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Altay Dilleri Sözlüğü</string>
+    <string name="txt_username">Kullanıcı adı</string>
+    <string name="txt_password">Şifre</string>
+    <string name="txt_signin">Katılmak</string>
+    <string name="txt_forgot_password">Şifrenizi unuttunuz mu?</string>
+    <string name="txt_create_account"><u>Yaratmak</u></string>
+    <string name="txt_login_account"><u>Katılmak</u></string>
+    <string name="pwdUserNameWrong">Yanlış giriş veya şifre</string>
+    <string name="txt_not_account">Hesapiniz yok mu?</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_create">Yaratmak</string>
+    <string name="txt_yes_account">Hesabınız var mı?</string>
+    <string name="continue_without_an_account">Hesap oluşturmadan devam edin</string>
+    <string name="txt_signout">Çıkmak</string>
+    <string name="txt_signout_confirm">Gerçekten dışarı çıkmak istiyor musun?</string>
+    <string name="txt_cancel">Iptal</string>
+    <string name="txt_search">Arayış</string>
+    <string name="txt_animals">Hayvanlar</string>
+    <string name="configuration">Tebrikler!</string>
+    <string name="txt_pay_success">Başarıyla ödendi</string>
+    <string name="txt_preview_pay">Ayrıntılar</string>
+    <string name="txt_continue">İlerlemek</string>
+    <string name="something_went_wrong">Bir şeyler yanlış gitti</string>
+    <string name="txt_try_again">Yeniden</string>
+    <string name="txt_select_language">Dil seçiniz</string>
+    <string name="txt_write_username">İsminizi yaziniz</string>
+    <string name="txt_write_password">Şifrenizi yaziniz</string>
+    <string name="txt_write_email">Email yaziniz</string>
+    <string name="txt_create_success_account">Hesabınız başarıyla oluşturuldu!</string>
+    <string name="txt_or_log_in_with">Veya şununla oturum açın</string>
+    <string name="txt_confirm_password">Şifreyi onaylayın</string>
+    <string name="txt_name_country">Türkçe</string>
+    <string name="txt_error_request">Bir hata oluştu! Lütfen tekrar deneyin!</string>
+</resources>

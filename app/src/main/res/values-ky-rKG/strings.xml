@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Altay Dilleri Sözlüğü</string>
+    <string name="txt_create_account"><u>Жаратуу</u></string>
+    <string name="txt_login_account"><u>Кирүү</u></string>
+    <string name="pwdUserNameWrong">Аты-Жөнүнүз же сыр сөзүнүз туура эмес жазылды</string>
+    <string name="txt_username">Аты-Жөнү</string>
+    <string name="txt_password">Сыр сөз</string>
+    <string name="txt_signin">Кирүү</string>
+    <string name="txt_forgot_password">Сыр сөздү унуттуңузбу?</string>
+    <string name="txt_not_account">Аккаунтуңуз жокпу?</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_create">Жаратуу</string>
+    <string name="txt_yes_account">Аккаунтуңуз барбы?</string>
+    <string name="continue_without_an_account">Аккаунтту түзбөстөн уланта берүү</string>
+    <string name="txt_signout">Чыгуу</string>
+    <string name="txt_signout_confirm">Чын эле чыгууну каалайсызбы?</string>
+    <string name="txt_cancel">Кайтуу</string>
+    <string name="txt_search">Издөө</string>
+    <string name="txt_animals">Жаныбарлар</string>
+    <string name="configuration">Куттуктайбыз!</string>
+    <string name="txt_pay_success">Ийгиликтүү төлөндү</string>
+    <string name="txt_preview_pay">Толук маалымат</string>
+    <string name="txt_continue">Улантуу</string>
+    <string name="something_went_wrong">Бир жерден ката кетти</string>
+    <string name="txt_try_again">Жаныдан кайталоо</string>
+    <string name="txt_select_language">Тилди тандаңыз</string>
+    <string name="txt_write_username">Аты-Жөнүнүздү жазыныз</string>
+    <string name="txt_write_password">Сыр Сөзүнүздү жазыныз</string>
+    <string name="txt_write_email">Почтанызды жазыныз</string>
+    <string name="txt_create_success_account">Сиздин аккаунтунуз ийгиликтүү түзүлдү!</string>
+    <string name="txt_or_log_in_with">Кирүү үчүн башка жолдор</string>
+    <string name="txt_confirm_password">Сыр сөздү кайталоо</string>
+    <string name="txt_name_country">Кыргызча</string>
+    <string name="txt_error_request">Ката кетти! Сураныч, дагы бир жолу аракет кылып көрүңүз!</string>
+</resources>

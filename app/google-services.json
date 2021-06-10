@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "911011960752",
+    "project_id": "altay-dilleri-sozlugu",
+    "storage_bucket": "altay-dilleri-sozlugu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:911011960752:android:069162276ff173c4496875",
+        "android_client_info": {
+          "package_name": "kg.kyrgyzcoder.altaydillerisozlugu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "911011960752-5057rf9enmts6kar8i627mlp2t5kedr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcY4BFrWGAmcSa1W_ylFafWDoUVzU2XNU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "911011960752-5057rf9enmts6kar8i627mlp2t5kedr3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
