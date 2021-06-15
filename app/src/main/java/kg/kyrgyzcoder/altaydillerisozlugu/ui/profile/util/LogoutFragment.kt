@@ -9,6 +9,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentLogoutBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.viewmodel.ProfileViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.viewmodel.ProfileViewModelFactory
@@ -66,10 +67,11 @@ class LogoutFragment : DialogFragment(), KodeinAware, ProfileListener {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
         requireActivity().finish()
-        Toast.makeText(requireContext(), "Сиз ийгиликтүү чыктыныз!!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), getString(R.string.txt_success_logout), Toast.LENGTH_SHORT).show()
     }
 
     override fun logoutFail(code: Int?) {
+        Toast.makeText(requireContext(), "dasdsadsa", Toast.LENGTH_SHORT).show()
     }
 
     override fun onResume() {

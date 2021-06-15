@@ -6,8 +6,10 @@ import kg.kyrgyzcoder.altaydillerisozlugu.data.local.UserPreferences
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.NetworkResponse
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.repo.ItemRepository
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.CategoryListener
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.DescriptionsListener
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.WordsListener
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
 class ItemViewModel(
@@ -15,8 +17,10 @@ class ItemViewModel(
     private val itemRepository: ItemRepository
 ) : ViewModel() {
 
+
     private var listener: CategoryListener? = null
     private var wordsListener: WordsListener? = null
+    private var descriptionsListener: DescriptionsListener? = null
 
     fun getCategoryListener(listener: CategoryListener) {
         this.listener = listener
@@ -26,11 +30,17 @@ class ItemViewModel(
         this.wordsListener = wordsListener
     }
 
-    fun getCategoryList(search: String) = viewModelScope.launch {
+    fun getDescriptionsListener(descriptionsListener: DescriptionsListener) {
+        this.descriptionsListener = descriptionsListener
+    }
+
+
+
+    fun getCategoryList(code: String?,search: String) = viewModelScope.launch {
 
         userPreferences.currentUserToken.collectLatest { token ->
-            if (token != null) {
-                when (val response = itemRepository.getCategoryList("Token $token", search)) {
+            if (token!!.isNotEmpty()) {
+                when (val response = itemRepository.getCategoryList(code,"Token $token", search)) {
                     is NetworkResponse.Success -> {
                         listener?.getCategories(response.value)
                     }
@@ -40,7 +50,7 @@ class ItemViewModel(
                 }
             }
             else {
-                when (val response = itemRepository.getCategoryListDefUser(search)) {
+                when (val response = itemRepository.getCategoryListDefUser(code, search)) {
                     is NetworkResponse.Success -> {
                         listener?.getCategories(response.value)
                     }
@@ -53,11 +63,11 @@ class ItemViewModel(
 
     }
 
-    fun getWordsList(categoryId: Int, search: String) = viewModelScope.launch {
+    fun getWordsList(code: String?,categoryId: Int, search: String) = viewModelScope.launch {
 
         userPreferences.currentUserToken.collectLatest { token ->
-            if (token != null) {
-                when (val response = itemRepository.getWordsList("Token $token", categoryId, search)) {
+            if (token!!.isNotEmpty()) {
+                when (val response = itemRepository.getWordsList(code,"Token $token", categoryId, search)) {
                     is NetworkResponse.Success -> {
                         wordsListener?.getWordsSuccess(response.value)
                     }
@@ -67,12 +77,39 @@ class ItemViewModel(
                 }
             }
             else {
-                when (val response = itemRepository.getWordsListDefUser(categoryId, search)) {
+                when (val response = itemRepository.getWordsListDefUser(code, categoryId, search)) {
                     is NetworkResponse.Success -> {
                         wordsListener?.getWordsSuccess(response.value)
                     }
                     is NetworkResponse.Failure -> {
                         wordsListener?.getWordsError(response.errorCode)
+                    }
+                }
+            }
+        }
+
+    }
+
+    fun getDescriptionsList(code: String?,categoryId: Int) = viewModelScope.launch {
+
+        userPreferences.currentUserToken.collectLatest { token ->
+            if (token!!.isNotEmpty()) {
+                when (val response = itemRepository.getDescriptionsList(code,"Token $token", categoryId)) {
+                    is NetworkResponse.Success -> {
+                        descriptionsListener?.getDescriptionsSuccess(response.value)
+                    }
+                    is NetworkResponse.Failure -> {
+                        descriptionsListener?.getDescriptionsError(response.errorCode)
+                    }
+                }
+            }
+            else {
+                when (val response = itemRepository.getDescriptionsListDefUser(code, categoryId)) {
+                    is NetworkResponse.Success -> {
+                        descriptionsListener?.getDescriptionsSuccess(response.value)
+                    }
+                    is NetworkResponse.Failure -> {
+                        descriptionsListener?.getDescriptionsError(response.errorCode)
                     }
                 }
             }

@@ -1,5 +1,6 @@
 package kg.kyrgyzcoder.altaydillerisozlugu.ui.splash.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
@@ -8,12 +9,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.core.app.ActivityCompat.recreate
 import androidx.fragment.app.DialogFragment
 import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.ActivitySplashScreenBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentMainBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentSelectLanguageBinding
+import kg.kyrgyzcoder.altaydillerisozlugu.util.LANGUAGE_KEY
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -27,7 +30,7 @@ class SelectLanguageFragment(private val listener: LanguageListener) : DialogFra
     private var _binding: FragmentSelectLanguageBinding? = null
     private val binding: FragmentSelectLanguageBinding get() = _binding!!
 
-    private val countryList = addItemList(11)
+    private val countryList = addItemList(14)
     private var isTouched: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,8 +49,13 @@ class SelectLanguageFragment(private val listener: LanguageListener) : DialogFra
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.scrol.isFillViewport = true
+
         binding.recyclerView.adapter = CountryAdapter(countryList, this)
         binding.recyclerView.setHasFixedSize(true)
+
+
+
     }
 
     fun addItemList(size: Int) : List<Language> {
@@ -57,7 +65,7 @@ class SelectLanguageFragment(private val listener: LanguageListener) : DialogFra
 
 
         for (i in 0 until size) {
-            val drawable = when (i % 11) {
+            val drawable = when (i % 14) {
                 0 -> R.drawable.tr
                 1 -> R.drawable.az
                 2 -> R.drawable.uz
@@ -68,10 +76,13 @@ class SelectLanguageFragment(private val listener: LanguageListener) : DialogFra
                 7 -> R.drawable.kg
                 8 -> R.drawable.ba
                 9 -> R.drawable.cu
-                else -> R.drawable.qr
+                10 -> R.drawable.qr
+                11 -> R.drawable.krc
+                12 -> R.drawable.sah
+                else -> R.drawable.crh
             }
 
-            val name = when (i % 11) {
+            val name = when (i % 14) {
                 0 -> "Türkçe"
                 1 -> "Azərbaycan"
                 2 -> "O'zbek"
@@ -82,21 +93,27 @@ class SelectLanguageFragment(private val listener: LanguageListener) : DialogFra
                 7 -> "Кыргызча"
                 8 -> "Башҡорт"
                 9 -> "Чăваш"
-                else -> "Qaraqalpaq"
+                10 -> "Qaraqalpaq"
+                11 -> "Карачай-балкар"
+                12 -> "Якутия"
+                else -> "Крым Татарский"
             }
 
-            val code = when (i % 11) {
+            val code = when (i % 14) {
                 0 -> "tr"
                 1 -> "az"
                 2 -> "uz"
-                3 -> "kz"
+                3 -> "kk"
                 4 -> "ug"
-                5 -> "tm"
-                6 -> "tatar"
+                5 -> "tk"
+                6 -> "tt"
                 7 -> "ky"
-                8 -> "ru-ba"
-                9 -> "ru-cu"
-                else -> "uz-qr"
+                8 -> "ba"
+                9 -> "cv"
+                10 -> "kaa"
+                11 -> "krc"
+                12 -> "sah"
+                else -> "crh"
             }
 
             val item = Language(drawable, name, code)
@@ -114,6 +131,7 @@ class SelectLanguageFragment(private val listener: LanguageListener) : DialogFra
         dismiss()
     }
 
+    @SuppressLint("CommitPrefEdits")
     private fun setLocale(position: Int) {
 
         val locale = Locale(countryList[position].code)

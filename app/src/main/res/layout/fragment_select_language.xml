@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="320dp"
-        android:layout_height="wrap_content"
+        android:layout_height="545dp"
         android:orientation="vertical">
 
         <TextView
@@ -22,9 +22,12 @@
             android:layout_marginStart="60dp"
             android:textSize="20sp"/>
 
-        <androidx.core.widget.NestedScrollView
+        <ScrollView
+            android:id="@+id/scrol"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:padding="10dp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
@@ -35,7 +38,7 @@
                     android:paddingBottom="10dp"
                     />
 
-        </androidx.core.widget.NestedScrollView>
+        </ScrollView>
 
     </LinearLayout>
 

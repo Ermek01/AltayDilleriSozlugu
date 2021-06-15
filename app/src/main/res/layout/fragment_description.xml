@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.main.words.WordsFragment">
+    android:background="@color/white"
+    tools:context=".ui.main.description.DescriptionFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -76,65 +77,38 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefresh"
+    <TextView
+        android:id="@+id/name_cards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textColor="@color/color_items_card"
+        android:fontFamily="@font/philosopher"
+        android:textAlignment="center"
+        android:layout_below="@id/appBar"
+        android:layout_marginTop="30dp"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/appBar"
-        android:layout_marginTop="6dp">
+        android:layout_below="@id/name_cards"
+        android:layout_marginTop="30dp"
+        android:layout_above="@+id/indicator"
+        android:background="@color/white"
+        android:paddingStart="35dp"
+        android:paddingEnd="35dp"
+        android:foregroundGravity="center"
+        android:overScrollMode="never"
+        android:clipToPadding="false"/>
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedScrollView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RelativeLayout
-                android:id="@+id/relativeLayout_category_cards"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/name_cards"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="30sp"
-                    android:textColor="@color/color_items_card"
-                    android:fontFamily="@font/philosopher"
-                    android:textAlignment="center"
-                    android:layout_marginTop="30dp"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView_words"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/name_cards"
-                    android:layout_marginTop="20dp"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    tools:listitem="@layout/row_words_items"
-                    app:spanCount="2"
-                    android:paddingStart="30dp"
-                    android:paddingEnd="30dp"
-                    tools:ignore="RtlSymmetry" />
-
-            </RelativeLayout>
-
-        </androidx.core.widget.NestedScrollView>
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/progressBar"
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/indicator"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#65FFFFFF"
-        android:visibility="gone">
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        app:ci_drawable="@drawable/indicator_color"
+        />
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
-
-    </RelativeLayout>
 
 </RelativeLayout>

@@ -47,7 +47,10 @@ class AuthViewModel(
 
     private fun saveUserData(value: ModelLoginRes) = viewModelScope.launch {
         userPreferences.saveUserData(
-            value.token
+            value.token,
+            value.user_id,
+            value.username,
+            value.email
         )
         listener?.userDataSaved()
     }

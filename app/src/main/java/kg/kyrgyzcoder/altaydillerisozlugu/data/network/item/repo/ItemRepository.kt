@@ -7,20 +7,28 @@ class ItemRepository(
     private val apiService: ApiService
 ) : BaseRepository() {
 
-    suspend fun getCategoryList(authorization : String, search: String) = safeApiCall {
-        apiService.getCategoryList("application/json", authorization, search)
+    suspend fun getCategoryList(code: String?, authorization : String, search: String) = safeApiCall {
+        apiService.getCategoryList(code,"application/json", authorization, search)
     }
 
-    suspend fun getCategoryListDefUser(search: String) = safeApiCall {
-        apiService.getCategoryListDefUser("application/json", search)
+    suspend fun getCategoryListDefUser(code: String?, search: String) = safeApiCall {
+        apiService.getCategoryListDefUser(code,"application/json", search)
     }
 
-    suspend fun getWordsList(authorization : String, categoryId: Int, search: String) = safeApiCall {
-        apiService.getWordsList("application/json", authorization, categoryId, search)
+    suspend fun getWordsList(code: String?,authorization : String, categoryId: Int, search: String) = safeApiCall {
+        apiService.getWordsList(code,"application/json", authorization, categoryId, search)
     }
 
-    suspend fun getWordsListDefUser(categoryId: Int, search: String) = safeApiCall {
-        apiService.getWordsListDefUser("application/json", categoryId, search)
+    suspend fun getWordsListDefUser(code: String?,categoryId: Int, search: String) = safeApiCall {
+        apiService.getWordsListDefUser(code,"application/json", categoryId, search)
+    }
+
+    suspend fun getDescriptionsList(code: String?,authorization : String, categoryId: Int) = safeApiCall {
+        apiService.getDescriptionsList(code,"application/json", authorization, categoryId)
+    }
+
+    suspend fun getDescriptionsListDefUser(code: String?,categoryId: Int) = safeApiCall {
+        apiService.getDescriptionsListDefUser(code,"application/json", categoryId)
     }
 
 }

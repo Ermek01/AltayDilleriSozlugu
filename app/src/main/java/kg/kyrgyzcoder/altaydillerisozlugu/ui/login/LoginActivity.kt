@@ -1,6 +1,7 @@
 package kg.kyrgyzcoder.altaydillerisozlugu.ui.login
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -19,10 +20,7 @@ import kg.kyrgyzcoder.altaydillerisozlugu.ui.login.viewmodel.AuthViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.login.viewmodel.AuthViewModelFactory
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.MainActivity
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.register.RegisterActivity
-import kg.kyrgyzcoder.altaydillerisozlugu.util.hide
-import kg.kyrgyzcoder.altaydillerisozlugu.util.hideKeyboard
-import kg.kyrgyzcoder.altaydillerisozlugu.util.show
-import kg.kyrgyzcoder.altaydillerisozlugu.util.toast
+import kg.kyrgyzcoder.altaydillerisozlugu.util.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
@@ -38,6 +36,7 @@ class LoginActivity : AppCompatActivity(), KodeinAware, AuthListener {
     private lateinit var binding: ActivityLoginBinding
 
     private var mIsShowPass = false
+    private val languages = "ky"
 
     @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -51,17 +50,35 @@ class LoginActivity : AppCompatActivity(), KodeinAware, AuthListener {
         authViewModel = ViewModelProvider(this, authViewModelFactory).get(AuthViewModel::class.java)
         authViewModel.setListener(this)
 
+        val pref = getSharedPreferences("language", Context.MODE_PRIVATE)
+        val code : String = pref.getString(CODE_KEY, "").toString()
+
         binding.btnLogin.setOnClickListener {
 
             if (checkInputs()){
                 hideKeyboard()
                 binding.progressBar.show()
-                authViewModel.loginUser(
-                    ModelLoginUser(
-                        binding.editUsername.text.toString(),
-                        binding.editPassword.text.toString()
+
+                if (code.isEmpty()){
+                    authViewModel.loginUser(
+                        ModelLoginUser(
+                            binding.editUsername.text.toString(),
+                            binding.editPassword.text.toString(),
+                            languages
+                        )
                     )
-                )
+                }
+                else {
+                    authViewModel.loginUser(
+                        ModelLoginUser(
+                            binding.editUsername.text.toString(),
+                            binding.editPassword.text.toString(),
+                            code
+                        )
+                    )
+                }
+
+
             }
 
         }

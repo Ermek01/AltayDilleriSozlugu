@@ -47,7 +47,7 @@
             app:drawableEndCompat="@drawable/ccp_ic"
             android:drawablePadding="10dp"
             android:fontFamily="@font/nunito"
-            android:text="@string/txt_name_country"
+            android:text="Кыргызча"
             android:textStyle="normal" />
 
     </RelativeLayout>

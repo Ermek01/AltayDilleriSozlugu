@@ -24,5 +24,6 @@
     <color name="color_txt_error">#FF4D4D</color>
     <color name="color_btn_cancel">#CCCDCE</color>
     <color name="color_txt_select_language">#5A5A67</color>
+    <color name="color_txt_translate">#2C3A47</color>
 
 </resources>

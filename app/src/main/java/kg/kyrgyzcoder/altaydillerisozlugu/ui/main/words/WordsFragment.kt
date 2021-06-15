@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -26,16 +27,15 @@ import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.WordsListener
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.WordsRecyclerViewAdapter
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModelFactory
-import kg.kyrgyzcoder.altaydillerisozlugu.util.hide
-import kg.kyrgyzcoder.altaydillerisozlugu.util.hideKeyboard
-import kg.kyrgyzcoder.altaydillerisozlugu.util.show
-import kg.kyrgyzcoder.altaydillerisozlugu.util.toast
+import kg.kyrgyzcoder.altaydillerisozlugu.util.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import java.lang.Exception
 
-class WordsFragment : Fragment(), KodeinAware, WordsListener, WordsRecyclerViewAdapter.WordsClickListener {
+class WordsFragment : Fragment(), KodeinAware, WordsListener,
+    WordsRecyclerViewAdapter.WordsClickListener {
 
     override val kodein: Kodein by closestKodein()
     private val itemViewModelFactory: ItemViewModelFactory by instance()
@@ -51,9 +51,11 @@ class WordsFragment : Fragment(), KodeinAware, WordsListener, WordsRecyclerViewA
 
     private lateinit var adapter: WordsRecyclerViewAdapter
 
-    val args : WordsFragmentArgs by navArgs()
+    private var code: String? = ""
 
+    val args: WordsFragmentArgs by navArgs()
 
+    var amount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,13 +80,16 @@ class WordsFragment : Fragment(), KodeinAware, WordsListener, WordsRecyclerViewA
 
         itemViewModel.getWordsListener(this)
 
-        val amount = args.id
+        amount = args.id
+
+        val pref = requireActivity().getSharedPreferences("language", Context.MODE_PRIVATE)
+        code = pref.getString(CODE_KEY, "")
 
         binding.progressBar.show()
-        itemViewModel.getWordsList(amount, search)
+        itemViewModel.getWordsList(code, amount, search)
 
         binding.swipeRefresh.setOnRefreshListener {
-            itemViewModel.getWordsList(amount, search)
+            itemViewModel.getWordsList(code, amount, search)
         }
 
         binding.imgBack.setOnClickListener {
@@ -120,7 +125,7 @@ class WordsFragment : Fragment(), KodeinAware, WordsListener, WordsRecyclerViewA
 
 
         })
-        
+
         binding.editSearch.setOnTouchListener(View.OnTouchListener { v, event ->
 
             val DRAWABLE_LEFT = 0
@@ -147,7 +152,7 @@ class WordsFragment : Fragment(), KodeinAware, WordsListener, WordsRecyclerViewA
     }
 
     private fun getWordsSearch(amount: Int) {
-        itemViewModel.getWordsList(amount, binding.editSearch.text.toString())
+        itemViewModel.getWordsList(code, amount, binding.editSearch.text.toString())
         adapter = WordsRecyclerViewAdapter(this)
         binding.recyclerViewWords.setHasFixedSize(true)
         binding.recyclerViewWords.adapter = adapter
@@ -163,6 +168,18 @@ class WordsFragment : Fragment(), KodeinAware, WordsListener, WordsRecyclerViewA
         adapter.submitList(words)
         binding.progressBar.hide()
         binding.swipeRefresh.isRefreshing = false
+
+        if (code!!.isNotEmpty()) {
+            when (code) {
+                "tr" -> {
+                    binding.nameCards.text = modelWordsPag[0].category
+                }
+                "ky" -> {
+                    binding.nameCards.text = modelWordsPag[0].category
+                }
+            }
+        }
+
     }
 
     override fun getWordsError(code: Int?) {
@@ -172,6 +189,10 @@ class WordsFragment : Fragment(), KodeinAware, WordsListener, WordsRecyclerViewA
     }
 
     override fun onWordsClick(position: Int) {
+        val action =
+            WordsFragmentDirections.actionWordsFragmentToDescriptionFragment(amount, position)
+        Navigation.findNavController(binding.root).navigate(action)
+
     }
 
 }

@@ -1,8 +1,10 @@
 package kg.kyrgyzcoder.altaydillerisozlugu.ui.splash
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,20 +12,20 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import com.google.firebase.auth.FirebaseAuth
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.MainActivity
 import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.data.local.UserPreferences
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.ActivitySplashScreenBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.login.LoginActivity
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.util.LogoutFragment
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.MainActivity
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.splash.utils.LanguageListener
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.splash.utils.SelectLanguageFragment
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.splash.viewmodel.UserPreferencesViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.splash.viewmodel.UserPreferencesViewModelFactory
-import kg.kyrgyzcoder.altaydillerisozlugu.util.toast
+import kg.kyrgyzcoder.altaydillerisozlugu.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -32,6 +34,8 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
+import java.util.*
+
 
 class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener {
     override val kodein: Kodein by closestKodein()
@@ -39,26 +43,23 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
 
     private lateinit var userPreferencesViewModel: UserPreferencesViewModel
 
-    val userPreferences : UserPreferences? = null
+    val userPreferences: UserPreferences? = null
 
     private lateinit var binding: ActivitySplashScreenBinding
 
     private lateinit var bottomAnim: Animation
 
-    private lateinit var circleAnim1 : Animation
-    private lateinit var circleAnim2 : Animation
-    private lateinit var circleAnim3 : Animation
+    private lateinit var circleAnim1: Animation
+    private lateinit var circleAnim2: Animation
+    private lateinit var circleAnim3: Animation
 
     private var mIsRecreate: Boolean = false
 
     private var mCode = ""
+    private var code: String? = ""
     private var nameCountry = ""
     private var mFlag = 0
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mIsRecreate = true
-    }
 
     override fun getLanguage(flag: Int, name: String, code: String, isRecreate: Boolean) {
         mFlag = flag
@@ -67,19 +68,21 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
         mIsRecreate = isRecreate
     }
 
+    @SuppressLint("CommitPrefEdits")
     override fun recreate() {
         super.recreate()
 
-        if (mIsRecreate){
-            Log.d("ololo", "recreate")
+        Log.d("ololo", "recreate")
+        val pref = getSharedPreferences("language", Context.MODE_PRIVATE)
+        val editor = pref.edit()
 
-            if (mCode.isNotEmpty()) {
-                binding.imgFlag.setBackgroundResource(mFlag)
-                binding.nameCountry.text = nameCountry
-            }
-        }
+        editor.putInt(FLAG_KEY, mFlag)
+        editor.putString(CODE_KEY, mCode)
+        editor.putString(NAME_KEY, nameCountry)
+        editor.apply()
 
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,9 +102,26 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
                 userPreferencesViewModelFactory
             ).get(UserPreferencesViewModel::class.java)
 
+        val pref = getSharedPreferences("language", Context.MODE_PRIVATE)
+        val flag = pref.getInt(FLAG_KEY, 0)
+        code = pref.getString(CODE_KEY, "")
+        val name = pref.getString(NAME_KEY, "")
+        val language = pref.getString(LANGUAGE_KEY, "")
 
+        if (flag != 0) {
+            binding.imgFlag.setImageResource(flag)
+            binding.nameCountry.text = name
 
-
+            val locale = Locale(code!!)
+            Locale.setDefault(locale)
+            val config = Configuration()
+            config.locale = locale
+            applicationContext.createConfigurationContext(config)
+            applicationContext.resources.updateConfiguration(
+                config,
+                applicationContext.resources.displayMetrics
+            )
+        }
 
         binding.relativeLayout.setOnClickListener {
             val fm = supportFragmentManager
@@ -120,16 +140,28 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
             )
         }
 
-        GlobalScope.launch(Dispatchers.Main){
+        GlobalScope.launch(Dispatchers.Main) {
             val user = FirebaseAuth.getInstance().currentUser
-            if (user != null){
+            if (user != null) {
                 delayFor(1)
-            }
-            else {
+            } else {
                 signIn()
             }
         }
 
+    }
+
+
+    override fun applyOverrideConfiguration(overrideConfiguration: Configuration?) {
+
+        if (overrideConfiguration != null) {
+            val uiMode = overrideConfiguration.uiMode
+            overrideConfiguration.setTo(baseContext.resources.configuration)
+            overrideConfiguration.uiMode = uiMode
+        }
+        super.applyOverrideConfiguration(overrideConfiguration)
+
+        super.applyOverrideConfiguration(overrideConfiguration)
     }
 
     private fun signIn() {
@@ -144,9 +176,9 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
         }
     }
 
-    private suspend fun delayFor(code : Int){
+    private suspend fun delayFor(code: Int) {
 
-        if (!mIsRecreate){
+        if (!mIsRecreate) {
 
             binding.circle240dp.visibility = View.VISIBLE
             binding.circle240dp.animation = circleAnim1
@@ -158,12 +190,12 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
             binding.circle450dp.animation = circleAnim3
             delay(500)
 
-            if (code == 1){
+            if (code == 1) {
                 delay(2000)
             }
-            userPreferencesViewModel.isUserSignedIn.asLiveData().observe(this, {isUserIn ->
+            userPreferencesViewModel.isUserSignedIn.asLiveData().observe(this, { isUserIn ->
 
-                if (isUserIn.isNullOrEmpty()){
+                if (isUserIn.isNullOrEmpty()) {
 
                     binding.circle240dp.visibility = View.GONE
                     binding.circle350dp.visibility = View.GONE
@@ -188,8 +220,7 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
                         finish()
                     }
 
-                }
-                else {
+                } else {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()

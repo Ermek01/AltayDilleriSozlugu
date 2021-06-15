@@ -2,6 +2,7 @@ package kg.kyrgyzcoder.altaydillerisozlugu.util
 
 import android.app.Application
 import android.content.Context
+import android.content.res.Configuration
 import com.jakewharton.threetenabp.AndroidThreeTen
 import kg.kyrgyzcoder.altaydillerisozlugu.data.local.UserPreferences
 import kg.kyrgyzcoder.altaydillerisozlugu.data.local.UserPreferencesImpl
@@ -20,25 +21,9 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
+import java.util.*
 
 class App : Application(), KodeinAware {
-
-    override fun onCreate() {
-        super.onCreate()
-        instance = this
-    }
-
-    fun setLanguagePref(localeKey: String){
-        val preferences = getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit()
-        preferences.putString(LOCALE, localeKey)
-        preferences.apply()
-
-    }
-
-    fun getLanguagePref() : String? {
-        val  preferences = getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-        return preferences.getString(LOCALE, "")
-    }
 
     override val kodein: Kodein = Kodein.lazy {
 

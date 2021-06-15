@@ -31,6 +31,6 @@
     <string name="txt_create_success_account">Hesabınız başarıyla oluşturuldu!</string>
     <string name="txt_or_log_in_with">Veya şununla oturum açın</string>
     <string name="txt_confirm_password">Şifreyi onaylayın</string>
-    <string name="txt_name_country">Türkçe</string>
     <string name="txt_error_request">Bir hata oluştu! Lütfen tekrar deneyin!</string>
+    <string name="txt_success_logout">Başarıyly çıkış yaptınız</string>
 </resources>

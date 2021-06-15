@@ -7,7 +7,9 @@ import kg.kyrgyzcoder.altaydillerisozlugu.data.local.UserPreferences
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.NetworkResponse
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.user.repo.UserDataRepository
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.util.ProfileListener
+import kotlinx.coroutines.async
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -23,19 +25,20 @@ class ProfileViewModel(
     }
 
     fun logoutUser() = viewModelScope.launch {
-            userPreferences.currentUserToken.collectLatest { token ->
+        userPreferences.currentUserToken.collect { token ->
+            if (token!!.isNotEmpty()){
                 when (val response = userDataRepository.logoutUser("Token $token")) {
                     is NetworkResponse.Success -> {
-                        listener?.logoutSuccess()
                         userPreferences.logoutUser()
+                        listener?.logoutSuccess()
+
                     }
                     is NetworkResponse.Failure -> {
                         listener?.logoutFail(response.errorCode)
                     }
                 }
+            }
         }
 
     }
-
-
 }

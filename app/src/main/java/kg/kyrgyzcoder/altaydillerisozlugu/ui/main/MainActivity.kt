@@ -1,5 +1,7 @@
 package kg.kyrgyzcoder.altaydillerisozlugu.ui.main
 
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
@@ -11,7 +13,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.ActivityMainBinding
+import kg.kyrgyzcoder.altaydillerisozlugu.util.CODE_KEY
 import kg.kyrgyzcoder.altaydillerisozlugu.util.OnBackPressed
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {

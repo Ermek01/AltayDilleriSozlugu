@@ -38,6 +38,12 @@
         <argument
             android:name="id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_wordsFragment_to_descriptionFragment"
+            app:destination="@id/descriptionFragment" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/navigation_choosen"
@@ -80,5 +86,20 @@
         <action
             android:id="@+id/action_navigation_profile_to_navigation_main"
             app:destination="@id/navigation_main" />
+    </fragment>
+    <fragment
+        android:id="@+id/descriptionFragment"
+        android:name="kg.kyrgyzcoder.altaydillerisozlugu.ui.main.description.DescriptionFragment"
+        android:label="fragment_description"
+        tools:layout="@layout/fragment_description" >
+        <action
+            android:id="@+id/action_descriptionFragment_to_wordsFragment"
+            app:destination="@id/wordsFragment" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
     </fragment>
 </navigation>

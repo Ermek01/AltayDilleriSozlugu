@@ -2,6 +2,7 @@ package kg.kyrgyzcoder.altaydillerisozlugu.data.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelCategoryRes
+import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelDescriptionsPag
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelWordsPag
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.login.model.ModelLoginRes
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.login.model.ModelLoginUser
@@ -33,38 +34,57 @@ interface ApiService {
         @Header("Content-Type")  content_type:String,
         @Header ("Authorization") authorization:String)
 
-    @GET("category/")
+    @GET("{i18n}/category/")
     suspend fun getCategoryList(
+        @Path("i18n") code : String?,
         @Header("Content-Type")  content_type:String,
         @Header ("Authorization") value: String,
         @Query("search") q : String
     ): ModelCategoryRes
 
-    @GET("category/")
+    @GET("{i18n}/category/")
     suspend fun getCategoryListDefUser(
+        @Path("i18n") code : String?,
         @Header("Content-Type")  content_type:String,
         @Query("search") q : String
     ): ModelCategoryRes
 
-    @GET("words/")
+    @GET("{i18n}/words/")
     suspend fun getWordsList(
+        @Path("i18n") code : String?,
         @Header("Content-Type")  content_type:String,
         @Header ("Authorization") value: String,
         @Query ("category") categoryId: Int,
         @Query("search") q : String
     ): ModelWordsPag
 
-    @GET("words/")
+    @GET("{i18n}/words/")
     suspend fun getWordsListDefUser(
+        @Path("i18n") code : String?,
         @Header("Content-Type")  content_type:String,
         @Query ("category") categoryId: Int,
         @Query("search") q : String
     ): ModelWordsPag
+
+    @GET("{i18n}/descriptions/")
+    suspend fun getDescriptionsList(
+        @Path("i18n") code : String?,
+        @Header("Content-Type")  content_type:String,
+        @Header ("Authorization") value: String,
+        @Query ("category") categoryId: Int,
+    ): ModelDescriptionsPag
+
+    @GET("{i18n}/descriptions/")
+    suspend fun getDescriptionsListDefUser(
+        @Path("i18n") code : String?,
+        @Header("Content-Type")  content_type:String,
+        @Query ("category") categoryId: Int,
+    ): ModelDescriptionsPag
 
 
     companion object {
 
-        private const val BASE_URL = "http://138.68.80.130/api/v1/"
+        private const val BASE_URL = "http://138.68.80.130/"
 
         operator fun invoke(): ApiService {
             val requestInterceptor = Interceptor { chain ->

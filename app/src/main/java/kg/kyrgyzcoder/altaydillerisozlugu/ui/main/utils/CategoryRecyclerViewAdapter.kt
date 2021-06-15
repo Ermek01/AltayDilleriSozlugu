@@ -1,20 +1,31 @@
 package kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kg.kyrgyzcoder.altaydillerisozlugu.R
+import kg.kyrgyzcoder.altaydillerisozlugu.data.local.UserPreferences
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelCategory
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.RowCategoryItemsBinding
+import kg.kyrgyzcoder.altaydillerisozlugu.util.CODE_KEY
 
 class CategoryRecyclerViewAdapter(
     private val listener: CategoryClickListener
 ) :
     ListAdapter<ModelCategory, CategoryRecyclerViewAdapter.ViewHolderCat>(DIFF) {
+
+    val userPreferences: UserPreferences? = null
+
+    var defLang = "ky"
+
 
     fun getItemAtPos(position: Int): ModelCategory {
         return getItem(position)
@@ -28,18 +39,42 @@ class CategoryRecyclerViewAdapter(
         fun onBind(position: Int) {
             val current = getItemAtPos(position)
 
-            if (!current.image.isNullOrEmpty())
-                Glide.with(binding.root).load(current.image)
-                    .error(ContextCompat.getDrawable(binding.root.context, R.drawable.def_image))
-                    .into(binding.imgItems)
+            val pref = itemView.context.getSharedPreferences("language", Context.MODE_PRIVATE)
+            val code : String = pref.getString(CODE_KEY, "").toString()
 
-            binding.nameCategory.text = current.title_ky
+            if (code.isNotEmpty()){
+                when(code){
+                    "tr" -> {
+                        Glide.with(binding.root).load(current.image)
+                            .error(ContextCompat.getDrawable(binding.root.context, R.drawable.def_image))
+                            .into(binding.imgItems)
+                        binding.nameCategory.text = current.title_tr
+                    }
+                    "ky" -> {
+
+                        Glide.with(binding.root).load(current.image)
+                            .error(ContextCompat.getDrawable(binding.root.context, R.drawable.def_image))
+                            .into(binding.imgItems)
+
+                        binding.nameCategory.text = current.title_ky
+                    }
+                }
+            }
+
+//            if (!current.image.isNullOrEmpty())
+//                Glide.with(binding.root).load(current.image)
+//                    .error(ContextCompat.getDrawable(binding.root.context, R.drawable.def_image))
+//                    .into(binding.imgItems)
+//            binding.nameCategory.text = current.title_ky
+
+
+
+            listener.onChangeLanguageText(position)
 
             binding.root.setOnClickListener {
                 listener.onCategoryClick(position)
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderCat {
@@ -53,6 +88,7 @@ class CategoryRecyclerViewAdapter(
 
     interface CategoryClickListener {
         fun onCategoryClick(position: Int)
+        fun onChangeLanguageText(position: Int)
     }
 
     companion object {

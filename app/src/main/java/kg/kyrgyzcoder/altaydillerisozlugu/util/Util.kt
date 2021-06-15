@@ -15,6 +15,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import kg.kyrgyzcoder.altaydillerisozlugu.R
 
+val FLAG_KEY = "FLAG_KEY"
+val CODE_KEY = "CODE_KEY"
+val NAME_KEY = "NAME_KEY"
+val LANGUAGE_KEY = "NAME_KEY"
+
 fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }

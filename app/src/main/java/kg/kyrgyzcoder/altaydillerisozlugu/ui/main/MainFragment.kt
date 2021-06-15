@@ -13,6 +13,8 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelCategoryRes
@@ -22,9 +24,11 @@ import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.CategoryListener
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.CategoryRecyclerViewAdapter
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModelFactory
+import kg.kyrgyzcoder.altaydillerisozlugu.util.CODE_KEY
 import kg.kyrgyzcoder.altaydillerisozlugu.util.hide
 import kg.kyrgyzcoder.altaydillerisozlugu.util.hideKeyboard
 import kg.kyrgyzcoder.altaydillerisozlugu.util.show
+import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -41,9 +45,12 @@ class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecycler
 
     private lateinit var adapter: CategoryRecyclerViewAdapter
     private var search: String = ""
+    private var code: String? = ""
 
     private var _binding: FragmentMainBinding? = null
     private val binding: FragmentMainBinding get() = _binding!!
+
+    private var currentLanguages = listOf<List<String?>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,11 +76,14 @@ class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecycler
 
         itemViewModel.getCategoryListener(this)
 
+        val pref = requireActivity().getSharedPreferences("language",Context.MODE_PRIVATE)
+        code = pref.getString(CODE_KEY, "")
+
         binding.progressBar.show()
-        itemViewModel.getCategoryList(search)
+        itemViewModel.getCategoryList(code, search)
 
         binding.swipeRefresh.setOnRefreshListener {
-            itemViewModel.getCategoryList(search)
+            itemViewModel.getCategoryList(code, search)
         }
 
 
@@ -133,7 +143,7 @@ class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecycler
     }
 
     private fun getCategoriesSearch() {
-        itemViewModel.getCategoryList(binding.editSearch.text.toString())
+        itemViewModel.getCategoryList(code, binding.editSearch.text.toString())
         adapter = CategoryRecyclerViewAdapter(this)
         binding.recyclerViewCategoryCards.setHasFixedSize(true)
         binding.recyclerViewCategoryCards.adapter = adapter
@@ -159,7 +169,10 @@ class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecycler
 
     override fun onCategoryClick(position: Int) {
         val amount = categories[position].id
-        val action = MainFragmentDirections.actionMainFragmentToWordsFragment(amount)
+        val action = MainFragmentDirections.actionMainFragmentToWordsFragment(amount, position)
         Navigation.findNavController(binding.root).navigate(action)
+    }
+
+    override fun onChangeLanguageText(position: Int) {
     }
 }

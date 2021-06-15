@@ -1,5 +1,6 @@
 package kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -12,6 +13,7 @@ import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelCategory
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelWords
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.RowCategoryItemsBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.RowWordsItemsBinding
+import kg.kyrgyzcoder.altaydillerisozlugu.util.CODE_KEY
 
 class WordsRecyclerViewAdapter(
     private val listener: WordsClickListener
@@ -30,12 +32,19 @@ class WordsRecyclerViewAdapter(
         fun onBind(position: Int) {
             val current = getItemAtPos(position)
 
-//            if (!current.image.isNullOrEmpty())
-//                Glide.with(binding.root).load(current.image)
-//                    .error(ContextCompat.getDrawable(binding.root.context, R.drawable.def_image))
-//                    .into(binding.imgItems)
+            val pref = itemView.context.getSharedPreferences("language", Context.MODE_PRIVATE)
+            val code : String = pref.getString(CODE_KEY, "").toString()
 
-            binding.tvWordsName.text = current.title_ky
+            if (code.isNotEmpty()){
+                when(code){
+                    "tr" -> {
+                        binding.tvWordsName.text = current.title_tr
+                    }
+                    "ky" -> {
+                        binding.tvWordsName.text = current.title_ky
+                    }
+                }
+            }
 
             binding.root.setOnClickListener {
                 listener.onWordsClick(position)

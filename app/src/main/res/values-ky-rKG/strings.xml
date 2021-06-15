@@ -31,6 +31,6 @@
     <string name="txt_create_success_account">Сиздин аккаунтунуз ийгиликтүү түзүлдү!</string>
     <string name="txt_or_log_in_with">Кирүү үчүн башка жолдор</string>
     <string name="txt_confirm_password">Сыр сөздү кайталоо</string>
-    <string name="txt_name_country">Кыргызча</string>
     <string name="txt_error_request">Ката кетти! Сураныч, дагы бир жолу аракет кылып көрүңүз!</string>
+    <string name="txt_success_logout">Сиз ийгиликтүү чыктыныз!</string>
 </resources>
