@@ -18,6 +18,8 @@ class ProfileViewModel(
     private val userDataRepository: UserDataRepository
 ) : ViewModel() {
 
+    val userToken = userPreferences.currentUserToken
+
     private var listener: ProfileListener? = null
 
     fun setProfileListener(listener: ProfileListener) {

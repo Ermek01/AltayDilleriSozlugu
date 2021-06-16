@@ -34,7 +34,7 @@
         <action
             android:id="@+id/action_wordsFragment_to_mainFragment"
             app:destination="@id/navigation_main"
-            app:popUpTo="@id/navigation_main" />
+            />
         <argument
             android:name="id"
             app:argType="integer" />

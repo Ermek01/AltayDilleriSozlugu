@@ -57,15 +57,16 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
 
     private var mCode = ""
     private var code: String? = ""
+    private var name: String? = ""
+    private var flag: Int = 0
     private var nameCountry = ""
     private var mFlag = 0
 
 
-    override fun getLanguage(flag: Int, name: String, code: String, isRecreate: Boolean) {
+    override fun getLanguage(flag: Int, name: String, code: String) {
         mFlag = flag
         nameCountry = name
         mCode = code
-        mIsRecreate = isRecreate
     }
 
     @SuppressLint("CommitPrefEdits")
@@ -86,8 +87,16 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        loadLanguage()
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
+
+        if (flag != 0) {
+            binding.imgFlag.setImageResource(flag)
+            binding.nameCountry.text = name
+
+        }
 
         Log.d("ololo", "onCreate")
 
@@ -102,26 +111,7 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
                 userPreferencesViewModelFactory
             ).get(UserPreferencesViewModel::class.java)
 
-        val pref = getSharedPreferences("language", Context.MODE_PRIVATE)
-        val flag = pref.getInt(FLAG_KEY, 0)
-        code = pref.getString(CODE_KEY, "")
-        val name = pref.getString(NAME_KEY, "")
-        val language = pref.getString(LANGUAGE_KEY, "")
 
-        if (flag != 0) {
-            binding.imgFlag.setImageResource(flag)
-            binding.nameCountry.text = name
-
-            val locale = Locale(code!!)
-            Locale.setDefault(locale)
-            val config = Configuration()
-            config.locale = locale
-            applicationContext.createConfigurationContext(config)
-            applicationContext.resources.updateConfiguration(
-                config,
-                applicationContext.resources.displayMetrics
-            )
-        }
 
         binding.relativeLayout.setOnClickListener {
             val fm = supportFragmentManager
@@ -149,6 +139,54 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
             }
         }
 
+    }
+
+    private fun loadLanguage() {
+        val pref = getSharedPreferences("language", Context.MODE_PRIVATE)
+        flag = pref.getInt(FLAG_KEY, 0)
+        code = pref.getString(CODE_KEY, "")
+        name = pref.getString(NAME_KEY, "")
+        val language = pref.getString(LANGUAGE_KEY, "")
+
+
+
+        val locale = Locale(code!!)
+        Locale.setDefault(locale)
+        val config = Configuration()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            config.locale = locale
+            baseContext.resources.updateConfiguration(
+                config,
+                baseContext.resources.displayMetrics
+            )
+        }
+        else {
+            config.setLocale(locale)
+        }
+
+        baseContext.applicationContext.createConfigurationContext(config)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putString("lang", code)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        val code = savedInstanceState.getString("lang")
+        val locale = Locale(code)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        applicationContext.createConfigurationContext(config)
+        applicationContext.resources.updateConfiguration(
+            config,
+            applicationContext.resources.displayMetrics
+        )
     }
 
 

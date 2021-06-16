@@ -110,22 +110,6 @@ class WordsFragment : Fragment(), KodeinAware, WordsListener,
 
         }
 
-        binding.editSearch.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                getWordsSearch(amount)
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-
-
-        })
-
         binding.editSearch.setOnTouchListener(View.OnTouchListener { v, event ->
 
             val DRAWABLE_LEFT = 0
@@ -149,9 +133,25 @@ class WordsFragment : Fragment(), KodeinAware, WordsListener,
 
         })
 
+        binding.editSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                getWordsSearch()
+            }
+
+
+        })
+
     }
 
-    private fun getWordsSearch(amount: Int) {
+    private fun getWordsSearch() {
         itemViewModel.getWordsList(code, amount, binding.editSearch.text.toString())
         adapter = WordsRecyclerViewAdapter(this)
         binding.recyclerViewWords.setHasFixedSize(true)

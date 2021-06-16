@@ -125,7 +125,7 @@ class SelectLanguageFragment(private val listener: LanguageListener) : DialogFra
 
 
     override fun onItemClick(position: Int) {
-        listener.getLanguage(countryList[position].flag, countryList[position].name, countryList[position].code, true)
+        listener.getLanguage(countryList[position].flag, countryList[position].name, countryList[position].code)
         setLocale(position)
         recreate(requireActivity())
         dismiss()

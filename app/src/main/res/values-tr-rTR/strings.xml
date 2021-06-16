@@ -33,4 +33,7 @@
     <string name="txt_confirm_password">Şifreyi onaylayın</string>
     <string name="txt_error_request">Bir hata oluştu! Lütfen tekrar deneyin!</string>
     <string name="txt_success_logout">Başarıyly çıkış yaptınız</string>
+    <string name="txt_profile">Profil</string>
+    <string name="txt_access_account">Tam erişime sahip olmak için lütfen kayıt olun</string>
+    <string name="txt_register">Kayıt</string>
 </resources>

@@ -21,9 +21,7 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.login.LoginActivity" />
-        <activity android:name=".ui.splash.SplashScreenActivity"
-            android:configChanges="locale">
-
+        <activity android:name=".ui.splash.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
