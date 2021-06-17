@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import kg.kyrgyzcoder.altaydillerisozlugu.data.local.UserPreferences
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.NetworkResponse
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.user.repo.UserDataRepository
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.util.LogoutListener
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.util.ProfileListener
 import kotlinx.coroutines.async
 import kotlinx.coroutines.cancel
@@ -20,10 +21,15 @@ class ProfileViewModel(
 
     val userToken = userPreferences.currentUserToken
 
-    private var listener: ProfileListener? = null
+    private var listener: LogoutListener? = null
+    private var profileListener: ProfileListener? = null
 
-    fun setProfileListener(listener: ProfileListener) {
+    fun setLogoutListener(listener: LogoutListener) {
         this.listener = listener
+    }
+
+    fun setProfileListener(profileListener: ProfileListener) {
+        this.profileListener = profileListener
     }
 
     fun logoutUser() = viewModelScope.launch {
@@ -37,6 +43,23 @@ class ProfileViewModel(
                     }
                     is NetworkResponse.Failure -> {
                         listener?.logoutFail(response.errorCode)
+                    }
+                }
+            }
+        }
+
+    }
+
+    fun profileUser() = viewModelScope.launch {
+        userPreferences.currentUserToken.collect { token ->
+            if (token!!.isNotEmpty()){
+                when (val response = userDataRepository.profileUser("Token $token")) {
+                    is NetworkResponse.Success -> {
+                        profileListener?.getProfileSuccess(response.value)
+
+                    }
+                    is NetworkResponse.Failure -> {
+                        profileListener?.getProfileFailure(response.errorCode)
                     }
                 }
             }

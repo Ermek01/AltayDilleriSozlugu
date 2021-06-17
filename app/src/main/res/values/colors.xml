@@ -25,5 +25,8 @@
     <color name="color_btn_cancel">#CCCDCE</color>
     <color name="color_txt_select_language">#5A5A67</color>
     <color name="color_txt_translate">#2C3A47</color>
+    <color name="color_words_choosen">#FCA951</color>
+    <color name="color_txt_username">#FF993A</color>
+    <color name="color_txt_getpremium">#F1C40F</color>
 
 </resources>

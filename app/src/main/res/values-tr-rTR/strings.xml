@@ -36,4 +36,7 @@
     <string name="txt_profile">Profil</string>
     <string name="txt_access_account">Tam erişime sahip olmak için lütfen kayıt olun</string>
     <string name="txt_register">Kayıt</string>
+    <string name="txt_basic_member">Basit kullanıcı</string>
+    <string name="txt_get_premium">Premium almak</string>
+    <string name="txt_enable_geo">Lütfen coğrafi bilgileri etkinleştirin</string>
 </resources>

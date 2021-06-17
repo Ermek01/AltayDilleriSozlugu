@@ -11,4 +11,8 @@ class UserDataRepository(
         apiService.logoutUser("application/json", authorization)
     }
 
+    suspend fun profileUser(authorization: String) = safeApiCall {
+        apiService.getProfileUser("application/json", authorization)
+    }
+
 }

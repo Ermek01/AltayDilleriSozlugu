@@ -139,11 +139,11 @@ class WordsFragment : Fragment(), KodeinAware, WordsListener,
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
+                getWordsSearch()
             }
 
             override fun afterTextChanged(s: Editable?) {
-                getWordsSearch()
+
             }
 
 

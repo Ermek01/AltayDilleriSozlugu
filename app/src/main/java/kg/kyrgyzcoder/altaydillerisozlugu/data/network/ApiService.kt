@@ -7,6 +7,7 @@ import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelWordsPag
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.login.model.ModelLoginRes
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.login.model.ModelLoginUser
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.user.model.ModelCreateUser
+import kg.kyrgyzcoder.altaydillerisozlugu.data.network.user.model.ModelProfileUser
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -33,6 +34,12 @@ interface ApiService {
     suspend fun logoutUser(
         @Header("Content-Type")  content_type:String,
         @Header ("Authorization") authorization:String)
+
+    @GET("accounts/profile/")
+    suspend fun getProfileUser(
+        @Header("Content-Type")  content_type:String,
+        @Header ("Authorization") authorization:String
+    ): ModelProfileUser
 
     @GET("{i18n}/category/")
     suspend fun getCategoryList(

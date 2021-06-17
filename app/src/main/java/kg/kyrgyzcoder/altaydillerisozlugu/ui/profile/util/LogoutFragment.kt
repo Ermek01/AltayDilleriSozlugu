@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import kg.kyrgyzcoder.altaydillerisozlugu.R
+import kg.kyrgyzcoder.altaydillerisozlugu.data.network.user.model.ModelProfileUser
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentLogoutBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.viewmodel.ProfileViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.viewmodel.ProfileViewModelFactory
@@ -21,7 +22,7 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
 
-class LogoutFragment : DialogFragment(), KodeinAware, ProfileListener {
+class LogoutFragment : DialogFragment(), KodeinAware, LogoutListener {
 
     override val kodein: Kodein by closestKodein()
     private val profileViewModelFactory: ProfileViewModelFactory by instance()
@@ -50,7 +51,8 @@ class LogoutFragment : DialogFragment(), KodeinAware, ProfileListener {
         profileViewModel = ViewModelProvider(
             requireActivity(), profileViewModelFactory
         ).get(ProfileViewModel::class.java)
-        profileViewModel.setProfileListener(this)
+        profileViewModel.setLogoutListener(this)
+
 
         binding.btnCancel.setOnClickListener {
             dismiss()

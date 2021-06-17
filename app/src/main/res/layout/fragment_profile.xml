@@ -76,6 +76,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
+        android:id="@+id/txt_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txt_profile"
@@ -85,6 +86,17 @@
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/philosopher"
         android:textSize="18dp"/>
+
+    <ImageView
+        android:id="@+id/edit"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_below="@id/appBar"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_edit"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
@@ -128,5 +140,214 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/layout_basic_member"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/txt_profile"
+        android:layout_marginTop="50dp"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        >
+
+        <RelativeLayout
+            android:id="@+id/profile_basic"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_centerHorizontal="true"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_circle_profie_img">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_circle_profile_img2"
+                    android:layout_centerInParent="true">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_centerInParent="true"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="100dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_bg_profile_img"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txt_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_basic"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/philosopher"
+            android:textSize="20sp"
+            android:textColor="@color/color_txt_username"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/member"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/bg_items_pay"
+            android:layout_below="@id/txt_username"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            app:cardCornerRadius="8dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/txt_basic_member"
+                android:fontFamily="@font/philosopher"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/linearlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/member"
+            android:orientation="horizontal"
+            android:layout_marginTop="35dp"
+            android:layout_marginStart="22dp">
+
+            <ImageView
+                android:id="@+id/location"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:src="@drawable/ic_location"/>
+
+            <TextView
+                android:id="@+id/txt_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/philosopher"
+                android:textColor="@color/main_bg"
+                android:textSize="18sp"
+                android:layout_marginStart="7dp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="25dp"
+                android:background="@drawable/view"
+                android:layout_marginStart="10dp"/>
+
+            <ImageView
+                android:id="@+id/email"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:src="@drawable/ic_email"
+                android:layout_marginStart="10dp"/>
+
+            <TextView
+                android:id="@+id/txt_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/philosopher"
+                android:textColor="@color/main_bg"
+                android:textSize="18sp"
+                android:layout_marginStart="7dp"/>
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="70dp"
+            app:cardCornerRadius="50dp"
+            android:layout_centerHorizontal="true"
+            app:cardBackgroundColor="@color/color_txt_getpremium"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:cardBackgroundColor="@color/white"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    app:cardCornerRadius="100dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/img_pay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_money"
+                            android:layout_centerInParent="true"
+                            />
+
+                    </RelativeLayout>
+
+
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/card"
+                    android:textColor="@color/color_txt_words"
+                    android:fontFamily="@font/philosopher"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="43dp"
+                    android:text="@string/txt_get_premium" />
+
+            </RelativeLayout>
+
+
+
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/prBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#48FFFFFF"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
 
 </RelativeLayout>

@@ -35,4 +35,7 @@
     <string name="txt_profile">Жеке баракча</string>
     <string name="txt_access_account">Толук мүмкүнчүлүккө ээ болуш үчүн, катталууңузду суранабыз</string>
     <string name="txt_register">Катталуу</string>
+    <string name="txt_basic_member">Жөнөкөй колдонуучу</string>
+    <string name="txt_get_premium">Премиумга өтүү</string>
+    <string name="txt_enable_geo">Сураныч геомаалыматты күйгүзүңүз</string>
 </resources>
