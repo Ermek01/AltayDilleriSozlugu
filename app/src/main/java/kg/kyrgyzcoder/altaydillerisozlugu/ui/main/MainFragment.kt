@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -33,6 +34,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import java.lang.Exception
 
 class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecyclerViewAdapter.CategoryClickListener {
 
@@ -80,9 +82,16 @@ class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecycler
         code = pref.getString(CODE_KEY, "")
 
         binding.progressBar.show()
-        itemViewModel.getCategoryList(code, search)
+        try {
+            itemViewModel.getCategoryList(code, search)
+        }
+        catch (e : Exception) {
+            Log.d("ololo", e.toString())
+        }
+
 
         binding.swipeRefresh.setOnRefreshListener {
+            binding.progressBar.show()
             itemViewModel.getCategoryList(code, search)
         }
 
@@ -100,7 +109,7 @@ class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecycler
 
         }
 
-        binding.editSearch.addTextChangedListener(object : TextWatcher {
+        binding.editSearch.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -129,6 +138,7 @@ class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecycler
                     ).bounds.width()
                 ) {
                     binding.editSearch.visibility = View.GONE
+                    binding.editSearch.setText("")
                     binding.toolbar.visibility = View.VISIBLE
                     binding.search.visibility = View.VISIBLE
                     hideKeyboard(v)
@@ -169,7 +179,7 @@ class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecycler
 
     override fun onCategoryClick(position: Int) {
         val amount = categories[position].id
-        val action = MainFragmentDirections.actionMainFragmentToWordsFragment(amount, position)
+        val action = MainFragmentDirections.actionMainFragmentToWordsFragment(amount)
         Navigation.findNavController(binding.root).navigate(action)
     }
 

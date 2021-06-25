@@ -179,7 +179,7 @@
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_bg_profile_img"/>
+                            android:src="@drawable/profile_img"/>
 
                     </androidx.cardview.widget.CardView>
 

@@ -9,18 +9,20 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kg.kyrgyzcoder.altaydillerisozlugu.R
-import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelCategory
-import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelWords
+import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.*
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.RowCategoryItemsBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.RowWordsItemsBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.util.CODE_KEY
+import kg.kyrgyzcoder.altaydillerisozlugu.util.TRANSLATE_KY
+import kg.kyrgyzcoder.altaydillerisozlugu.util.TRANSLATE_TR
+import java.util.ArrayList
 
 class WordsRecyclerViewAdapter(
     private val listener: WordsClickListener
 ) :
-    ListAdapter<ModelWords, WordsRecyclerViewAdapter.ViewHolderCat>(DIFF) {
+    ListAdapter<ModelDescriptions, WordsRecyclerViewAdapter.ViewHolderCat>(DIFF) {
 
-    fun getItemAtPos(position: Int): ModelWords {
+    fun getItemAtPos(position: Int): ModelDescriptions {
         return getItem(position)
     }
 
@@ -38,10 +40,10 @@ class WordsRecyclerViewAdapter(
             if (code.isNotEmpty()){
                 when(code){
                     "tr" -> {
-                        binding.tvWordsName.text = current.title_tr
+                        binding.tvWordsName.text = current.languages[TRANSLATE_TR].title_tr
                     }
                     "ky" -> {
-                        binding.tvWordsName.text = current.title_ky
+                        binding.tvWordsName.text = current.languages[TRANSLATE_KY].title_ky
                     }
                 }
             }
@@ -67,16 +69,16 @@ class WordsRecyclerViewAdapter(
     }
 
     companion object {
-        private val DIFF = object : DiffUtil.ItemCallback<ModelWords>() {
-            override fun areItemsTheSame(oldItem: ModelWords, newItem: ModelWords): Boolean {
-                return oldItem.id == newItem.id
+        private val DIFF = object : DiffUtil.ItemCallback<ModelDescriptions>() {
+            override fun areItemsTheSame(oldItem: ModelDescriptions, newItem: ModelDescriptions): Boolean {
+                return oldItem.languages == newItem.languages
             }
 
             override fun areContentsTheSame(
-                oldItem: ModelWords,
-                newItem: ModelWords
+                oldItem: ModelDescriptions,
+                newItem: ModelDescriptions
             ): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.languages == newItem.languages
             }
         }
     }

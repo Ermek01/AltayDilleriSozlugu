@@ -61,7 +61,7 @@
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/row_descriptions_items"
-                android:paddingStart="10dp"
+                android:paddingStart="15dp"
                 android:paddingEnd="15dp"/>
 
         </RelativeLayout>

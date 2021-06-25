@@ -9,15 +9,23 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.lifecycle.ViewModelProvider
 import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentChosenBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentWordsBinding
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.utils.FavoriteListener
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.viewmodel.ChosenViewModel
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.viewmodel.ChosenViewModelFactory
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.login.viewmodel.AuthViewModel
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.login.viewmodel.AuthViewModelFactory
+import kg.kyrgyzcoder.altaydillerisozlugu.util.CODE_KEY
 import kg.kyrgyzcoder.altaydillerisozlugu.util.hideKeyboard
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class ChosenFragment : Fragment(), KodeinAware {
+class ChosenFragment : Fragment(), KodeinAware, FavoriteListener {
 
     override val kodein: Kodein by closestKodein()
 
@@ -28,13 +36,18 @@ class ChosenFragment : Fragment(), KodeinAware {
         super.onCreate(savedInstanceState)
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentChosenBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.search.setOnClickListener {
 
@@ -72,7 +85,13 @@ class ChosenFragment : Fragment(), KodeinAware {
 
         })
 
+    }
 
+    override fun addFavoriteFailure(code: Int?) {
+
+    }
+
+    override fun addFavoriteSuccess() {
 
     }
 }

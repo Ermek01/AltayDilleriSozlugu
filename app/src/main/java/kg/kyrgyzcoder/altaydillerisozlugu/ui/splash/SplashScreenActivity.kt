@@ -13,6 +13,7 @@ import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import com.google.firebase.auth.FirebaseAuth
@@ -34,6 +35,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
+import java.lang.Exception
 import java.util.*
 
 
@@ -52,11 +54,13 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
     private lateinit var circleAnim1: Animation
     private lateinit var circleAnim2: Animation
     private lateinit var circleAnim3: Animation
+    private lateinit var circleAnim4: Animation
 
     private var mIsRecreate: Boolean = false
 
     private var mCode = ""
     private var code: String? = ""
+    private var defcode: String? = "ky"
     private var name: String? = ""
     private var flag: Int = 0
     private var nameCountry = ""
@@ -67,29 +71,25 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
         mFlag = flag
         nameCountry = name
         mCode = code
-    }
-
-    @SuppressLint("CommitPrefEdits")
-    override fun recreate() {
-        super.recreate()
-
-        Log.d("ololo", "recreate")
-        val pref = getSharedPreferences("language", Context.MODE_PRIVATE)
+        val pref = applicationContext.getSharedPreferences("language", Context.MODE_PRIVATE)
         val editor = pref.edit()
 
         editor.putInt(FLAG_KEY, mFlag)
         editor.putString(CODE_KEY, mCode)
         editor.putString(NAME_KEY, nameCountry)
         editor.apply()
-
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadLanguage()
-        binding = ActivitySplashScreenBinding.inflate(layoutInflater)
-
+        try {
+            binding = ActivitySplashScreenBinding.inflate(layoutInflater)
+        }
+        catch (e : Exception) {
+            Log.d("ololo", e.toString())
+        }
         setContentView(binding.root)
 
         if (flag != 0) {
@@ -104,6 +104,7 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
         circleAnim1 = AnimationUtils.loadAnimation(this, R.anim.circle_anim_240dp)
         circleAnim2 = AnimationUtils.loadAnimation(this, R.anim.circle_anim_350dp)
         circleAnim3 = AnimationUtils.loadAnimation(this, R.anim.circle_anim_450dp)
+        circleAnim4 = AnimationUtils.loadAnimation(this, R.anim.circle_anim_550dp)
 
         userPreferencesViewModel =
             ViewModelProvider(
@@ -149,19 +150,17 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
         val language = pref.getString(LANGUAGE_KEY, "")
 
 
-
         val locale = Locale(code!!)
         Locale.setDefault(locale)
         val config = Configuration()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             config.locale = locale
             baseContext.resources.updateConfiguration(
                 config,
                 baseContext.resources.displayMetrics
             )
-        }
-        else {
+        } else {
             config.setLocale(locale)
         }
 
@@ -220,13 +219,16 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
 
             binding.circle240dp.visibility = View.VISIBLE
             binding.circle240dp.animation = circleAnim1
-            delay(1000)
+            delay(800)
             binding.circle350dp.visibility = View.VISIBLE
             binding.circle350dp.animation = circleAnim2
-            delay(1000)
+            delay(800)
             binding.circle450dp.visibility = View.VISIBLE
             binding.circle450dp.animation = circleAnim3
-            delay(500)
+            delay(800)
+            binding.circle550dp.visibility = View.VISIBLE
+            binding.circle550dp.animation = circleAnim4
+            delay(200)
 
             if (code == 1) {
                 delay(2000)
@@ -238,6 +240,7 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
                     binding.circle240dp.visibility = View.GONE
                     binding.circle350dp.visibility = View.GONE
                     binding.circle450dp.visibility = View.GONE
+                    binding.circle550dp.visibility = View.GONE
 
                     binding.relativeLayout.visibility = View.VISIBLE
                     binding.btnLogin.visibility = View.VISIBLE
@@ -248,14 +251,36 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
                     binding.txtWithoutAccount.animation = bottomAnim
 
                     binding.btnLogin.setOnClickListener {
+
+                        val pref = getSharedPreferences("language",Context.MODE_PRIVATE)
+                        val code = pref.getString(CODE_KEY, "")
+
+                        if (code!!.isEmpty()) {
+                            val pref = applicationContext.getSharedPreferences("language", Context.MODE_PRIVATE)
+                            val editor = pref.edit()
+                            editor.putString(CODE_KEY, defcode)
+                            editor.apply()
+                        }
+
                         val intent = Intent(this, LoginActivity::class.java)
                         startActivity(intent)
                     }
 
                     binding.txtWithoutAccount.setOnClickListener {
+                        val pref = getSharedPreferences("language",Context.MODE_PRIVATE)
+                        val code = pref.getString(CODE_KEY, "")
+
+                        if (code!!.isEmpty()) {
+                            val pref = applicationContext.getSharedPreferences("language", Context.MODE_PRIVATE)
+                            val editor = pref.edit()
+                            editor.putString(CODE_KEY, defcode)
+                            editor.apply()
+                        }
+
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                         finish()
+
                     }
 
                 } else {

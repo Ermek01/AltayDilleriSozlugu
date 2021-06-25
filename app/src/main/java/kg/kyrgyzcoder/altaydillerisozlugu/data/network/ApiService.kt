@@ -1,7 +1,9 @@
 package kg.kyrgyzcoder.altaydillerisozlugu.data.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelFavorites
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelCategoryRes
+import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelDescriptions
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelDescriptionsPag
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelWordsPag
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.login.model.ModelLoginRes
@@ -79,6 +81,7 @@ interface ApiService {
         @Header("Content-Type")  content_type:String,
         @Header ("Authorization") value: String,
         @Query ("category") categoryId: Int,
+        @Query("search") q : String
     ): ModelDescriptionsPag
 
     @GET("{i18n}/descriptions/")
@@ -86,7 +89,16 @@ interface ApiService {
         @Path("i18n") code : String?,
         @Header("Content-Type")  content_type:String,
         @Query ("category") categoryId: Int,
+        @Query("search") q : String
     ): ModelDescriptionsPag
+
+    @POST("{i18n}/favorites/")
+    suspend fun addFavorites(
+        @Path("i18n") code : String?,
+        @Header ("Authorization") value: String,
+        @Header("Content-Type")  content_type:String,
+        @Body modelFavorites: ModelFavorites
+    )
 
 
     companion object {

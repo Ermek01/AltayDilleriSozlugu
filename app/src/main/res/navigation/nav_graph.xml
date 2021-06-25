@@ -41,9 +41,7 @@
         <action
             android:id="@+id/action_wordsFragment_to_descriptionFragment"
             app:destination="@id/descriptionFragment" />
-        <argument
-            android:name="position"
-            app:argType="integer" />
+
     </fragment>
     <fragment
         android:id="@+id/navigation_choosen"

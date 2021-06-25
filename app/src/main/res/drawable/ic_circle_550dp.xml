@@ -2,8 +2,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
     xmlns:tools="http://schemas.android.com/tools"
-    android:width="450dp"
-    android:height="450dp"
+    android:width="550dp"
+    android:height="550dp"
     android:viewportWidth="450"
     android:viewportHeight="450"
     >

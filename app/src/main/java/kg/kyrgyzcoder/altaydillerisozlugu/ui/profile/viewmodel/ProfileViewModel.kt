@@ -52,7 +52,7 @@ class ProfileViewModel(
 
     fun profileUser() = viewModelScope.launch {
         userPreferences.currentUserToken.collect { token ->
-            if (token!!.isNotEmpty()){
+            if (token?.isNotEmpty() == true){
                 when (val response = userDataRepository.profileUser("Token $token")) {
                     is NetworkResponse.Success -> {
                         profileListener?.getProfileSuccess(response.value)

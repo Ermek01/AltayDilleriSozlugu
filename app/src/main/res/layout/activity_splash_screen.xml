@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_bg"
+    android:clipToPadding="false"
     tools:context=".ui.splash.SplashScreenActivity">
 
     <ImageView
@@ -12,8 +13,8 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="105dp"
-        android:src="@drawable/flag"/>
+        android:layout_marginTop="155dp"
+        android:src="@drawable/flag" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -21,34 +22,33 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/icon"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:background="@drawable/frame"
         android:paddingStart="5dp"
-        android:paddingEnd="10dp"
         android:paddingTop="5dp"
-        android:visibility="gone"
+        android:paddingEnd="10dp"
         android:paddingBottom="5dp"
-        android:layout_marginTop="10dp">
+        android:visibility="gone">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_flag"
             android:layout_width="27dp"
             android:layout_height="27dp"
-            android:src="@drawable/flag_kg"
-            />
+            android:src="@drawable/flag_kg" />
 
         <TextView
             android:id="@+id/name_country"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/img_flag"
             android:layout_centerVertical="true"
             android:layout_marginStart="5dp"
-            android:textColor="@android:color/white"
-            app:drawableEndCompat="@drawable/ccp_ic"
+            android:layout_toEndOf="@id/img_flag"
             android:drawablePadding="10dp"
             android:fontFamily="@font/nunito"
             android:text="Кыргызча"
-            android:textStyle="normal" />
+            android:textColor="@android:color/white"
+            android:textStyle="normal"
+            app:drawableEndCompat="@drawable/ccp_ic" />
 
     </RelativeLayout>
 
@@ -60,10 +60,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:background="@drawable/bg_button"
-        android:text="@string/txt_signin"
-        android:visibility="gone"
         android:fontFamily="@font/nunito"
-        android:textColor="@color/txt_btn" />
+        android:text="@string/txt_signin"
+        android:textColor="@color/txt_btn"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/txt_without_account"
@@ -74,8 +74,8 @@
         android:layout_marginTop="20dp"
         android:text="@string/continue_without_an_account"
         android:textColor="@android:color/white"
-        android:visibility="gone"
-        android:textSize="17sp"/>
+        android:textSize="17sp"
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/circle_240dp"
@@ -83,33 +83,51 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_circle_240dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="135dp"
-        android:visibility="gone"/>
+        android:layout_marginTop="185dp"
+        android:visibility="gone"
+        />
 
     <ImageView
         android:id="@+id/circle_350dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_circle_350dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"
+        android:src="@drawable/ic_circle_350dp"
         android:visibility="gone"
-        android:layout_marginTop="80dp"/>
+        />
 
     <ImageView
         android:id="@+id/circle_450dp"
-        android:layout_width="450dp"
-        android:layout_height="450dp"
-        android:src="@drawable/ic_circle_450dp"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone"
-        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginBottom="295dp"
+        android:layout_marginStart="-40dp"
+        android:layout_marginEnd="-40dp"
+        android:src="@drawable/ic_circle_450dp"
+        android:clipChildren="false"
+        android:maxWidth="176dp"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/circle_550dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_circle_550dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="180dp"
+        android:layout_marginStart="-95dp"
+        android:layout_marginEnd="-95dp"
+        android:layout_marginTop="-45dp"
+        android:visibility="gone"
         />
-
-
-
-
-
 
 </RelativeLayout>

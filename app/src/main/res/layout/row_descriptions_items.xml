@@ -16,18 +16,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/img"
+        android:layout_marginTop="3dp"
         android:fontFamily="@font/montserrat_alternates"
+        android:textColor="@color/color_txt_select_language"
         android:text="Кыргызча"/>
 
     <TextView
         android:id="@+id/translate_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:fontFamily="@font/cormorant_garamond_light"
+        android:fontFamily="@font/philosopher"
         android:text="Кой"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         android:textSize="20sp"
+
+        android:layout_marginStart="50dp"
         android:textColor="@color/color_txt_translate"/>
 
     <de.hdodenhof.circleimageview.CircleImageView

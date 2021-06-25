@@ -20,8 +20,8 @@
 
             <ImageView
                 android:id="@+id/img_back"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignParentStart="true"
                 android:src="@drawable/ic_back_white"
                 android:layout_centerVertical="true"
@@ -109,6 +109,20 @@
         android:layout_alignParentBottom="true"
         app:ci_drawable="@drawable/indicator_color"
         />
+
+    <RelativeLayout
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#65FFFFFF"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

@@ -39,4 +39,6 @@
     <string name="txt_basic_member">Basit kullanıcı</string>
     <string name="txt_get_premium">Premium almak</string>
     <string name="txt_enable_geo">Lütfen coğrafi bilgileri etkinleştirin</string>
+    <string name="txt_error_add_favorite">Bir kelime eklerken bir hata oluştu</string>
+    <string name="txt_success_add_favorite">Kelime başarıyla eklendi</string>
 </resources>

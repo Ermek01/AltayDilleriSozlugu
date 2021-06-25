@@ -50,33 +50,19 @@ class LoginActivity : AppCompatActivity(), KodeinAware, AuthListener {
         authViewModel = ViewModelProvider(this, authViewModelFactory).get(AuthViewModel::class.java)
         authViewModel.setListener(this)
 
-        val pref = getSharedPreferences("language", Context.MODE_PRIVATE)
-        val code : String = pref.getString(CODE_KEY, "").toString()
+
 
         binding.btnLogin.setOnClickListener {
 
             if (checkInputs()){
                 hideKeyboard()
                 binding.progressBar.show()
-
-                if (code.isEmpty()){
-                    authViewModel.loginUser(
-                        ModelLoginUser(
-                            binding.editUsername.text.toString(),
-                            binding.editPassword.text.toString(),
-                            languages
-                        )
+                authViewModel.loginUser(
+                    ModelLoginUser(
+                        binding.editUsername.text.toString(),
+                        binding.editPassword.text.toString()
                     )
-                }
-                else {
-                    authViewModel.loginUser(
-                        ModelLoginUser(
-                            binding.editUsername.text.toString(),
-                            binding.editPassword.text.toString(),
-                            code
-                        )
-                    )
-                }
+                )
 
 
             }

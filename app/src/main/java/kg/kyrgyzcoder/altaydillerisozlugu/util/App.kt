@@ -7,9 +7,11 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import kg.kyrgyzcoder.altaydillerisozlugu.data.local.UserPreferences
 import kg.kyrgyzcoder.altaydillerisozlugu.data.local.UserPreferencesImpl
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.ApiService
+import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.repo.FavoriteRepository
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.repo.ItemRepository
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.login.repo.AuthRepository
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.user.repo.UserDataRepository
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.viewmodel.ChosenViewModelFactory
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.login.viewmodel.AuthViewModelFactory
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModelFactory
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.viewmodel.ProfileViewModelFactory
@@ -44,6 +46,9 @@ class App : Application(), KodeinAware {
 
         bind<ItemRepository>() with singleton { ItemRepository(instance()) }
         bind() from provider { ItemViewModelFactory(instance(), instance()) }
+
+        bind<FavoriteRepository>() with singleton { FavoriteRepository(instance()) }
+        bind() from provider { ChosenViewModelFactory(instance(), instance()) }
 
     }
 

@@ -39,4 +39,6 @@
     <string name="txt_basic_member">Жөнөкөй колдонуучу</string>
     <string name="txt_get_premium">Премиумга өтүү</string>
     <string name="txt_enable_geo">Сураныч геомаалыматты күйгүзүңүз</string>
+    <string name="txt_error_add_favorite">Созду кошуудан ката кетти!</string>
+    <string name="txt_success_add_favorite">Сөз ийгиликтүү кошулду!</string>
 </resources>
