@@ -3,7 +3,7 @@ package kg.kyrgyzcoder.altaydillerisozlugu.ui.main
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.ChosenFragment
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.favorites.ChosenFragment
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.ProfileFragment
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.settings.SettingsFragment
 

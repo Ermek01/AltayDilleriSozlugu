@@ -60,9 +60,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:background="@drawable/bg_button"
-        android:fontFamily="@font/nunito"
+        android:fontFamily="@font/montserrat_alternates"
         android:text="@string/txt_signin"
-        android:textColor="@color/txt_btn"
+        android:textStyle="normal"
+        android:textAllCaps="false"
+        android:textColor="@color/color_txt_btn_text"
         android:visibility="gone" />
 
     <TextView

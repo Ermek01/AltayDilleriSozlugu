@@ -1,11 +1,10 @@
-package kg.kyrgyzcoder.altaydillerisozlugu.ui.main
+package kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.favorites
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -14,87 +13,81 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import kg.kyrgyzcoder.altaydillerisozlugu.R
-import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelCategoryRes
-import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelCategory
-import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentMainBinding
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.CategoryListener
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.CategoryRecyclerViewAdapter
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModel
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModelFactory
+import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelFavorites
+import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelFavoritesRes
+import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelFavoritesResItem
+import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentChosenBinding
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.utils.FavoriteListener
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.utils.FavoritesRecyclerViewAdapter
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.utils.FavoritesWordsRecyclerAdapter
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.utils.GetFavoriteListener
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.viewmodel.ChosenViewModel
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.viewmodel.ChosenViewModelFactory
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.MainFragmentDirections
 import kg.kyrgyzcoder.altaydillerisozlugu.util.CODE_KEY
 import kg.kyrgyzcoder.altaydillerisozlugu.util.hide
 import kg.kyrgyzcoder.altaydillerisozlugu.util.hideKeyboard
 import kg.kyrgyzcoder.altaydillerisozlugu.util.show
-import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import java.lang.Exception
+import java.util.ArrayList
 
-class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecyclerViewAdapter.CategoryClickListener {
+class ChosenFragment : Fragment(), KodeinAware, GetFavoriteListener, FavoriteListener {
 
     override val kodein: Kodein by closestKodein()
-    private val itemViewModelFactory: ItemViewModelFactory by instance()
+    private val chosenViewModelFactory: ChosenViewModelFactory by instance()
 
-    private lateinit var itemViewModel: ItemViewModel
+    private lateinit var chosenViewModel: ChosenViewModel
 
-    private val categories = mutableListOf<ModelCategory>()
+    private var _binding: FragmentChosenBinding? = null
+    private val binding: FragmentChosenBinding get() = _binding!!
 
-    private lateinit var adapter: CategoryRecyclerViewAdapter
-    private var search: String = ""
+    private val favorites = mutableListOf<ModelFavoritesResItem>()
+
+    private lateinit var adapter: FavoritesRecyclerViewAdapter
+
     private var code: String? = ""
-
-    private var _binding: FragmentMainBinding? = null
-    private val binding: FragmentMainBinding get() = _binding!!
-
-    private var currentLanguages = listOf<List<String?>>()
+    private var search: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
+    ): View {
+        _binding = FragmentChosenBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        itemViewModel = ViewModelProvider(
+        chosenViewModel = ViewModelProvider(
             requireActivity(),
-            itemViewModelFactory
-        ).get(ItemViewModel::class.java)
+            chosenViewModelFactory
+        ).get(ChosenViewModel::class.java)
 
-        itemViewModel.getCategoryListener(this)
+        chosenViewModel.getFavoriteListener(this)
+        chosenViewModel.addFavoriteListener(this)
 
         val pref = requireActivity().getSharedPreferences("language",Context.MODE_PRIVATE)
         code = pref.getString(CODE_KEY, "")
 
         binding.progressBar.show()
-        try {
-            itemViewModel.getCategoryList(code, search)
-        }
-        catch (e : Exception) {
-            Log.d("ololo", e.toString())
-        }
-
+        chosenViewModel.getFavorites(code, search)
 
         binding.swipeRefresh.setOnRefreshListener {
             binding.progressBar.show()
-            itemViewModel.getCategoryList(code, search)
+            chosenViewModel.getFavorites(code, search)
         }
-
 
         binding.search.setOnClickListener {
 
@@ -115,7 +108,7 @@ class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecycler
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                getCategoriesSearch()
+                getFavoritesSearch()
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -138,9 +131,9 @@ class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecycler
                     ).bounds.width()
                 ) {
                     binding.editSearch.visibility = View.GONE
-                    binding.editSearch.setText("")
                     binding.toolbar.visibility = View.VISIBLE
                     binding.search.visibility = View.VISIBLE
+                    binding.editSearch.setText("")
                     hideKeyboard(v)
                     return@OnTouchListener true
                 }
@@ -149,40 +142,45 @@ class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecycler
 
         })
 
-
     }
 
-    private fun getCategoriesSearch() {
-        itemViewModel.getCategoryList(code, binding.editSearch.text.toString())
-//        adapter = CategoryRecyclerViewAdapter(this)
-//        binding.recyclerViewCategoryCards.setHasFixedSize(true)
-//        binding.recyclerViewCategoryCards.adapter = adapter
+    private fun getFavoritesSearch() {
+        chosenViewModel.getFavorites(code, binding.editSearch.text.toString())
+//        adapter = FavoritesRecyclerViewAdapter(this)
+//        binding.recyclerViewWords.setHasFixedSize(true)
+//        binding.recyclerViewWords.adapter = adapter
 //        binding.swipeRefresh.isRefreshing = false
-//        adapter.submitList(categories)
+//        adapter.submitList(favorites)
     }
 
-    override fun getCategories(modelCategoryRes: ModelCategoryRes) {
-        categories.clear()
-        categories.addAll(modelCategoryRes)
-        adapter = CategoryRecyclerViewAdapter(this)
-        binding.recyclerViewCategoryCards.adapter = adapter
-        adapter.submitList(categories)
+    override fun getFavoritesSuccess(modelFavoritesRes: ModelFavoritesRes) {
+        favorites.clear()
+        favorites.addAll(modelFavoritesRes)
+        adapter = FavoritesRecyclerViewAdapter()
+        binding.recyclerViewWords.adapter = adapter
+        adapter.submitList(favorites)
         binding.progressBar.hide()
         binding.swipeRefresh.isRefreshing = false
+
     }
 
-    override fun getCategoryError(code: Int?) {
+    override fun getFavoritesError(code: Int?) {
         binding.progressBar.hide()
         Toast.makeText(activity, getString(R.string.txt_error_request), Toast.LENGTH_SHORT).show()
         binding.swipeRefresh.isRefreshing = false
     }
 
-    override fun onCategoryClick(position: Int) {
-        val amount = categories[position].id
-        val action = MainFragmentDirections.actionMainFragmentToWordsFragment(amount)
-        Navigation.findNavController(binding.root).navigate(action)
+    override fun addFavoriteFailure(code: Int?) {
+
     }
 
-    override fun onChangeLanguageText(position: Int) {
+    override fun addFavoriteSuccess() {
+        binding.progressBar.hide()
     }
+
+//    override fun onFavoritesClick(position: Int) {
+//        val amount = favorites[position].category_id
+//        val action = ChosenFragmentDirections.actionNavigationChoosenToFavoritesFragment(amount)
+//        Navigation.findNavController(binding.root).navigate(action)
+//    }
 }

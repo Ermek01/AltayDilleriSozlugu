@@ -28,5 +28,7 @@
     <color name="color_words_choosen">#FCA951</color>
     <color name="color_txt_username">#FF993A</color>
     <color name="color_txt_getpremium">#F1C40F</color>
+    <color name="color_txt_favorites">#2C3E50</color>
+    <color name="color_txt_btn_text">#115B74</color>
 
 </resources>

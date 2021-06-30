@@ -1,9 +1,10 @@
 package kg.kyrgyzcoder.altaydillerisozlugu.data.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelDescFavorites
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelFavorites
+import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelFavoritesRes
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelCategoryRes
-import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelDescriptions
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelDescriptionsPag
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelWordsPag
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.login.model.ModelLoginRes
@@ -99,6 +100,22 @@ interface ApiService {
         @Header("Content-Type")  content_type:String,
         @Body modelFavorites: ModelFavorites
     )
+
+    @GET("{i18n}/favorites/")
+    suspend fun getFavorites(
+        @Path("i18n") code : String?,
+        @Header ("Authorization") value: String,
+        @Header("Content-Type")  content_type:String,
+        @Query("search") search : String
+    ): ModelFavoritesRes
+
+    @GET("{i18n}/favorites/category/{id}/")
+    suspend fun getDescFavorites(
+        @Path("i18n") code : String?,
+        @Path("id") id : Int,
+        @Header ("Authorization") value: String,
+        @Header("Content-Type")  content_type:String,
+    ): ModelDescFavorites
 
 
     companion object {

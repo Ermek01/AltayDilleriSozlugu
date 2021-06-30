@@ -18,8 +18,8 @@
 
             <ImageView
                 android:id="@+id/icon"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/flag"
                 android:layout_centerHorizontal="true"
@@ -27,8 +27,8 @@
 
             <EditText
                 android:id="@+id/edit_username"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
                 android:fontFamily="@font/montserrat_alternates"
                 android:textStyle="bold"
                 android:hint="@string/txt_username"
@@ -41,15 +41,17 @@
 
             <TextView
                 android:id="@+id/usernameError"
-                android:layout_width="wrap_content"
+                android:layout_width="350dp"
                 android:layout_height="20dp"
                 android:background="@drawable/bg_button"
                 android:text="@string/pwdUserNameWrong"
                 android:textColor="@color/color_txt_error"
-                android:textSize="10sp"
+                android:textSize="14sp"
+                android:textAlignment="center"
                 android:paddingTop="2dp"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
+                android:paddingBottom="2dp"
                 android:visibility="gone"
                 tools:ignore="SmallSp"
                 android:layout_below="@id/edit_username"
@@ -57,8 +59,8 @@
 
             <EditText
                 android:id="@+id/edit_password"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
                 android:fontFamily="@font/montserrat_alternates"
                 android:textStyle="bold"
                 android:hint="@string/txt_password"
@@ -92,10 +94,10 @@
 
             <Button
                 android:id="@+id/btn_login"
-                android:layout_width="170dp"
-                android:layout_height="40dp"
+                android:layout_width="200dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="60dp"
                 android:background="@drawable/bg_login_btn"
                 android:text="@string/txt_signin"
                 android:textStyle="bold"
@@ -111,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/txt_forgot_password"
                 android:textStyle="normal"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/white"
                 android:fontFamily="@font/montserrat_alternates"
@@ -126,7 +128,7 @@
                 android:text="@string/txt_or_log_in_with"
                 android:textStyle="normal"
                 android:textSize="18sp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="35dp"
                 android:textColor="@color/white"
                 android:fontFamily="@font/montserrat_alternates"
                 android:layout_below="@id/txt_forgot_password"
@@ -143,8 +145,8 @@
                 >
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     app:cardCornerRadius="5dp"
                     app:cardBackgroundColor="@color/white">
 
@@ -159,8 +161,8 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     app:cardCornerRadius="5dp"
                     app:cardBackgroundColor="@color/white"
                     android:layout_marginStart="25dp">
@@ -195,7 +197,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/txt_not_account"
                     android:textStyle="normal"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:fontFamily="@font/montserrat_alternates"
                     android:textColor="@color/white"
                     />
@@ -206,7 +208,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/txt_create_account"
                     android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:fontFamily="@font/montserrat_alternates"
                     android:textColor="@color/white"
                     android:layout_marginStart="5dp"

@@ -16,7 +16,7 @@
     <path
         android:pathData="M240 120C240 186.274 186.274 240 120 240C53.7258 240 0 186.274 0 120C0 53.7258 53.7258 0 120 0C186.274 0 240 53.7258 240 120Z"
         android:strokeWidth="2"
-        android:strokeColor="#C0BFE0"
+        android:strokeColor="#FFFFFF"
         />
 
   </group>

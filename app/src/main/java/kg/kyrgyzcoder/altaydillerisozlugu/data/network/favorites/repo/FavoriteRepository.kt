@@ -12,4 +12,12 @@ class FavoriteRepository(
         apiService.addFavorites(code, authorization,"application/json",  modelFavorites)
     }
 
+    suspend fun getFavorites(code: String?, authorization : String, search: String) = safeApiCall {
+        apiService.getFavorites(code, authorization,"application/json", search)
+    }
+
+    suspend fun getDescFavorites(code: String?, id: Int, authorization : String) = safeApiCall {
+        apiService.getDescFavorites(code, id, authorization,"application/json")
+    }
+
 }

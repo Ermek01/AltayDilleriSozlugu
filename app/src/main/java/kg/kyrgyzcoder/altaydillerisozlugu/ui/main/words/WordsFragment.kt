@@ -156,12 +156,12 @@ class WordsFragment : Fragment(), KodeinAware, DescriptionsListener,
     }
     private fun getDescriptionSearch() {
         itemViewModel.getDescriptionsList(code, amount, binding.searchWords.text.toString())
-        adapter = WordsRecyclerViewAdapter(this)
-        binding.recyclerViewWords.setHasFixedSize(true)
-        binding.recyclerViewWords.adapter = adapter
-        binding.swipeRefresh.isRefreshing = false
-        adapter.submitList(words)
-        binding.progressBar.hide()
+//        adapter = WordsRecyclerViewAdapter(this)
+//        binding.recyclerViewWords.setHasFixedSize(true)
+//        binding.recyclerViewWords.adapter = adapter
+//        binding.swipeRefresh.isRefreshing = false
+//        adapter.submitList(words)
+//        binding.progressBar.hide()
     }
 
     override fun onWordsClick(position: Int) {
@@ -172,11 +172,15 @@ class WordsFragment : Fragment(), KodeinAware, DescriptionsListener,
     }
 
     override fun getDescriptionsSuccess(modelDescriptionsPag: ModelDescriptionsPag) {
-        words.clear()
-        words.addAll(modelDescriptionsPag)
+
+        if (words.isEmpty()) {
+            words.addAll(modelDescriptionsPag)
+        }
+
         adapter = WordsRecyclerViewAdapter(this)
         binding.recyclerViewWords.adapter = adapter
         adapter.submitList(words)
+        adapter.notifyDataSetChanged()
         binding.progressBar.hide()
         binding.swipeRefresh.isRefreshing = false
 

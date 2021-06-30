@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_choosen"
-        android:name="kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.ChosenFragment"
+        android:name="kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.favorites.ChosenFragment"
         android:label="fragment_chosen"
         tools:layout="@layout/fragment_chosen" >
         <action
@@ -57,6 +57,9 @@
         <action
             android:id="@+id/action_navigation_choosen_to_navigation_settings"
             app:destination="@id/navigation_settings" />
+        <action
+            android:id="@+id/action_navigation_choosen_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_settings"
@@ -96,6 +99,18 @@
         <argument
             android:name="id"
             app:argType="integer" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.favorites.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_navigation_choosen"
+            app:destination="@id/navigation_choosen" />
         <argument
             android:name="position"
             app:argType="integer" />
