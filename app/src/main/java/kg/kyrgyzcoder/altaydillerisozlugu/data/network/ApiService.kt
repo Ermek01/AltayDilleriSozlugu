@@ -2,6 +2,7 @@ package kg.kyrgyzcoder.altaydillerisozlugu.data.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelDescFavorites
+import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelEditProfile
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelFavorites
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelFavoritesRes
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelCategoryRes
@@ -12,7 +13,9 @@ import kg.kyrgyzcoder.altaydillerisozlugu.data.network.login.model.ModelLoginUse
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.user.model.ModelCreateUser
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.user.model.ModelProfileUser
 import okhttp3.Interceptor
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -43,6 +46,14 @@ interface ApiService {
         @Header("Content-Type")  content_type:String,
         @Header ("Authorization") authorization:String
     ): ModelProfileUser
+
+    @Multipart
+    @PATCH("accounts/profile/")
+    suspend fun editProfileUser(
+        @Header ("Authorization") authorization:String,
+        @Part image : MultipartBody.Part?,
+        @Part ("username") username : String
+    )
 
     @GET("{i18n}/category/")
     suspend fun getCategoryList(

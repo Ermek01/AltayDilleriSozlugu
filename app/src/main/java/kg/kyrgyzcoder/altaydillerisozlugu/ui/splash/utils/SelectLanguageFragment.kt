@@ -139,12 +139,5 @@ class SelectLanguageFragment(private val listener: LanguageListener) : DialogFra
         val config = Configuration()
         config.locale = locale
         requireContext().resources.updateConfiguration(config, requireContext().resources.displayMetrics)
-
-//        val config = resources.configuration
-//        val locale = Locale(countryList[position].code)
-//        Locale.setDefault(locale)
-//        config.locale = locale
-//        resources.updateConfiguration(config, resources.displayMetrics)
-//        recreate(requireActivity())
     }
 }

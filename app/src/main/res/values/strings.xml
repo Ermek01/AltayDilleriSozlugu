@@ -40,6 +40,8 @@
     <string name="txt_enable_geo">Сураныч геомаалыматты күйгүзүңүз</string>
     <string name="txt_error_add_favorite">Созду кошуудан ката кетти!</string>
     <string name="txt_success_add_favorite">Сөз ийгиликтүү кошулду!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txt_edit">Өзгөртүү</string>
+    <string name="basic_language">Негизги тилиңиз</string>
+    <string name="full_name">Толук атыңыз</string>
+    <string name="txt_email_edit">Электрондук почтаныз</string>
 </resources>

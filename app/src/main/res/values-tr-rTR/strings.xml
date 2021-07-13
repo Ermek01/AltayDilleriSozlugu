@@ -41,4 +41,8 @@
     <string name="txt_enable_geo">Lütfen coğrafi bilgileri etkinleştirin</string>
     <string name="txt_error_add_favorite">Bir kelime eklerken bir hata oluştu</string>
     <string name="txt_success_add_favorite">Kelime başarıyla eklendi</string>
+    <string name="txt_edit">Düzeltme</string>
+    <string name="basic_language">Temel diliniz</string>
+    <string name="full_name">Tam adınız</string>
+    <string name="txt_email_edit">E-postanız</string>
 </resources>

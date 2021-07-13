@@ -3,10 +3,12 @@ package kg.kyrgyzcoder.altaydillerisozlugu.ui.profile
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
@@ -16,23 +18,26 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.navigation.Navigation
+import com.bumptech.glide.Glide
 import com.google.android.gms.location.*
 import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.user.model.ModelProfileUser
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentMainBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentProfileBinding
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.MainFragmentDirections
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModelFactory
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.util.LogoutFragment
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.util.ProfileListener
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.viewmodel.ProfileViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.viewmodel.ProfileViewModelFactory
-import kg.kyrgyzcoder.altaydillerisozlugu.util.OnBackPressed
-import kg.kyrgyzcoder.altaydillerisozlugu.util.hide
-import kg.kyrgyzcoder.altaydillerisozlugu.util.show
-import kg.kyrgyzcoder.altaydillerisozlugu.util.toast
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.splash.utils.LanguageListener
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.splash.utils.SelectLanguageFragment
+import kg.kyrgyzcoder.altaydillerisozlugu.util.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
@@ -40,7 +45,14 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import java.util.*
 
-class ProfileFragment : Fragment(), KodeinAware, ProfileListener {
+class ProfileFragment : Fragment(), KodeinAware, ProfileListener, LanguageListener {
+
+    private var mFlag = 0
+    private var flag: Int = 0
+    private var nameCountry = ""
+    private var code: String? = ""
+    private var name: String? = ""
+    private var mCode = ""
 
     override val kodein: Kodein by closestKodein()
     private val profileViewModelFactory: ProfileViewModelFactory by instance()
@@ -57,8 +69,47 @@ class ProfileFragment : Fragment(), KodeinAware, ProfileListener {
     private var _binding: FragmentProfileBinding? = null
     private val binding: FragmentProfileBinding get() = _binding!!
 
+    override fun getLanguage(flag: Int, name: String, code: String) {
+        mFlag = flag
+        nameCountry = name
+        mCode = code
+        val pref = requireActivity().getSharedPreferences("language", Context.MODE_PRIVATE)
+        val editor = pref.edit()
+
+        editor.putInt(FLAG_KEY, mFlag)
+        editor.putString(CODE_KEY, mCode)
+        editor.putString(NAME_KEY, nameCountry)
+        editor.apply()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        loadLanguage()
+    }
+
+    private fun loadLanguage() {
+        val pref = requireActivity().getSharedPreferences("language", Context.MODE_PRIVATE)
+        flag = pref.getInt(FLAG_KEY, 0)
+        code = pref.getString(CODE_KEY, "")
+        name = pref.getString(NAME_KEY, "")
+        val language = pref.getString(LANGUAGE_KEY, "")
+
+
+        val locale = Locale(code!!)
+        Locale.setDefault(locale)
+        val config = Configuration()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            config.locale = locale
+            requireActivity().baseContext.resources.updateConfiguration(
+                config,
+                requireActivity().baseContext.resources.displayMetrics
+            )
+        } else {
+            config.setLocale(locale)
+        }
+
+        requireActivity().applicationContext.createConfigurationContext(config)
     }
 
     override fun onCreateView(
@@ -80,6 +131,11 @@ class ProfileFragment : Fragment(), KodeinAware, ProfileListener {
 
         profileViewModel.setProfileListener(this)
 
+        if (flag != 0) {
+            binding.imgFlag.setImageResource(flag)
+            binding.etLanguage.text = name
+        }
+
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
         profileViewModel.userToken.asLiveData().observe(viewLifecycleOwner, {
@@ -96,7 +152,11 @@ class ProfileFragment : Fragment(), KodeinAware, ProfileListener {
             }
         })
 
-
+        binding.ccp.setOnClickListener {
+            val fm = fragmentManager
+            val logoutFragment = SelectLanguageFragment(this)
+            logoutFragment.show(fm!!, "")
+        }
 
         binding.btnLogout.setOnClickListener {
 
@@ -105,9 +165,17 @@ class ProfileFragment : Fragment(), KodeinAware, ProfileListener {
             logoutFragment.show(fm!!, "")
 
         }
+
+        binding.edit.setOnClickListener {
+            val action = ProfileFragmentDirections.actionNavigationProfileToProfileEditFragment()
+            Navigation.findNavController(binding.root).navigate(action)
+        }
     }
 
     override fun getProfileSuccess(modelProfileUser: ModelProfileUser) {
+        Glide.with(binding.root).load(modelProfileUser.image)
+            .error(ContextCompat.getDrawable(binding.root.context, R.drawable.ic_bg_profile_img))
+            .into(binding.profileImg)
         binding.txtUsername.text = modelProfileUser.username
         binding.txtEmail.text = modelProfileUser.email
         binding.prBar.hide()
@@ -208,5 +276,7 @@ class ProfileFragment : Fragment(), KodeinAware, ProfileListener {
             }
         }
     }
+
+
 
 }

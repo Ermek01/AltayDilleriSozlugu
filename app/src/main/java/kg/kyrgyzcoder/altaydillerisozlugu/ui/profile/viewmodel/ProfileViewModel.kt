@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kg.kyrgyzcoder.altaydillerisozlugu.data.local.UserPreferences
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.NetworkResponse
+import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelEditProfile
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.user.repo.UserDataRepository
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.util.EditProfileListener
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.util.LogoutListener
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.util.ProfileListener
 import kotlinx.coroutines.async
@@ -13,6 +15,8 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class ProfileViewModel(
     private val userPreferences: UserPreferences,
@@ -23,6 +27,7 @@ class ProfileViewModel(
 
     private var listener: LogoutListener? = null
     private var profileListener: ProfileListener? = null
+    private var editProfileListener: EditProfileListener? = null
 
     fun setLogoutListener(listener: LogoutListener) {
         this.listener = listener
@@ -30,6 +35,10 @@ class ProfileViewModel(
 
     fun setProfileListener(profileListener: ProfileListener) {
         this.profileListener = profileListener
+    }
+
+    fun setEditProfileListener(editProfileListener: EditProfileListener) {
+        this.editProfileListener = editProfileListener
     }
 
     fun logoutUser() = viewModelScope.launch {
@@ -60,6 +69,23 @@ class ProfileViewModel(
                     }
                     is NetworkResponse.Failure -> {
                         profileListener?.getProfileFailure(response.errorCode)
+                    }
+                }
+            }
+        }
+
+    }
+
+    fun editProfileUser(image: MultipartBody.Part?, username: String) = viewModelScope.launch {
+        userPreferences.currentUserToken.collect { token ->
+            if (token?.isNotEmpty() == true){
+                when (val response = userDataRepository.editProfileUser("Token $token", image, username)) {
+                    is NetworkResponse.Success -> {
+                        editProfileListener?.editProfileSuccess()
+
+                    }
+                    is NetworkResponse.Failure -> {
+                        editProfileListener?.editProfileFailure(response.errorCode)
                     }
                 }
             }

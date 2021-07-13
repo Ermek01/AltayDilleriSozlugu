@@ -172,14 +172,9 @@ class WordsFragment : Fragment(), KodeinAware, DescriptionsListener,
     }
 
     override fun getDescriptionsSuccess(modelDescriptionsPag: ModelDescriptionsPag) {
-
-        if (words.isEmpty()) {
-            words.addAll(modelDescriptionsPag)
-        }
-
         adapter = WordsRecyclerViewAdapter(this)
         binding.recyclerViewWords.adapter = adapter
-        adapter.submitList(words)
+        adapter.submitList(modelDescriptionsPag)
         adapter.notifyDataSetChanged()
         binding.progressBar.hide()
         binding.swipeRefresh.isRefreshing = false

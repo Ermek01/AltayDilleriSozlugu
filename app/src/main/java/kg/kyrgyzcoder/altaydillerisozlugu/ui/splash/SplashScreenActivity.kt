@@ -61,6 +61,8 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
     private var mCode = ""
     private var code: String? = ""
     private var defcode: String? = "ky"
+    private var defNameCountry: String? = "Крыгызча"
+    private var defFlag: Int = 2131231164
     private var name: String? = ""
     private var flag: Int = 0
     private var nameCountry = ""
@@ -188,7 +190,6 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
         )
     }
 
-
     override fun applyOverrideConfiguration(overrideConfiguration: Configuration?) {
 
         if (overrideConfiguration != null) {
@@ -259,6 +260,8 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
                             val pref = applicationContext.getSharedPreferences("language", Context.MODE_PRIVATE)
                             val editor = pref.edit()
                             editor.putString(CODE_KEY, defcode)
+                            editor.putInt(FLAG_KEY, defFlag)
+                            editor.putString(NAME_KEY, defNameCountry)
                             editor.apply()
                         }
 
@@ -273,7 +276,9 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
                         if (code!!.isEmpty()) {
                             val pref = applicationContext.getSharedPreferences("language", Context.MODE_PRIVATE)
                             val editor = pref.edit()
+                            editor.putInt(FLAG_KEY, defFlag)
                             editor.putString(CODE_KEY, defcode)
+                            editor.putString(NAME_KEY, defNameCountry)
                             editor.apply()
                         }
 

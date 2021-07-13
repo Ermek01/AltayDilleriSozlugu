@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.profile.ProfileEditFragment"
+    android:background="@color/white">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/main_bg">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/main_icon"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/flag" />
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="280dp"
+                android:layout_height="match_parent"
+                android:paddingStart="25dp"
+                app:titleTextColor="@color/white"
+                app:title="@string/app_name"
+                android:layout_centerHorizontal="true"
+                app:titleTextAppearance="@style/ToolbarTheme"/>
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_back_white"/>
+
+        </RelativeLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/txt_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_edit"
+        android:textColor="@color/main_bg"
+        android:layout_below="@id/appBar"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/philosopher"
+        android:textSize="18sp"/>
+
+    <ImageView
+        android:id="@+id/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/appBar"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_edit_ok"
+        android:layout_marginEnd="20dp"
+        />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/txt_profile"
+        android:layout_marginTop="20dp">
+
+        <RelativeLayout
+            android:id="@+id/basic_member"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/txt_profile"
+            android:layout_marginTop="20dp"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:id="@+id/profile_basic"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_centerHorizontal="true"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_circle_profie_img">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_circle_profile_img2"
+                        android:layout_centerInParent="true">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_centerInParent="true"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="100dp">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/profile_img"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/member"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/bg_items_pay"
+                android:layout_below="@id/profile_basic"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                app:cardCornerRadius="8dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="@string/txt_basic_member"
+                    android:fontFamily="@font/philosopher"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/txt_fullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/philosopher"
+                android:text="@string/full_name"
+                android:textColor="@color/bg_items_pay"
+                android:layout_below="@id/member"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"/>
+
+            <EditText
+                android:id="@+id/et_fullName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/txt_fullName"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:textSize="17sp"
+                android:textColor="@color/color_payment_edittext"
+                android:text="dhlfksk"
+                android:backgroundTint="@color/color_payment_edittext"
+                />
+
+            <TextView
+                android:id="@+id/txt_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/philosopher"
+                android:text="@string/basic_language"
+                android:textColor="@color/bg_items_pay"
+                android:layout_below="@id/et_fullName"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="25dp"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_flag"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/txt_language"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                />
+
+            <ImageView
+                android:id="@+id/ccp"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ccp_black_ic"
+                android:layout_below="@id/txt_language"
+                android:layout_toEndOf="@id/img_flag"
+                android:layout_marginTop="13dp"/>
+
+            <TextView
+                android:id="@+id/et_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/philosopher"
+                android:textSize="17sp"
+                android:layout_marginTop="13dp"
+                android:layout_below="@id/txt_language"
+                android:layout_toEndOf="@id/ccp"
+                android:textColor="@color/color_payment_edittext"
+                />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@drawable/view"
+                android:layout_below="@id/et_language"
+                android:layout_toEndOf="@id/ccp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="2dp"/>
+
+            <TextView
+                android:id="@+id/txt_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/philosopher"
+                android:text="@string/txt_email_edit"
+                android:textColor="@color/bg_items_pay"
+                android:layout_below="@id/img_flag"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="25dp"/>
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/txt_email"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:textSize="17sp"
+                android:textColor="@color/color_payment_edittext"
+                android:text="dhlfksk"
+                android:backgroundTint="@color/color_payment_edittext"
+                />
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+</RelativeLayout>

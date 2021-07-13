@@ -2,7 +2,10 @@ package kg.kyrgyzcoder.altaydillerisozlugu.util
 
 import android.app.Activity
 import android.content.Context
+import android.database.Cursor
 import android.graphics.Typeface
+import android.net.Uri
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +16,6 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import kg.kyrgyzcoder.altaydillerisozlugu.R
 
 val FLAG_KEY = "FLAG_KEY"
 val CODE_KEY = "CODE_KEY"
