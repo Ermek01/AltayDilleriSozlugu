@@ -52,7 +52,7 @@ interface ApiService {
     suspend fun editProfileUser(
         @Header ("Authorization") authorization:String,
         @Part image : MultipartBody.Part?,
-        @Part ("username") username : String
+        @Part ("username") username : RequestBody
     )
 
     @GET("{i18n}/category/")
@@ -90,18 +90,18 @@ interface ApiService {
     @GET("{i18n}/descriptions/")
     suspend fun getDescriptionsList(
         @Path("i18n") code : String?,
-        @Header("Content-Type")  content_type:String,
-        @Header ("Authorization") value: String,
-        @Query ("category") categoryId: Int,
-        @Query("search") q : String
+        @Query ("category") categoryId: Int?,
+        @Header("Content-Type")  content_type:String?,
+        @Header ("Authorization") value: String?,
+        @Query("search") q : String?
     ): ModelDescriptionsPag
 
     @GET("{i18n}/descriptions/")
     suspend fun getDescriptionsListDefUser(
         @Path("i18n") code : String?,
         @Header("Content-Type")  content_type:String,
-        @Query ("category") categoryId: Int,
-        @Query("search") q : String
+        @Query ("category") categoryId: Int?,
+        @Query("search") q : String?
     ): ModelDescriptionsPag
 
     @POST("{i18n}/favorites/")

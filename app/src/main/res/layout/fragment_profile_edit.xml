@@ -50,6 +50,7 @@
                 android:layout_height="25dp"
                 android:layout_marginStart="25dp"
                 android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
                 android:src="@drawable/ic_back_white"/>
 
         </RelativeLayout>
@@ -74,9 +75,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@id/appBar"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/ic_edit_ok"
         android:layout_marginEnd="20dp"
+        android:padding="10dp"
         />
 
     <androidx.core.widget.NestedScrollView
@@ -121,7 +123,8 @@
                             <de.hdodenhof.circleimageview.CircleImageView
                                 android:id="@+id/profile_img"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                />
 
                         </androidx.cardview.widget.CardView>
 
@@ -190,23 +193,29 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="25dp"/>
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img_flag"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+            <RelativeLayout
+                android:id="@+id/language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/txt_language"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                />
+                android:layout_marginStart="30dp">
 
-            <ImageView
-                android:id="@+id/ccp"
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ccp_black_ic"
-                android:layout_below="@id/txt_language"
-                android:layout_toEndOf="@id/img_flag"
-                android:layout_marginTop="13dp"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_flag"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/ccp"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ccp_black_ic"
+                    android:layout_toEndOf="@id/img_flag" />
+
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/et_language"
@@ -217,7 +226,7 @@
                 android:textSize="17sp"
                 android:layout_marginTop="13dp"
                 android:layout_below="@id/txt_language"
-                android:layout_toEndOf="@id/ccp"
+                android:layout_toEndOf="@id/language"
                 android:textColor="@color/color_payment_edittext"
                 />
 
@@ -226,9 +235,9 @@
                 android:layout_height="1dp"
                 android:background="@drawable/view"
                 android:layout_below="@id/et_language"
-                android:layout_toEndOf="@id/ccp"
+                android:layout_toEndOf="@id/language"
                 android:layout_marginStart="5dp"
-                android:layout_marginEnd="40dp"
+                android:layout_marginEnd="35dp"
                 android:layout_marginTop="2dp"/>
 
             <TextView
@@ -238,7 +247,7 @@
                 android:fontFamily="@font/philosopher"
                 android:text="@string/txt_email_edit"
                 android:textColor="@color/bg_items_pay"
-                android:layout_below="@id/img_flag"
+                android:layout_below="@id/language"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="25dp"/>
 

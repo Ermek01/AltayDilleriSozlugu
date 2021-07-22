@@ -35,9 +35,11 @@ import kg.kyrgyzcoder.altaydillerisozlugu.ui.splash.utils.LanguageListener
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.splash.utils.SelectLanguageFragment
 import kg.kyrgyzcoder.altaydillerisozlugu.util.*
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -61,6 +63,7 @@ class ProfileEditFragment : Fragment(), KodeinAware, ProfileListener, LanguageLi
     lateinit var byteArrayOutputStream: ByteArrayOutputStream
     lateinit var imageInByte: ByteArray
     var requestImage: MultipartBody.Part? = null
+    var mUsername: RequestBody? = null
 
     override val kodein: Kodein by closestKodein()
     private val profileViewModelFactory: ProfileViewModelFactory by instance()
@@ -71,7 +74,7 @@ class ProfileEditFragment : Fragment(), KodeinAware, ProfileListener, LanguageLi
 
     private val cropActivityResultContract = object : ActivityResultContract<Any?, Uri?>() {
         override fun createIntent(context: Context, input: Any?): Intent {
-            return CropImage.activity().getIntent(requireActivity())
+            return CropImage.activity().setAspectRatio(1,1).getIntent(requireActivity())
         }
 
         override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
@@ -154,7 +157,7 @@ class ProfileEditFragment : Fragment(), KodeinAware, ProfileListener, LanguageLi
         profileViewModel.setEditProfileListener(this)
         binding.basicMember.visibility = View.VISIBLE
 
-        binding.ccp.setOnClickListener {
+        binding.language.setOnClickListener {
             val fm = fragmentManager
             val logoutFragment = SelectLanguageFragment(this)
             logoutFragment.show(fm!!, "")
@@ -173,7 +176,8 @@ class ProfileEditFragment : Fragment(), KodeinAware, ProfileListener, LanguageLi
                 }
 
                 val requestFile : RequestBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file!!)
-                requestImage = MultipartBody.Part.createFormData("image.jpg", file!!.name, requestFile)
+                requestImage = MultipartBody.Part.createFormData("image", file!!.name, requestFile)
+
             }
         }
 
@@ -183,7 +187,8 @@ class ProfileEditFragment : Fragment(), KodeinAware, ProfileListener, LanguageLi
 
         binding.edit.setOnClickListener {
             val username = binding.etFullName.text.toString()
-            profileViewModel.editProfileUser(requestImage, username)
+            mUsername = RequestBody.create("text/plain".toMediaTypeOrNull(), username)
+            profileViewModel.editProfileUser(requestImage, mUsername!!)
         }
     }
 

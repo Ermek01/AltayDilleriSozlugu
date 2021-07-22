@@ -3,6 +3,7 @@ package kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.utils
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
@@ -12,6 +13,7 @@ import kg.kyrgyzcoder.altaydillerisozlugu.data.local.UserPreferences
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelFavoritesResItem
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.Word
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.RowWordsItemsChoosenBinding
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.favorites.ChosenFragment
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.favorites.ChosenFragmentDirections
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.viewmodel.ChosenViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.viewmodel.ChosenViewModelFactory
@@ -23,7 +25,7 @@ import org.kodein.di.android.closestKodein
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
-class FavoritesRecyclerViewAdapter() :
+class FavoritesRecyclerViewAdapter(val activity: FragmentActivity) :
     ListAdapter<ModelFavoritesResItem, FavoritesRecyclerViewAdapter.ViewHolderCat>(DIFF),
     FavoritesWordsRecyclerAdapter.FavoritesClickListener,
     FavoritesWordsRecyclerAdapter.AddFavoritesClick{
@@ -88,7 +90,7 @@ class FavoritesRecyclerViewAdapter() :
     ) {
       /*  words.clear()
         words.addAll(current.words)*/
-        adapter = FavoritesWordsRecyclerAdapter(this, this)
+        adapter = FavoritesWordsRecyclerAdapter(activity,this, this)
         binding.recyclerView.adapter = adapter
         adapter.parent = position
         adapter.submitList(current.words)

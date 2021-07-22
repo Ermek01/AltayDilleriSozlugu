@@ -23,11 +23,11 @@ class ItemRepository(
         apiService.getWordsListDefUser(code,"application/json", categoryId, search)
     }
 
-    suspend fun getDescriptionsList(code: String?,authorization : String, categoryId: Int, search: String) = safeApiCall {
-        apiService.getDescriptionsList(code,"application/json", authorization, categoryId, search)
+    suspend fun getDescriptionsList(code: String?, categoryId: Int?, authorization : String?,  search: String?) = safeApiCall {
+        apiService.getDescriptionsList(code, categoryId,"application/json", authorization, search)
     }
 
-    suspend fun getDescriptionsListDefUser(code: String?,categoryId: Int, search: String) = safeApiCall {
+    suspend fun getDescriptionsListDefUser(code: String?,categoryId: Int?, search: String?) = safeApiCall {
         apiService.getDescriptionsListDefUser(code,"application/json", categoryId, search)
     }
 

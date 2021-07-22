@@ -32,13 +32,13 @@ const val TRANSLATE_TT = 6
 const val TRANSLATE_KY = 7
 const val TRANSLATE_KSK = 8
 const val TRANSLATE_BA = 9
-val TRANSLATE_CV = 10
-val TRANSLATE_ASH = 11
-val TRANSLATE_KAA = 12
-val TRANSLATE_KRC = 13
-val TRANSLATE_SAH = 14
-val TRANSLATE_CRH = 15
-val TRANSLATE_ALT = 16
+const val TRANSLATE_CV = 10
+const val TRANSLATE_ASH = 11
+const val TRANSLATE_KAA = 12
+const val TRANSLATE_KRC = 13
+const val TRANSLATE_SAH = 14
+const val TRANSLATE_CRH = 15
+const val TRANSLATE_ALT = 16
 
 fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

@@ -29,6 +29,7 @@ import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelDescripti
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentDescriptionBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentMainBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.utils.FavoriteListener
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.utils.RegisterDialogFragment
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.viewmodel.ChosenViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.viewmodel.ChosenViewModelFactory
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.DescriptionsListener
@@ -37,6 +38,7 @@ import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.WordsRecyclerViewAdapter
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModelFactory
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.words.WordsFragmentArgs
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.util.LogoutFragment
 import kg.kyrgyzcoder.altaydillerisozlugu.util.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -45,7 +47,8 @@ import org.kodein.di.generic.instance
 import java.lang.Exception
 import kotlin.math.abs
 
-class DescriptionFragment : Fragment(), KodeinAware, DescriptionsListener, DescriptionsPagerAdapter.FavoriteClickListener, FavoriteListener {
+class DescriptionFragment : Fragment(), KodeinAware, DescriptionsListener,
+    DescriptionsPagerAdapter.FavoriteClickListener, FavoriteListener {
 
     override val kodein: Kodein by closestKodein()
     private val itemViewModelFactory: ItemViewModelFactory by instance()
@@ -62,6 +65,7 @@ class DescriptionFragment : Fragment(), KodeinAware, DescriptionsListener, Descr
     private var position: Int? = null
     private var userId = 0
     private var search: String = ""
+    private var token: String? = null
 
     private var _binding: FragmentDescriptionBinding? = null
     private val binding: FragmentDescriptionBinding get() = _binding!!
@@ -113,18 +117,19 @@ class DescriptionFragment : Fragment(), KodeinAware, DescriptionsListener, Descr
             chosenViewModelFactory
         ).get(ChosenViewModel::class.java)
 
-        chosenViewModel.userId.asLiveData().observe(viewLifecycleOwner, Observer {
-            userId = it!!
-        })
-
         binding.progressBar.show()
         itemViewModel.getDescriptionsListener(this)
         chosenViewModel.addFavoriteListener(this)
+
+        chosenViewModel.token.asLiveData().observe(viewLifecycleOwner, {
+            token = it
+        })
 
         val pref = requireActivity().getSharedPreferences("language", Context.MODE_PRIVATE)
         code = pref.getString(CODE_KEY, "")
 
         itemViewModel.getDescriptionsList(code, amount, search)
+
 
         binding.imgBack.setOnClickListener {
             Navigation.findNavController(binding.root).popBackStack(R.id.descriptionFragment, true)
@@ -221,7 +226,7 @@ class DescriptionFragment : Fragment(), KodeinAware, DescriptionsListener, Descr
     override fun getDescriptionsSuccess(modelDescriptionsPag: ModelDescriptionsPag) {
         descriptions.clear()
         descriptions.addAll(modelDescriptionsPag)
-        adapter = DescriptionsPagerAdapter(requireContext(), descriptions, this)
+        adapter = DescriptionsPagerAdapter(requireContext(),token, descriptions, this)
         binding.viewPager.adapter = adapter
         binding.progressBar.hide()
         adapter.notifyDataSetChanged()
@@ -243,8 +248,7 @@ class DescriptionFragment : Fragment(), KodeinAware, DescriptionsListener, Descr
                         binding.nameCards.text = modelDescriptionsPag[0].category
                     }
                 }
-            }
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 Log.d("ololo", e.toString())
             }
 
@@ -262,7 +266,17 @@ class DescriptionFragment : Fragment(), KodeinAware, DescriptionsListener, Descr
     }
 
     override fun onAddFavoriteClick(position: Int) {
-        chosenViewModel.addFavorite(code, ModelFavorites(descriptions[position].id))
+
+        if (token.isNullOrEmpty()) {
+
+            val fm = fragmentManager
+            val registerFragment = RegisterDialogFragment()
+            registerFragment.show(fm!!, "")
+
+
+        } else {
+            chosenViewModel.addFavorite(code, ModelFavorites(descriptions[position].id))
+        }
     }
 
     override fun onRemoveFavoriteClick(position: Int) {

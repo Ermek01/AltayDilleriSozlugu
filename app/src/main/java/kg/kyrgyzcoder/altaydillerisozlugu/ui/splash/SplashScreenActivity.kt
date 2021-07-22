@@ -14,6 +14,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import com.google.firebase.auth.FirebaseAuth
@@ -61,8 +62,8 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
     private var mCode = ""
     private var code: String? = ""
     private var defcode: String? = "ky"
-    private var defNameCountry: String? = "Крыгызча"
-    private var defFlag: Int = 2131231164
+    private var defNameCountry: String? = "Кыргызча"
+    private var defFlag: Int = 2131231165
     private var name: String? = ""
     private var flag: Int = 0
     private var nameCountry = ""
@@ -95,9 +96,8 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
         setContentView(binding.root)
 
         if (flag != 0) {
-            binding.imgFlag.setImageResource(flag)
+            binding.imgFlag.setImageDrawable(ContextCompat.getDrawable(applicationContext, flag))
             binding.nameCountry.text = name
-
         }
 
         Log.d("ololo", "onCreate")
@@ -247,14 +247,14 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
                     binding.btnLogin.visibility = View.VISIBLE
                     binding.txtWithoutAccount.visibility = View.VISIBLE
 
+                    val pref = getSharedPreferences("language",Context.MODE_PRIVATE)
+                    val code = pref.getString(CODE_KEY, "")
+
                     binding.relativeLayout.animation = bottomAnim
                     binding.btnLogin.animation = bottomAnim
                     binding.txtWithoutAccount.animation = bottomAnim
 
                     binding.btnLogin.setOnClickListener {
-
-                        val pref = getSharedPreferences("language",Context.MODE_PRIVATE)
-                        val code = pref.getString(CODE_KEY, "")
 
                         if (code!!.isEmpty()) {
                             val pref = applicationContext.getSharedPreferences("language", Context.MODE_PRIVATE)
@@ -270,8 +270,6 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
                     }
 
                     binding.txtWithoutAccount.setOnClickListener {
-                        val pref = getSharedPreferences("language",Context.MODE_PRIVATE)
-                        val code = pref.getString(CODE_KEY, "")
 
                         if (code!!.isEmpty()) {
                             val pref = applicationContext.getSharedPreferences("language", Context.MODE_PRIVATE)

@@ -2,11 +2,9 @@ package kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +20,7 @@ class CategoryRecyclerViewAdapter(
 ) :
     ListAdapter<ModelCategory, CategoryRecyclerViewAdapter.ViewHolderCat>(DIFF) {
 
+
     val userPreferences: UserPreferences? = null
 
     var defLang = "ky"
@@ -33,52 +32,9 @@ class CategoryRecyclerViewAdapter(
 
     private var _binding: RowCategoryItemsBinding? = null
 
-    inner class ViewHolderCat(private val binding: RowCategoryItemsBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun onBind(position: Int) {
-            val current = getItemAtPos(position)
-
-            val pref = itemView.context.getSharedPreferences("language", Context.MODE_PRIVATE)
-            val code : String = pref.getString(CODE_KEY, "").toString()
-
-            if (code.isNotEmpty()){
-                when(code){
-                    "tr" -> {
-                        Glide.with(binding.root).load(current.image)
-                            .error(ContextCompat.getDrawable(binding.root.context, R.drawable.def_image))
-                            .into(binding.imgItems)
-                        binding.nameCategory.text = current.title_tr
-                    }
-                    "ky" -> {
-
-                        Glide.with(binding.root).load(current.image)
-                            .error(ContextCompat.getDrawable(binding.root.context, R.drawable.def_image))
-                            .into(binding.imgItems)
-
-                        binding.nameCategory.text = current.title_ky
-                    }
-                }
-            }
-
-//            if (!current.image.isNullOrEmpty())
-//                Glide.with(binding.root).load(current.image)
-//                    .error(ContextCompat.getDrawable(binding.root.context, R.drawable.def_image))
-//                    .into(binding.imgItems)
-//            binding.nameCategory.text = current.title_ky
-
-
-
-            listener.onChangeLanguageText(position)
-
-            binding.root.setOnClickListener {
-                listener.onCategoryClick(position)
-            }
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderCat {
-        _binding = RowCategoryItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        _binding =
+            RowCategoryItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolderCat(_binding!!)
     }
 
@@ -106,4 +62,63 @@ class CategoryRecyclerViewAdapter(
         }
     }
 
+    inner class ViewHolderCat(private val binding: RowCategoryItemsBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        val pref = itemView.context.getSharedPreferences("language", Context.MODE_PRIVATE)
+        val code: String = pref.getString(CODE_KEY, "").toString()
+
+        fun onBind(position: Int) {
+            val current = getItemAtPos(position)
+
+            getData(current)
+            listener.onChangeLanguageText(position)
+        }
+
+        private fun getData(current: ModelCategory) {
+
+            if (code.isNotEmpty()) {
+                when (code) {
+                    "tr" -> {
+                        getDataTR(current)
+                    }
+                    "ky" -> {
+                        getDataTR(current)
+                    }
+                }
+            }
+        }
+
+        private fun getDataTR(current: ModelCategory) {
+            if (current.is_free) {
+                Glide.with(binding.root).load(current.image)
+                    .error(
+                        ContextCompat.getDrawable(
+                            binding.root.context,
+                            R.drawable.def_image
+                        )
+                    )
+                    .into(binding.imgItems)
+                binding.nameCategory.background =
+                    binding.root.resources.getDrawable(R.color.main_bg)
+                binding.nameCategory.text = current.title
+                binding.root.setOnClickListener {
+                    listener.onCategoryClick(position)
+                }
+            } else {
+                Glide.with(binding.root).load(current.image)
+                    .error(
+                        ContextCompat.getDrawable(
+                            binding.root.context,
+                            R.drawable.def_image
+                        )
+                    )
+                    .into(binding.imgItems)
+                binding.padLock.visibility = View.VISIBLE
+                binding.nameCategory.background =
+                    binding.root.resources.getDrawable(R.color.bg_items_pay)
+                binding.nameCategory.text = current.title
+            }
+        }
+    }
 }

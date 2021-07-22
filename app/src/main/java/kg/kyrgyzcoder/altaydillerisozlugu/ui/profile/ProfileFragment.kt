@@ -2,9 +2,9 @@ package kg.kyrgyzcoder.altaydillerisozlugu.ui.profile
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
@@ -12,13 +12,11 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.RelativeLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
@@ -26,21 +24,17 @@ import com.bumptech.glide.Glide
 import com.google.android.gms.location.*
 import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.user.model.ModelProfileUser
-import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentMainBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentProfileBinding
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.MainFragmentDirections
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModel
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModelFactory
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.util.LogoutFragment
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.util.ProfileListener
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.viewmodel.ProfileViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.viewmodel.ProfileViewModelFactory
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.splash.SplashScreenActivity
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.splash.utils.LanguageListener
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.splash.utils.SelectLanguageFragment
 import kg.kyrgyzcoder.altaydillerisozlugu.util.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import java.util.*
@@ -140,10 +134,15 @@ class ProfileFragment : Fragment(), KodeinAware, ProfileListener, LanguageListen
 
         profileViewModel.userToken.asLiveData().observe(viewLifecycleOwner, {
             token = it
-            if (token!!.isEmpty()) {
+            if (token == null || token!!.isEmpty()) {
                 binding.btnLogout.visibility = View.GONE
                 binding.cardView.visibility = View.VISIBLE
                 binding.edit.visibility = View.GONE
+                binding.toolbar.visibility = View.GONE
+                val layoutParams = binding.mainIcon.layoutParams as RelativeLayout.LayoutParams
+                layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE)
+                binding.mainIcon.layoutParams = layoutParams
+
             } else {
                 binding.prBar.show()
                 getLastLocation()
@@ -152,7 +151,7 @@ class ProfileFragment : Fragment(), KodeinAware, ProfileListener, LanguageListen
             }
         })
 
-        binding.ccp.setOnClickListener {
+        binding.language.setOnClickListener {
             val fm = fragmentManager
             val logoutFragment = SelectLanguageFragment(this)
             logoutFragment.show(fm!!, "")
@@ -166,6 +165,13 @@ class ProfileFragment : Fragment(), KodeinAware, ProfileListener, LanguageListen
 
         }
 
+        binding.register.setOnClickListener {
+            val intent = Intent(requireContext(), SplashScreenActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+            requireActivity().finish()
+        }
+
         binding.edit.setOnClickListener {
             val action = ProfileFragmentDirections.actionNavigationProfileToProfileEditFragment()
             Navigation.findNavController(binding.root).navigate(action)
@@ -173,12 +179,19 @@ class ProfileFragment : Fragment(), KodeinAware, ProfileListener, LanguageListen
     }
 
     override fun getProfileSuccess(modelProfileUser: ModelProfileUser) {
-        Glide.with(binding.root).load(modelProfileUser.image)
-            .error(ContextCompat.getDrawable(binding.root.context, R.drawable.ic_bg_profile_img))
-            .into(binding.profileImg)
-        binding.txtUsername.text = modelProfileUser.username
-        binding.txtEmail.text = modelProfileUser.email
-        binding.prBar.hide()
+
+        try {
+            Glide.with(binding.root).load(modelProfileUser.image)
+                .error(ContextCompat.getDrawable(binding.root.context, R.drawable.ic_bg_profile_img))
+                .into(binding.profileImg)
+            binding.txtUsername.text = modelProfileUser.username
+            binding.txtEmail.text = modelProfileUser.email
+            binding.prBar.hide()
+        }catch (e: Exception) {
+            Log.e("ololo", e.toString())
+        }
+
+
     }
 
     override fun getProfileFailure(code: Int?) {

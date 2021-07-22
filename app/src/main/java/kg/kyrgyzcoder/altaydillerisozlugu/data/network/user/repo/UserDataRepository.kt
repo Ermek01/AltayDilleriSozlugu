@@ -18,7 +18,7 @@ class UserDataRepository(
         apiService.getProfileUser("application/json", authorization)
     }
 
-    suspend fun editProfileUser(authorization: String, image: MultipartBody.Part?, username: String,) = safeApiCall {
+    suspend fun editProfileUser(authorization: String, image: MultipartBody.Part?, username: RequestBody,) = safeApiCall {
         apiService.editProfileUser(authorization, image, username)
     }
 

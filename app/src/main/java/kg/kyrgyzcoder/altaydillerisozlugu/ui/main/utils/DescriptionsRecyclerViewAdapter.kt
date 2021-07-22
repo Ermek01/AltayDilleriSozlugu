@@ -3,10 +3,13 @@ package kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils
 import android.content.Context
 import android.media.MediaPlayer
 import android.net.Uri
+import android.text.Layout
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -237,8 +240,10 @@ class DescriptionsRecyclerViewAdapter() :
             Glide.with(binding.root).load(currentList[TRANSLATE_KSK].image_ksk)
                 .error(ContextCompat.getDrawable(binding.root.context, R.drawable.def_image))
                 .into(binding.img)
+            binding.nameCountry.gravity = Gravity.LEFT
             binding.nameCountry.text = currentList[TRANSLATE_KSK].language_ksk
             binding.translateTxt.text = currentList[TRANSLATE_KSK].title_ksk
+
         }
 
         private fun getTranslatesKy() {

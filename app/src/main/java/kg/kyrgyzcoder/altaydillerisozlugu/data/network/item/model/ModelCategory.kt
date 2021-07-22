@@ -3,6 +3,7 @@ package kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model
 data class ModelCategory(
     val id: Int,
     val image: String,
+    val title: String,
     val title_tr: String,
     val title_az: String,
     val title_uz: String,
@@ -20,6 +21,7 @@ data class ModelCategory(
     val title_sah: String,
     val title_crh: String,
     val title_alt: String,
+    val is_free: Boolean
 
 
 

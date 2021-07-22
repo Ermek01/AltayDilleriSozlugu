@@ -19,13 +19,14 @@ import kotlinx.coroutines.launch
 class ChosenViewModel(
     private val userPreferences: UserPreferences,
     private val favoriteRepository: FavoriteRepository
-): ViewModel() {
+) : ViewModel() {
 
     val userId = userPreferences.currentUserId
+    val token = userPreferences.currentUserToken
 
     private var favoriteListener: FavoriteListener? = null
     private var getFavoriteListener: GetFavoriteListener? = null
-    private var getDescFavoriteListener : GetDescFavoriteListener? = null
+    private var getDescFavoriteListener: GetDescFavoriteListener? = null
 
     fun addFavoriteListener(favoriteListener: FavoriteListener) {
         this.favoriteListener = favoriteListener
@@ -41,8 +42,9 @@ class ChosenViewModel(
 
     fun addFavorite(code: String?, modelFavorites: ModelFavorites) = viewModelScope.launch {
         userPreferences.currentUserToken.collectLatest { token ->
-            if (token!!.isNotEmpty()){
-                when (val response = favoriteRepository.addFavorites(code,"Token $token", modelFavorites)) {
+            if (token!!.isNotEmpty()) {
+                when (val response =
+                    favoriteRepository.addFavorites(code, "Token $token", modelFavorites)) {
                     is NetworkResponse.Success -> {
                         favoriteListener?.addFavoriteSuccess()
                     }
@@ -58,27 +60,30 @@ class ChosenViewModel(
     }
 
     fun getFavorites(code: String?, search: String) = viewModelScope.launch {
+
         userPreferences.currentUserToken.collectLatest { token ->
-            if (token!!.isNotEmpty()){
-                when (val response = favoriteRepository.getFavorites(code,"Token $token", search)) {
-                    is NetworkResponse.Success -> {
-                        getFavoriteListener?.getFavoritesSuccess(response.value)
-                    }
-                    is NetworkResponse.Failure -> {
-                        getFavoriteListener?.getFavoritesError(response.errorCode)
+            if (token != null) {
+                if (token.isNotEmpty()) {
+                    when (val response = favoriteRepository.getFavorites(code, "Token $token", search)) {
+                        is NetworkResponse.Success -> {
+                            getFavoriteListener?.getFavoritesSuccess(response.value)
+                        }
+                        is NetworkResponse.Failure -> {
+                            getFavoriteListener?.getFavoritesError(response.errorCode)
+                        }
                     }
                 }
             }
 
         }
 
-
     }
 
     fun getDescFavorites(code: String?, id: Int) = viewModelScope.launch {
         userPreferences.currentUserToken.collectLatest { token ->
-            if (token!!.isNotEmpty()){
-                when (val response = favoriteRepository.getDescFavorites(code, id,"Token $token")) {
+            if (token!!.isNotEmpty()) {
+                when (val response =
+                    favoriteRepository.getDescFavorites(code, id, "Token $token")) {
                     is NetworkResponse.Success -> {
                         getDescFavoriteListener?.getDescFavoritesSuccess(response.value)
                     }

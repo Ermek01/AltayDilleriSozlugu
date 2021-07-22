@@ -23,6 +23,7 @@ import java.util.ArrayList
 
 class DescriptionsPagerAdapter(
     private val context: Context,
+    private val token: String?,
     private val modelDescriptions: ArrayList<ModelDescriptions>,
     private val listener: FavoriteClickListener
 ) : PagerAdapter() {
@@ -72,8 +73,14 @@ class DescriptionsPagerAdapter(
                 )?.constantState
             ) {
                 listener.onAddFavoriteClick(position)
-                view.findViewById<ImageView>(R.id.favorite)
-                    .setImageResource(R.drawable.ic_favorite_enable)
+                if (token.isNullOrEmpty()) {
+
+                }
+                else {
+                    view.findViewById<ImageView>(R.id.favorite)
+                        .setImageResource(R.drawable.ic_favorite_enable)
+                }
+
             } else {
                 listener.onAddFavoriteClick(position)
                 view.findViewById<ImageView>(R.id.favorite)

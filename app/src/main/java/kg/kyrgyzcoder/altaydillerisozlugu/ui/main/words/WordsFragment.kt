@@ -168,7 +168,8 @@ class WordsFragment : Fragment(), KodeinAware, DescriptionsListener,
         val action =
             WordsFragmentDirections.actionWordsFragmentToDescriptionFragment(amount, position)
         Navigation.findNavController(binding.root).navigate(action)
-
+        binding.searchWords.setText("")
+        requireActivity().hideKeyboard()
     }
 
     override fun getDescriptionsSuccess(modelDescriptionsPag: ModelDescriptionsPag) {

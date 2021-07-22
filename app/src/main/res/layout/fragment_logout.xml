@@ -5,15 +5,10 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="30dp"
-    android:background="@color/white"
-    android:backgroundTint="@color/white"
+    android:paddingBottom="35dp"
+    android:paddingEnd="15dp"
+    android:background="@drawable/dialog_rounded_bg"
     tools:context=".ui.profile.util.LogoutFragment">
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="35dp"
-        android:paddingEnd="10dp">
 
         <TextView
             android:id="@+id/txt_logout"
@@ -24,8 +19,8 @@
             android:fontFamily="@font/philosopher"
             android:textColor="@color/color_payment_edittext"
             android:layout_marginTop="40dp"
-            android:layout_marginStart="35dp"
-            android:textSize="24sp"
+            android:layout_marginStart="15dp"
+            android:textSize="22sp"
             />
 
         <TextView
@@ -36,8 +31,8 @@
             android:fontFamily="@font/philosopher"
             android:textColor="@color/color_payment_edittext"
             android:layout_marginTop="25dp"
-            android:layout_marginStart="35dp"
-            android:textSize="22sp"
+            android:layout_marginStart="15dp"
+            android:textSize="20sp"
             android:layout_below="@id/txt_logout"
             />
 
@@ -45,8 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txt_logout_confirm"
-            android:layout_marginTop="40dp"
-            android:layout_centerHorizontal="true">
+            android:layout_marginTop="40dp">
 
             <Button
                 android:id="@+id/btn_cancel"
@@ -82,7 +76,5 @@
 
 
         </LinearLayout>
-
-    </RelativeLayout>
 
 </RelativeLayout>

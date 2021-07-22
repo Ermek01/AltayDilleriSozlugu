@@ -181,6 +181,8 @@ class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecycler
         val amount = categories[position].id
         val action = MainFragmentDirections.actionMainFragmentToWordsFragment(amount)
         Navigation.findNavController(binding.root).navigate(action)
+        binding.editSearch.setText("")
+        requireActivity().hideKeyboard()
     }
 
     override fun onChangeLanguageText(position: Int) {

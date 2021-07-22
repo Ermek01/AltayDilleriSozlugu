@@ -76,7 +76,7 @@ class ProfileViewModel(
 
     }
 
-    fun editProfileUser(image: MultipartBody.Part?, username: String) = viewModelScope.launch {
+    fun editProfileUser(image: MultipartBody.Part?, username: RequestBody) = viewModelScope.launch {
         userPreferences.currentUserToken.collect { token ->
             if (token?.isNotEmpty() == true){
                 when (val response = userDataRepository.editProfileUser("Token $token", image, username)) {

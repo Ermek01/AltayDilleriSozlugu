@@ -2,6 +2,7 @@ package kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.favorites
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,6 +14,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelFavorites
@@ -26,6 +28,7 @@ import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.utils.GetFavoriteListener
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.viewmodel.ChosenViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.viewmodel.ChosenViewModelFactory
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.MainFragmentDirections
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.splash.SplashScreenActivity
 import kg.kyrgyzcoder.altaydillerisozlugu.util.CODE_KEY
 import kg.kyrgyzcoder.altaydillerisozlugu.util.hide
 import kg.kyrgyzcoder.altaydillerisozlugu.util.hideKeyboard
@@ -52,6 +55,8 @@ class ChosenFragment : Fragment(), KodeinAware, GetFavoriteListener, FavoriteLis
 
     private var code: String? = ""
     private var search: String = ""
+
+    private var token: String? = "token"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,12 +86,28 @@ class ChosenFragment : Fragment(), KodeinAware, GetFavoriteListener, FavoriteLis
         val pref = requireActivity().getSharedPreferences("language",Context.MODE_PRIVATE)
         code = pref.getString(CODE_KEY, "")
 
-        binding.progressBar.show()
-        chosenViewModel.getFavorites(code, search)
+        chosenViewModel.token.asLiveData().observe(viewLifecycleOwner, {
+            token = it
+            if (token == null || token!!.isEmpty()) {
+                binding.favoritesLayoutDef.visibility = View.VISIBLE
+            }
+            else {
+                binding.favoritesLayout.visibility = View.VISIBLE
+                binding.progressBar.show()
+                chosenViewModel.getFavorites(code, search)
+                binding.swipeRefresh.setOnRefreshListener {
+                    binding.progressBar.show()
+                    chosenViewModel.getFavorites(code, search)
+                }
+            }
 
-        binding.swipeRefresh.setOnRefreshListener {
-            binding.progressBar.show()
-            chosenViewModel.getFavorites(code, search)
+        })
+
+        binding.register.setOnClickListener {
+            val intent = Intent(requireContext(), SplashScreenActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+            requireActivity().finish()
         }
 
         binding.search.setOnClickListener {
@@ -156,7 +177,7 @@ class ChosenFragment : Fragment(), KodeinAware, GetFavoriteListener, FavoriteLis
     override fun getFavoritesSuccess(modelFavoritesRes: ModelFavoritesRes) {
         favorites.clear()
         favorites.addAll(modelFavoritesRes)
-        adapter = FavoritesRecyclerViewAdapter()
+        adapter = FavoritesRecyclerViewAdapter(requireActivity())
         binding.recyclerViewWords.adapter = adapter
         adapter.submitList(favorites)
         binding.progressBar.hide()

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,17 +15,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.data.local.UserPreferences
-import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelFavoritesRes
+import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelFavorites
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelFavoritesResItem
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.Word
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.RowWordsFavoritesBinding
-import kg.kyrgyzcoder.altaydillerisozlugu.databinding.RowWordsItemsChoosenBinding
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.favorites.ChosenFragmentDirections
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.MainFragmentDirections
-import kg.kyrgyzcoder.altaydillerisozlugu.util.CODE_KEY
 
-class FavoritesWordsRecyclerAdapter(private val favoritesClickListener: FavoritesClickListener, private val addFavoritesClick: AddFavoritesClick):
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.viewmodel.ChosenViewModel
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.viewmodel.ChosenViewModelFactory
+
+import kg.kyrgyzcoder.altaydillerisozlugu.util.CODE_KEY
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
+
+import org.kodein.di.generic.instance
+
+class FavoritesWordsRecyclerAdapter(val activity: FragmentActivity,private val favoritesClickListener: FavoritesClickListener, private val addFavoritesClick: AddFavoritesClick):
     ListAdapter<Word, FavoritesWordsRecyclerAdapter.ViewHolderCat>(DIFF) {
+
+
 
     val list = arrayListOf<ModelFavoritesResItem>()
 
@@ -41,11 +51,22 @@ class FavoritesWordsRecyclerAdapter(private val favoritesClickListener: Favorite
     private var _binding: RowWordsFavoritesBinding? = null
 
     inner class ViewHolderCat(private val binding: RowWordsFavoritesBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root), KodeinAware, FavoriteListener {
+
+        override val kodein: Kodein by closestKodein(activity)
+        private val chosenViewModelFactory: ChosenViewModelFactory by instance()
+
+        private lateinit var chosenViewModel: ChosenViewModel
 
         fun onBind(position: Int) {
             val current = getItemAtPos(position)
 
+            chosenViewModel = ViewModelProvider(
+                activity,
+                chosenViewModelFactory
+            ).get(ChosenViewModel::class.java)
+
+            chosenViewModel.addFavoriteListener(this)
 
             val pref = itemView.context.getSharedPreferences("language", Context.MODE_PRIVATE)
             val code : String = pref.getString(CODE_KEY, "").toString()
@@ -83,10 +104,10 @@ class FavoritesWordsRecyclerAdapter(private val favoritesClickListener: Favorite
                         R.drawable.ic_favorite_disable
                     )?.constantState
                 ) {
-                    addFavoritesClick.onAddFavoritesClick(position, current.id)
+                    chosenViewModel.addFavorite(code, ModelFavorites(current.id))
                     binding.favorites.setImageResource(R.drawable.ic_favorite_enable)
                 } else {
-                    addFavoritesClick.onAddFavoritesClick(position, current.id)
+                    chosenViewModel.addFavorite(code, ModelFavorites(current.id))
                     binding.favorites.setImageResource(R.drawable.ic_favorite_disable)
                 }
 
@@ -95,6 +116,14 @@ class FavoritesWordsRecyclerAdapter(private val favoritesClickListener: Favorite
             binding.root.setOnClickListener {
                 favoritesClickListener.onFavoritesClick(position, parent)
             }
+        }
+
+        override fun addFavoriteFailure(code: Int?) {
+
+        }
+
+        override fun addFavoriteSuccess() {
+
         }
     }
 

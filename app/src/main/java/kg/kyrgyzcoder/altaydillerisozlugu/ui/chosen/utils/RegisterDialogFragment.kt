@@ -1,4 +1,4 @@
-package kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.util
+package kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.utils
 
 import android.content.Intent
 import android.graphics.Color
@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.user.model.ModelProfileUser
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentLogoutBinding
+import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentRegisterDialogBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.viewmodel.ProfileViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.viewmodel.ProfileViewModelFactory
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.splash.SplashScreenActivity
@@ -21,15 +22,11 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
 
-class LogoutFragment : DialogFragment(), KodeinAware, LogoutListener {
+class RegisterDialogFragment : DialogFragment(){
 
-    override val kodein: Kodein by closestKodein()
-    private val profileViewModelFactory: ProfileViewModelFactory by instance()
 
-    private lateinit var profileViewModel: ProfileViewModel
-
-    private var _binding: FragmentLogoutBinding? = null
-    private val binding: FragmentLogoutBinding get() = _binding!!
+    private var _binding: FragmentRegisterDialogBinding? = null
+    private val binding: FragmentRegisterDialogBinding get() = _binding!!
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,45 +37,27 @@ class LogoutFragment : DialogFragment(), KodeinAware, LogoutListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLogoutBinding.inflate(inflater, container, false)
+        _binding = FragmentRegisterDialogBinding.inflate(inflater, container, false)
 
         if (dialog != null && dialog?.window != null) {
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
         }
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        profileViewModel = ViewModelProvider(
-            requireActivity(), profileViewModelFactory
-        ).get(ProfileViewModel::class.java)
-        profileViewModel.setLogoutListener(this)
 
-
-        binding.btnCancel.setOnClickListener {
+        binding.register.setOnClickListener {
+            val intent = Intent(requireContext(), SplashScreenActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+            requireActivity().finish()
             dismiss()
         }
 
-        binding.btnLogout.setOnClickListener {
-            profileViewModel.logoutUser()
-        }
-
-    }
-
-    override fun logoutSuccess() {
-        val intent = Intent(requireContext(), SplashScreenActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
-        requireActivity().finish()
-        Toast.makeText(requireContext(), getString(R.string.txt_success_logout), Toast.LENGTH_SHORT).show()
-    }
-
-    override fun logoutFail(code: Int?) {
-        Toast.makeText(requireContext(), "dasdsadsa", Toast.LENGTH_SHORT).show()
     }
 
     override fun onResume() {
