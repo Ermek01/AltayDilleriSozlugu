@@ -1,26 +1,30 @@
 package kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
+@Parcelize
 data class Languages(
-    val audio_file_alt: Any?,
-    val audio_file_ash: Any?,
-    val audio_file_az: Any?,
-    val audio_file_ba: Any?,
-    val audio_file_crh: Any?,
-    val audio_file_cv: Any?,
-    val audio_file_kaa: Any?,
-    val audio_file_kk: Any?,
-    val audio_file_krc: Any?,
-    val audio_file_ksk: Any?,
-    val audio_file_ky: String,
-    val audio_file_sah: Any?,
-    val audio_file_tk: Any?,
+    val audio_file_alt: String?,
+    val audio_file_ash: String?,
+    val audio_file_az: String?,
+    val audio_file_ba: String?,
+    val audio_file_crh: String?,
+    val audio_file_cv: String?,
+    val audio_file_kaa: String?,
+    val audio_file_kk: String?,
+    val audio_file_krc: String?,
+    val audio_file_ksk: String?,
+    val audio_file_ky: String?,
+    val audio_file_sah: String?,
+    val audio_file_tk: String?,
     val audio_file_tr: String,
-    val audio_file_tt: Any?,
-    val audio_file_ug: Any?,
-    val audio_file_uz: Any?,
+    val audio_file_tt: String?,
+    val audio_file_ug: String?,
+    val audio_file_uz: String?,
     val image_alt: String,
     val image_ash: String,
     val image_az: String,
@@ -72,4 +76,4 @@ data class Languages(
     val title_tt: String,
     val title_ug: String,
     val title_uz: String
-)
+): Parcelable

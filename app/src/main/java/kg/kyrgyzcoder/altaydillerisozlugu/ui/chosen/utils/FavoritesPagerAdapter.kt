@@ -1,5 +1,6 @@
 package kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +13,6 @@ import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelDescFavoritesItem
-import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelFavoritesResItem
-import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelDescriptions
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.DescriptionsRecyclerViewAdapter
 import kg.kyrgyzcoder.altaydillerisozlugu.util.CODE_KEY
 import kg.kyrgyzcoder.altaydillerisozlugu.util.TRANSLATE_KY
 import kg.kyrgyzcoder.altaydillerisozlugu.util.TRANSLATE_TR
@@ -41,16 +39,12 @@ class FavoritesPagerAdapter(
         val pref = context.getSharedPreferences("language", Context.MODE_PRIVATE)
         val code: String = pref.getString(CODE_KEY, "").toString()
 
-        if (code.isNotEmpty()) {
-            when (code) {
-                "tr" -> {
-                    getTranslateTr(model, view)
-                }
-                "ky" -> {
-                    getTranslateKy(model, view)
-                }
-            }
-        }
+        if (!model.image.isNullOrEmpty())
+            Glide.with(view!!).load(model.image)
+                .error(ContextCompat.getDrawable(context, R.drawable.def_image))
+                .into(view.findViewById(R.id.img))
+
+        getData(code, model, view)
 
         if (model.favorite) {
             view.findViewById<ImageView>(R.id.favorite)
@@ -84,6 +78,20 @@ class FavoritesPagerAdapter(
         return view
     }
 
+    @SuppressLint("CutPasteId")
+    private fun getData(code: String, model: ModelDescFavoritesItem, view: View) {
+        if (code.isNotEmpty()) {
+            when (code) {
+                "tr" -> {
+                    view.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_TR].title_tr
+                }
+                "ky" -> {
+                    view.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_KY].title_ky
+                }
+            }
+        }
+    }
+
     private fun setupRecyclerViewAdapter(view: View, position: Int) {
         words.clear()
         words.addAll(favorites)
@@ -106,16 +114,13 @@ class FavoritesPagerAdapter(
                 .error(ContextCompat.getDrawable(context, R.drawable.def_image))
                 .into(view.findViewById(R.id.img))
 
-        view?.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_KY].title_ky
+
     }
 
     private fun getTranslateTr(model: ModelDescFavoritesItem, view: View?) {
-        if (!model.image.isNullOrEmpty())
-            Glide.with(view!!).load(model.image)
-                .error(ContextCompat.getDrawable(context, R.drawable.def_image))
-                .into(view.findViewById(R.id.img))
 
-        view?.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_TR].title_tr
+
+
     }
 
     interface FavoriteClickListener {

@@ -16,15 +16,13 @@ import kg.kyrgyzcoder.altaydillerisozlugu.databinding.RowCategoryItemsBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.util.CODE_KEY
 
 class CategoryRecyclerViewAdapter(
-    private val listener: CategoryClickListener
+    private val listener: CategoryClickListener, val is_premium: Boolean?, val token: String?
 ) :
     ListAdapter<ModelCategory, CategoryRecyclerViewAdapter.ViewHolderCat>(DIFF) {
-
 
     val userPreferences: UserPreferences? = null
 
     var defLang = "ky"
-
 
     fun getItemAtPos(position: Int): ModelCategory {
         return getItem(position)
@@ -77,47 +75,101 @@ class CategoryRecyclerViewAdapter(
 
         private fun getData(current: ModelCategory) {
 
-            if (code.isNotEmpty()) {
-                when (code) {
-                    "tr" -> {
-                        getDataTR(current)
-                    }
-                    "ky" -> {
-                        getDataTR(current)
-                    }
-                }
-            }
-        }
+            if (token == null || token.isEmpty()) {
 
-        private fun getDataTR(current: ModelCategory) {
-            if (current.is_free) {
-                Glide.with(binding.root).load(current.image)
-                    .error(
-                        ContextCompat.getDrawable(
-                            binding.root.context,
-                            R.drawable.def_image
+                if (current.is_free) {
+                    Glide.with(binding.root).load(current.image)
+                        .error(
+                            ContextCompat.getDrawable(
+                                binding.root.context,
+                                R.drawable.def_image
+                            )
                         )
-                    )
-                    .into(binding.imgItems)
-                binding.nameCategory.background =
-                    binding.root.resources.getDrawable(R.color.main_bg)
-                binding.nameCategory.text = current.title
-                binding.root.setOnClickListener {
-                    listener.onCategoryClick(position)
+                        .into(binding.imgItems)
+                    binding.nameCategory.background =
+                        binding.root.resources.getDrawable(R.color.main_bg)
+                    binding.nameCategory.text = current.title
+                    binding.root.setOnClickListener {
+                        listener.onCategoryClick(position)
+                    }
+                } else {
+                    Glide.with(binding.root).load(current.image)
+                        .error(
+                            ContextCompat.getDrawable(
+                                binding.root.context,
+                                R.drawable.def_image
+                            )
+                        )
+                        .into(binding.imgItems)
+                    binding.padLock.visibility = View.VISIBLE
+                    binding.nameCategory.background =
+                        binding.root.resources.getDrawable(R.color.bg_items_pay)
+                    binding.nameCategory.text = current.title
                 }
-            } else {
-                Glide.with(binding.root).load(current.image)
-                    .error(
-                        ContextCompat.getDrawable(
-                            binding.root.context,
-                            R.drawable.def_image
+
+            }
+
+            else {
+
+                if (current.is_premium) {
+
+                    Glide.with(binding.root).load(current.image)
+                        .error(
+                            ContextCompat.getDrawable(
+                                binding.root.context,
+                                R.drawable.def_image
+                            )
                         )
-                    )
-                    .into(binding.imgItems)
-                binding.padLock.visibility = View.VISIBLE
-                binding.nameCategory.background =
-                    binding.root.resources.getDrawable(R.color.bg_items_pay)
-                binding.nameCategory.text = current.title
+                        .into(binding.imgItems)
+
+                    binding.nameCategory.text = current.title
+
+                    if (current.is_free) {
+                        binding.nameCategory.background =
+                            binding.root.resources.getDrawable(R.color.main_bg)
+                    }
+                    else {
+                        binding.nameCategory.background =
+                            binding.root.resources.getDrawable(R.color.vip_categories)
+                    }
+
+
+                    binding.root.setOnClickListener {
+                        listener.onCategoryClick(position)
+                    }
+                }
+                else {
+                    if (current.is_free) {
+                        Glide.with(binding.root).load(current.image)
+                            .error(
+                                ContextCompat.getDrawable(
+                                    binding.root.context,
+                                    R.drawable.def_image
+                                )
+                            )
+                            .into(binding.imgItems)
+                        binding.nameCategory.background =
+                            binding.root.resources.getDrawable(R.color.main_bg)
+                        binding.nameCategory.text = current.title
+                        binding.root.setOnClickListener {
+                            listener.onCategoryClick(position)
+                        }
+                    } else {
+                        Glide.with(binding.root).load(current.image)
+                            .error(
+                                ContextCompat.getDrawable(
+                                    binding.root.context,
+                                    R.drawable.def_image
+                                )
+                            )
+                            .into(binding.imgItems)
+                        binding.padLock.visibility = View.VISIBLE
+                        binding.nameCategory.background =
+                            binding.root.resources.getDrawable(R.color.bg_items_pay)
+                        binding.nameCategory.text = current.title
+                    }
+                }
+
             }
         }
     }

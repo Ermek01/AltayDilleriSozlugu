@@ -25,6 +25,7 @@ import com.google.android.gms.location.*
 import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.user.model.ModelProfileUser
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentProfileBinding
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.payment.GetPremiumActivity
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.util.LogoutFragment
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.util.ProfileListener
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.viewmodel.ProfileViewModel
@@ -175,6 +176,10 @@ class ProfileFragment : Fragment(), KodeinAware, ProfileListener, LanguageListen
         binding.edit.setOnClickListener {
             val action = ProfileFragmentDirections.actionNavigationProfileToProfileEditFragment()
             Navigation.findNavController(binding.root).navigate(action)
+        }
+
+        binding.getPremium.setOnClickListener {
+            startActivity(Intent(requireActivity(), GetPremiumActivity::class.java))
         }
     }
 

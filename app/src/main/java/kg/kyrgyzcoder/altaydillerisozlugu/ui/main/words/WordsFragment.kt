@@ -2,6 +2,7 @@ package kg.kyrgyzcoder.altaydillerisozlugu.ui.main.words
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,16 +14,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.*
-import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentMainBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentWordsBinding
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.CategoryRecyclerViewAdapter
+import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.description.DescriptionFragment
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.DescriptionsListener
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.WordsListener
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.WordsRecyclerViewAdapter
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModelFactory
@@ -32,8 +32,6 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import java.lang.Exception
-import java.util.ArrayList
-import java.util.Locale.filter
 
 class WordsFragment : Fragment(), KodeinAware, DescriptionsListener,
     WordsRecyclerViewAdapter.WordsClickListener {
@@ -94,7 +92,7 @@ class WordsFragment : Fragment(), KodeinAware, DescriptionsListener,
             itemViewModel.getDescriptionsList(code, amount, search)
         }
 
-        binding.searchWords.addTextChangedListener(object: TextWatcher {
+        binding.searchWords.addTextChangedListener(object : TextWatcher {
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
@@ -154,6 +152,7 @@ class WordsFragment : Fragment(), KodeinAware, DescriptionsListener,
         })
 
     }
+
     private fun getDescriptionSearch() {
         itemViewModel.getDescriptionsList(code, amount, binding.searchWords.text.toString())
 //        adapter = WordsRecyclerViewAdapter(this)
@@ -164,7 +163,8 @@ class WordsFragment : Fragment(), KodeinAware, DescriptionsListener,
 //        binding.progressBar.hide()
     }
 
-    override fun onWordsClick(position: Int) {
+    override fun onWordsClick(position: Int, current: ModelDescriptions) {
+        itemViewModel.mutableLiveData.value = words
         val action =
             WordsFragmentDirections.actionWordsFragmentToDescriptionFragment(amount, position)
         Navigation.findNavController(binding.root).navigate(action)
@@ -180,21 +180,10 @@ class WordsFragment : Fragment(), KodeinAware, DescriptionsListener,
         binding.progressBar.hide()
         binding.swipeRefresh.isRefreshing = false
 
-        if (code!!.isNotEmpty()) {
-
-            try {
-                when (code) {
-                    "tr" -> {
-                        binding.nameCards.text = modelDescriptionsPag[0].category
-                    }
-                    "ky" -> {
-                        binding.nameCards.text = modelDescriptionsPag[0].category
-                    }
-                }
-            }
-            catch (e: Exception) {
-                Log.d("ololo", e.toString())
-            }
+        try {
+            binding.nameCards.text = modelDescriptionsPag[0].category
+        } catch (e: Exception) {
+            Log.d("ololo", e.toString())
         }
     }
 

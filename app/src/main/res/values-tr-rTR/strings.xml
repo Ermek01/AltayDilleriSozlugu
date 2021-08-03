@@ -45,4 +45,12 @@
     <string name="basic_language">Temel diliniz</string>
     <string name="full_name">Tam adınız</string>
     <string name="txt_email_edit">E-postanız</string>
+    <string name="txt_select_plan">Bir plan seçin</string>
+    <string name="txt_month_plan">Aylık plan</string>
+    <string name="txt_all_words">Tüm kelimelere erişim</string>
+    <string name="txt_year_plan">Yıllık Plan</string>
+    <string name="txt_phrases">Tüm ifadelere erişim</string>
+    <string name="txt_payment_method">Ödeme yöntemi</string>
+    <string name="txt_payyment_price">Ödeme yöntemi</string>
+    <string name="txt_accepted">alıyor</string>
 </resources>

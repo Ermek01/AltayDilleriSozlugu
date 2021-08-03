@@ -48,7 +48,6 @@ class DescriptionsRecyclerViewAdapter() :
             if (code.isNotEmpty()) {
                 when (code) {
                     "tr" -> {
-
                         when (holder.itemViewType) {
                             TRANSLATE_TR -> {
                                 binding.root.visibility = View.GONE
@@ -160,6 +159,734 @@ class DescriptionsRecyclerViewAdapter() :
                             }
                         }
                     }
+                    "az" -> {
+                        when (holder.itemViewType) {
+                            TRANSLATE_TR -> {
+                                getTranslatesTr()
+                            }
+                            TRANSLATE_AZ -> {
+                                binding.root.visibility = View.GONE
+                                binding.root.layoutParams = RecyclerView.LayoutParams(0, 0)
+                            }
+                            TRANSLATE_UZ -> {
+                                getTranslatesUz()
+                            }
+                            TRANSLATE_KK -> {
+                                getTranslatesKk()
+                            }
+                            TRANSLATE_UG -> {
+                                getTranslatesUg()
+                            }
+                            TRANSLATE_TK -> {
+                                getTranslatesTk()
+                            }
+                            TRANSLATE_TT -> {
+                                getTranslatesTt()
+                            }
+                            TRANSLATE_KY -> {
+                                getTranslatesKy()
+                            }
+                            TRANSLATE_KSK -> {
+                                getTranslatesKsk()
+                            }
+                            TRANSLATE_BA -> {
+                                getTranslatesBa()
+                            }
+                            TRANSLATE_CV -> {
+                                getTranslatesCv()
+                            }
+                            TRANSLATE_ASH -> {
+                                getTranslatesAsh()
+                            }
+                            TRANSLATE_KAA -> {
+                                getTranslatesKaa()
+                            }
+                            TRANSLATE_KRC -> {
+                                getTranslatesKrc()
+                            }
+                            TRANSLATE_SAH -> {
+                                getTranslatesSah()
+                            }
+                            TRANSLATE_CRH -> {
+                                getTranslatesCrh()
+                            }
+                            TRANSLATE_ALT -> {
+                                getTranslatesAlt()
+                            }
+                        }
+                    }
+                    "uz" -> {
+                        when (holder.itemViewType) {
+                            TRANSLATE_TR -> {
+                                getTranslatesTr()
+                            }
+                            TRANSLATE_AZ -> {
+                                getTranslatesAz()
+                            }
+                            TRANSLATE_UZ -> {
+                                binding.root.visibility = View.GONE
+                                binding.root.layoutParams = RecyclerView.LayoutParams(0, 0)
+                            }
+                            TRANSLATE_KK -> {
+                                getTranslatesKk()
+                            }
+                            TRANSLATE_UG -> {
+                                getTranslatesUg()
+                            }
+                            TRANSLATE_TK -> {
+                                getTranslatesTk()
+                            }
+                            TRANSLATE_TT -> {
+                                getTranslatesTt()
+                            }
+                            TRANSLATE_KY -> {
+                                getTranslatesKy()
+                            }
+                            TRANSLATE_KSK -> {
+                                getTranslatesKsk()
+                            }
+                            TRANSLATE_BA -> {
+                                getTranslatesBa()
+                            }
+                            TRANSLATE_CV -> {
+                                getTranslatesCv()
+                            }
+                            TRANSLATE_ASH -> {
+                                getTranslatesAsh()
+                            }
+                            TRANSLATE_KAA -> {
+                                getTranslatesKaa()
+                            }
+                            TRANSLATE_KRC -> {
+                                getTranslatesKrc()
+                            }
+                            TRANSLATE_SAH -> {
+                                getTranslatesSah()
+                            }
+                            TRANSLATE_CRH -> {
+                                getTranslatesCrh()
+                            }
+                            TRANSLATE_ALT -> {
+                                getTranslatesAlt()
+                            }
+                        }
+                    }
+                    "kk" -> {
+                        when (holder.itemViewType) {
+                            TRANSLATE_TR -> {
+                                getTranslatesTr()
+                            }
+                            TRANSLATE_AZ -> {
+                                getTranslatesAz()
+                            }
+                            TRANSLATE_UZ -> {
+                                getTranslatesUz()
+                            }
+                            TRANSLATE_KK -> {
+                                binding.root.visibility = View.GONE
+                                binding.root.layoutParams = RecyclerView.LayoutParams(0, 0)
+                            }
+                            TRANSLATE_UG -> {
+                                getTranslatesUg()
+                            }
+                            TRANSLATE_TK -> {
+                                getTranslatesTk()
+                            }
+                            TRANSLATE_TT -> {
+                                getTranslatesTt()
+                            }
+                            TRANSLATE_KY -> {
+                                getTranslatesKy()
+                            }
+                            TRANSLATE_KSK -> {
+                                getTranslatesKsk()
+                            }
+                            TRANSLATE_BA -> {
+                                getTranslatesBa()
+                            }
+                            TRANSLATE_CV -> {
+                                getTranslatesCv()
+                            }
+                            TRANSLATE_ASH -> {
+                                getTranslatesAsh()
+                            }
+                            TRANSLATE_KAA -> {
+                                getTranslatesKaa()
+                            }
+                            TRANSLATE_KRC -> {
+                                getTranslatesKrc()
+                            }
+                            TRANSLATE_SAH -> {
+                                getTranslatesSah()
+                            }
+                            TRANSLATE_CRH -> {
+                                getTranslatesCrh()
+                            }
+                            TRANSLATE_ALT -> {
+                                getTranslatesAlt()
+                            }
+                        }
+                    }
+                    "ug" -> {
+                        when (holder.itemViewType) {
+                            TRANSLATE_TR -> {
+                                getTranslatesTr()
+                            }
+                            TRANSLATE_AZ -> {
+                                getTranslatesAz()
+                            }
+                            TRANSLATE_UZ -> {
+                                getTranslatesUz()
+                            }
+                            TRANSLATE_KK -> {
+                                getTranslatesKk()
+                            }
+                            TRANSLATE_UG -> {
+                                binding.root.visibility = View.GONE
+                                binding.root.layoutParams = RecyclerView.LayoutParams(0, 0)
+                            }
+                            TRANSLATE_TK -> {
+                                getTranslatesTk()
+                            }
+                            TRANSLATE_TT -> {
+                                getTranslatesTt()
+                            }
+                            TRANSLATE_KY -> {
+                                getTranslatesKy()
+                            }
+                            TRANSLATE_KSK -> {
+                                getTranslatesKsk()
+                            }
+                            TRANSLATE_BA -> {
+                                getTranslatesBa()
+                            }
+                            TRANSLATE_CV -> {
+                                getTranslatesCv()
+                            }
+                            TRANSLATE_ASH -> {
+                                getTranslatesAsh()
+                            }
+                            TRANSLATE_KAA -> {
+                                getTranslatesKaa()
+                            }
+                            TRANSLATE_KRC -> {
+                                getTranslatesKrc()
+                            }
+                            TRANSLATE_SAH -> {
+                                getTranslatesSah()
+                            }
+                            TRANSLATE_CRH -> {
+                                getTranslatesCrh()
+                            }
+                            TRANSLATE_ALT -> {
+                                getTranslatesAlt()
+                            }
+                        }
+                    }
+                    "tk" -> {
+                        when (holder.itemViewType) {
+                            TRANSLATE_TR -> {
+                                getTranslatesTr()
+                            }
+                            TRANSLATE_AZ -> {
+                                getTranslatesAz()
+                            }
+                            TRANSLATE_UZ -> {
+                                getTranslatesUz()
+                            }
+                            TRANSLATE_KK -> {
+                                getTranslatesKk()
+                            }
+                            TRANSLATE_UG -> {
+                                getTranslatesUg()
+                            }
+                            TRANSLATE_TK -> {
+                                binding.root.visibility = View.GONE
+                                binding.root.layoutParams = RecyclerView.LayoutParams(0, 0)
+                            }
+                            TRANSLATE_TT -> {
+                                getTranslatesTt()
+                            }
+                            TRANSLATE_KY -> {
+                                getTranslatesKy()
+                            }
+                            TRANSLATE_KSK -> {
+                                getTranslatesKsk()
+                            }
+                            TRANSLATE_BA -> {
+                                getTranslatesBa()
+                            }
+                            TRANSLATE_CV -> {
+                                getTranslatesCv()
+                            }
+                            TRANSLATE_ASH -> {
+                                getTranslatesAsh()
+                            }
+                            TRANSLATE_KAA -> {
+                                getTranslatesKaa()
+                            }
+                            TRANSLATE_KRC -> {
+                                getTranslatesKrc()
+                            }
+                            TRANSLATE_SAH -> {
+                                getTranslatesSah()
+                            }
+                            TRANSLATE_CRH -> {
+                                getTranslatesCrh()
+                            }
+                            TRANSLATE_ALT -> {
+                                getTranslatesAlt()
+                            }
+                        }
+                    }
+                    "tt" -> {
+                        when (holder.itemViewType) {
+                            TRANSLATE_TR -> {
+                                getTranslatesTr()
+                            }
+                            TRANSLATE_AZ -> {
+                                getTranslatesAz()
+                            }
+                            TRANSLATE_UZ -> {
+                                getTranslatesUz()
+                            }
+                            TRANSLATE_KK -> {
+                                getTranslatesKk()
+                            }
+                            TRANSLATE_UG -> {
+                                getTranslatesUg()
+                            }
+                            TRANSLATE_TK -> {
+                                getTranslatesTk()
+                            }
+                            TRANSLATE_TT -> {
+                                binding.root.visibility = View.GONE
+                                binding.root.layoutParams = RecyclerView.LayoutParams(0, 0)
+                            }
+                            TRANSLATE_KY -> {
+                                getTranslatesKy()
+                            }
+                            TRANSLATE_KSK -> {
+                                getTranslatesKsk()
+                            }
+                            TRANSLATE_BA -> {
+                                getTranslatesBa()
+                            }
+                            TRANSLATE_CV -> {
+                                getTranslatesCv()
+                            }
+                            TRANSLATE_ASH -> {
+                                getTranslatesAsh()
+                            }
+                            TRANSLATE_KAA -> {
+                                getTranslatesKaa()
+                            }
+                            TRANSLATE_KRC -> {
+                                getTranslatesKrc()
+                            }
+                            TRANSLATE_SAH -> {
+                                getTranslatesSah()
+                            }
+                            TRANSLATE_CRH -> {
+                                getTranslatesCrh()
+                            }
+                            TRANSLATE_ALT -> {
+                                getTranslatesAlt()
+                            }
+                        }
+                    }
+                    "ba" -> {
+                        when (holder.itemViewType) {
+                            TRANSLATE_TR -> {
+                                getTranslatesTr()
+                            }
+                            TRANSLATE_AZ -> {
+                                getTranslatesAz()
+                            }
+                            TRANSLATE_UZ -> {
+                                getTranslatesUz()
+                            }
+                            TRANSLATE_KK -> {
+                                getTranslatesKk()
+                            }
+                            TRANSLATE_UG -> {
+                                getTranslatesUg()
+                            }
+                            TRANSLATE_TK -> {
+                                getTranslatesTk()
+                            }
+                            TRANSLATE_TT -> {
+                                getTranslatesTt()
+                            }
+                            TRANSLATE_KY -> {
+                                getTranslatesKy()
+                            }
+                            TRANSLATE_KSK -> {
+                                getTranslatesKsk()
+                            }
+                            TRANSLATE_BA -> {
+                                binding.root.visibility = View.GONE
+                                binding.root.layoutParams = RecyclerView.LayoutParams(0, 0)
+                            }
+                            TRANSLATE_CV -> {
+                                getTranslatesCv()
+                            }
+                            TRANSLATE_ASH -> {
+                                getTranslatesAsh()
+                            }
+                            TRANSLATE_KAA -> {
+                                getTranslatesKaa()
+                            }
+                            TRANSLATE_KRC -> {
+                                getTranslatesKrc()
+                            }
+                            TRANSLATE_SAH -> {
+                                getTranslatesSah()
+                            }
+                            TRANSLATE_CRH -> {
+                                getTranslatesCrh()
+                            }
+                            TRANSLATE_ALT -> {
+                                getTranslatesAlt()
+                            }
+                        }
+                    }
+                    "cv" -> {
+                        when (holder.itemViewType) {
+                            TRANSLATE_TR -> {
+                                getTranslatesTr()
+                            }
+                            TRANSLATE_AZ -> {
+                                getTranslatesAz()
+                            }
+                            TRANSLATE_UZ -> {
+                                getTranslatesUz()
+                            }
+                            TRANSLATE_KK -> {
+                                getTranslatesKk()
+                            }
+                            TRANSLATE_UG -> {
+                                getTranslatesUg()
+                            }
+                            TRANSLATE_TK -> {
+                                getTranslatesTk()
+                            }
+                            TRANSLATE_TT -> {
+                                getTranslatesTt()
+                            }
+                            TRANSLATE_KY -> {
+                                getTranslatesKy()
+                            }
+                            TRANSLATE_KSK -> {
+                                getTranslatesKsk()
+                            }
+                            TRANSLATE_BA -> {
+                                getTranslatesBa()
+                            }
+                            TRANSLATE_CV -> {
+                                binding.root.visibility = View.GONE
+                                binding.root.layoutParams = RecyclerView.LayoutParams(0, 0)
+                            }
+                            TRANSLATE_ASH -> {
+                                getTranslatesAsh()
+                            }
+                            TRANSLATE_KAA -> {
+                                getTranslatesKaa()
+                            }
+                            TRANSLATE_KRC -> {
+                                getTranslatesKrc()
+                            }
+                            TRANSLATE_SAH -> {
+                                getTranslatesSah()
+                            }
+                            TRANSLATE_CRH -> {
+                                getTranslatesCrh()
+                            }
+                            TRANSLATE_ALT -> {
+                                getTranslatesAlt()
+                            }
+                        }
+                    }
+                    "kaa" -> {
+                        when (holder.itemViewType) {
+                            TRANSLATE_TR -> {
+                                getTranslatesTr()
+                            }
+                            TRANSLATE_AZ -> {
+                                getTranslatesAz()
+                            }
+                            TRANSLATE_UZ -> {
+                                getTranslatesUz()
+                            }
+                            TRANSLATE_KK -> {
+                                getTranslatesKk()
+                            }
+                            TRANSLATE_UG -> {
+                                getTranslatesUg()
+                            }
+                            TRANSLATE_TK -> {
+                                getTranslatesTk()
+                            }
+                            TRANSLATE_TT -> {
+                                getTranslatesTt()
+                            }
+                            TRANSLATE_KY -> {
+                                getTranslatesKy()
+                            }
+                            TRANSLATE_KSK -> {
+                                getTranslatesKsk()
+                            }
+                            TRANSLATE_BA -> {
+                                getTranslatesBa()
+                            }
+                            TRANSLATE_CV -> {
+                                getTranslatesCv()
+                            }
+                            TRANSLATE_ASH -> {
+                                getTranslatesAsh()
+                            }
+                            TRANSLATE_KAA -> {
+                                binding.root.visibility = View.GONE
+                                binding.root.layoutParams = RecyclerView.LayoutParams(0, 0)
+                            }
+                            TRANSLATE_KRC -> {
+                                getTranslatesKrc()
+                            }
+                            TRANSLATE_SAH -> {
+                                getTranslatesSah()
+                            }
+                            TRANSLATE_CRH -> {
+                                getTranslatesCrh()
+                            }
+                            TRANSLATE_ALT -> {
+                                getTranslatesAlt()
+                            }
+                        }
+                    }
+                    "krc" -> {
+                        when (holder.itemViewType) {
+                            TRANSLATE_TR -> {
+                                getTranslatesTr()
+                            }
+                            TRANSLATE_AZ -> {
+                                getTranslatesAz()
+                            }
+                            TRANSLATE_UZ -> {
+                                getTranslatesUz()
+                            }
+                            TRANSLATE_KK -> {
+                                getTranslatesKk()
+                            }
+                            TRANSLATE_UG -> {
+                                getTranslatesUg()
+                            }
+                            TRANSLATE_TK -> {
+                                getTranslatesTk()
+                            }
+                            TRANSLATE_TT -> {
+                                getTranslatesTt()
+                            }
+                            TRANSLATE_KY -> {
+                                getTranslatesKy()
+                            }
+                            TRANSLATE_KSK -> {
+                                getTranslatesKsk()
+                            }
+                            TRANSLATE_BA -> {
+                                getTranslatesBa()
+                            }
+                            TRANSLATE_CV -> {
+                                getTranslatesCv()
+                            }
+                            TRANSLATE_ASH -> {
+                                getTranslatesAsh()
+                            }
+                            TRANSLATE_KAA -> {
+                                getTranslatesKaa()
+                            }
+                            TRANSLATE_KRC -> {
+                                binding.root.visibility = View.GONE
+                                binding.root.layoutParams = RecyclerView.LayoutParams(0, 0)
+                            }
+                            TRANSLATE_SAH -> {
+                                getTranslatesSah()
+                            }
+                            TRANSLATE_CRH -> {
+                                getTranslatesCrh()
+                            }
+                            TRANSLATE_ALT -> {
+                                getTranslatesAlt()
+                            }
+                        }
+                    }
+                    "sah" -> {
+                        when (holder.itemViewType) {
+                            TRANSLATE_TR -> {
+                                getTranslatesTr()
+                            }
+                            TRANSLATE_AZ -> {
+                                getTranslatesAz()
+                            }
+                            TRANSLATE_UZ -> {
+                                getTranslatesUz()
+                            }
+                            TRANSLATE_KK -> {
+                                getTranslatesKk()
+                            }
+                            TRANSLATE_UG -> {
+                                getTranslatesUg()
+                            }
+                            TRANSLATE_TK -> {
+                                getTranslatesTk()
+                            }
+                            TRANSLATE_TT -> {
+                                getTranslatesTt()
+                            }
+                            TRANSLATE_KY -> {
+                                getTranslatesKy()
+                            }
+                            TRANSLATE_KSK -> {
+                                getTranslatesKsk()
+                            }
+                            TRANSLATE_BA -> {
+                                getTranslatesBa()
+                            }
+                            TRANSLATE_CV -> {
+                                getTranslatesCv()
+                            }
+                            TRANSLATE_ASH -> {
+                                getTranslatesAsh()
+                            }
+                            TRANSLATE_KAA -> {
+                                getTranslatesKaa()
+                            }
+                            TRANSLATE_KRC -> {
+                                getTranslatesKrc()
+                            }
+                            TRANSLATE_SAH -> {
+                                binding.root.visibility = View.GONE
+                                binding.root.layoutParams = RecyclerView.LayoutParams(0, 0)
+                            }
+                            TRANSLATE_CRH -> {
+                                getTranslatesCrh()
+                            }
+                            TRANSLATE_ALT -> {
+                                getTranslatesAlt()
+                            }
+                        }
+                    }
+                    "crh" -> {
+                        when (holder.itemViewType) {
+                            TRANSLATE_TR -> {
+                                getTranslatesTr()
+                            }
+                            TRANSLATE_AZ -> {
+                                getTranslatesAz()
+                            }
+                            TRANSLATE_UZ -> {
+                                getTranslatesUz()
+                            }
+                            TRANSLATE_KK -> {
+                                getTranslatesKk()
+                            }
+                            TRANSLATE_UG -> {
+                                getTranslatesUg()
+                            }
+                            TRANSLATE_TK -> {
+                                getTranslatesTk()
+                            }
+                            TRANSLATE_TT -> {
+                                getTranslatesTt()
+                            }
+                            TRANSLATE_KY -> {
+                                getTranslatesKy()
+                            }
+                            TRANSLATE_KSK -> {
+                                getTranslatesKsk()
+                            }
+                            TRANSLATE_BA -> {
+                                getTranslatesBa()
+                            }
+                            TRANSLATE_CV -> {
+                                getTranslatesCv()
+                            }
+                            TRANSLATE_ASH -> {
+                                getTranslatesAsh()
+                            }
+                            TRANSLATE_KAA -> {
+                                getTranslatesKaa()
+                            }
+                            TRANSLATE_KRC -> {
+                                getTranslatesKrc()
+                            }
+                            TRANSLATE_SAH -> {
+                                getTranslatesSah()
+                            }
+                            TRANSLATE_CRH -> {
+                                binding.root.visibility = View.GONE
+                                binding.root.layoutParams = RecyclerView.LayoutParams(0, 0)
+                            }
+                            TRANSLATE_ALT -> {
+                                getTranslatesAlt()
+                            }
+                        }
+                    }
+                    "alt" -> {
+                        when (holder.itemViewType) {
+                            TRANSLATE_TR -> {
+                                getTranslatesTr()
+                            }
+                            TRANSLATE_AZ -> {
+                                getTranslatesAz()
+                            }
+                            TRANSLATE_UZ -> {
+                                getTranslatesUz()
+                            }
+                            TRANSLATE_KK -> {
+                                getTranslatesKk()
+                            }
+                            TRANSLATE_UG -> {
+                                getTranslatesUg()
+                            }
+                            TRANSLATE_TK -> {
+                                getTranslatesTk()
+                            }
+                            TRANSLATE_TT -> {
+                                getTranslatesTt()
+                            }
+                            TRANSLATE_KY -> {
+                                getTranslatesKy()
+                            }
+                            TRANSLATE_KSK -> {
+                                getTranslatesKsk()
+                            }
+                            TRANSLATE_BA -> {
+                                getTranslatesBa()
+                            }
+                            TRANSLATE_CV -> {
+                                getTranslatesCv()
+                            }
+                            TRANSLATE_ASH -> {
+                                getTranslatesAsh()
+                            }
+                            TRANSLATE_KAA -> {
+                                getTranslatesKaa()
+                            }
+                            TRANSLATE_KRC -> {
+                                getTranslatesKrc()
+                            }
+                            TRANSLATE_SAH -> {
+                                getTranslatesSah()
+                            }
+                            TRANSLATE_CRH -> {
+                                getTranslatesCrh()
+                            }
+                            TRANSLATE_ALT -> {
+                                binding.root.visibility = View.GONE
+                                binding.root.layoutParams = RecyclerView.LayoutParams(0, 0)
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -170,6 +897,37 @@ class DescriptionsRecyclerViewAdapter() :
                 .into(binding.img)
             binding.translateTxt.text = currentList[TRANSLATE_TR].title_tr
             binding.nameCountry.text = currentList[TRANSLATE_TR].language_tr
+
+            if (currentList[TRANSLATE_TR].audio_file_tr != null) {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                binding.playBtn.setOnClickListener {
+                    audioPlayTr()
+                }
+            } else {
+                binding.playBtn.setImageResource(R.drawable.ic_group_disable)
+            }
+        }
+
+        private fun audioPlayTr() {
+            if (mp.isPlaying) {
+                mp.stop()
+                mp.reset()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            } else {
+                mp = MediaPlayer.create(
+                    itemView.context,
+                    Uri.parse(currentList[TRANSLATE_TR].audio_file_tr)
+                )
+                mp.start()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_enable)
+                isPlaying = true
+            }
+
+            mp.setOnCompletionListener {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            }
         }
 
         private fun getTranslatesAlt() {
@@ -178,6 +936,37 @@ class DescriptionsRecyclerViewAdapter() :
                 .into(binding.img)
             binding.nameCountry.text = currentList[TRANSLATE_ALT].language_alt
             binding.translateTxt.text = currentList[TRANSLATE_ALT].title_alt
+
+            if (currentList[TRANSLATE_ALT].audio_file_alt != null) {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                binding.playBtn.setOnClickListener {
+                    audioPlayAlt()
+                }
+            } else {
+                binding.playBtn.setImageResource(R.drawable.ic_group_disable)
+            }
+        }
+
+        private fun audioPlayAlt() {
+            if (mp.isPlaying) {
+                mp.stop()
+                mp.reset()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            } else {
+                mp = MediaPlayer.create(
+                    itemView.context,
+                    Uri.parse(currentList[TRANSLATE_ALT].audio_file_alt)
+                )
+                mp.start()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_enable)
+                isPlaying = true
+            }
+
+            mp.setOnCompletionListener {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            }
         }
 
         private fun getTranslatesCrh() {
@@ -186,6 +975,40 @@ class DescriptionsRecyclerViewAdapter() :
                 .into(binding.img)
             binding.nameCountry.text = currentList[TRANSLATE_CRH].language_crh
             binding.translateTxt.text = currentList[TRANSLATE_CRH].title_crh
+
+            if (currentList[TRANSLATE_SAH].audio_file_sah != null) {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                binding.playBtn.setOnClickListener {
+                    audioPlayCrh()
+                }
+            } else {
+                binding.playBtn.setImageResource(R.drawable.ic_group_disable)
+            }
+
+        }
+
+        private fun audioPlayCrh() {
+            if (mp.isPlaying) {
+                mp.stop()
+                mp.reset()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            } else {
+                mp = MediaPlayer.create(
+                    itemView.context,
+                    Uri.parse(currentList[TRANSLATE_CRH].audio_file_crh)
+                )
+                mp.start()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_enable)
+                isPlaying = true
+
+
+            }
+
+            mp.setOnCompletionListener {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            }
         }
 
         private fun getTranslatesSah() {
@@ -194,6 +1017,40 @@ class DescriptionsRecyclerViewAdapter() :
                 .into(binding.img)
             binding.nameCountry.text = currentList[TRANSLATE_SAH].language_sah
             binding.translateTxt.text = currentList[TRANSLATE_SAH].title_sah
+
+            if (currentList[TRANSLATE_SAH].audio_file_sah != null) {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                binding.playBtn.setOnClickListener {
+                    audioPlaySah()
+                }
+            } else {
+                binding.playBtn.setImageResource(R.drawable.ic_group_disable)
+            }
+
+        }
+
+        private fun audioPlaySah() {
+            if (mp.isPlaying) {
+                mp.stop()
+                mp.reset()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            } else {
+                mp = MediaPlayer.create(
+                    itemView.context,
+                    Uri.parse(currentList[TRANSLATE_SAH].audio_file_sah)
+                )
+                mp.start()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_enable)
+                isPlaying = true
+
+
+            }
+
+            mp.setOnCompletionListener {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            }
         }
 
         private fun getTranslatesKrc() {
@@ -202,6 +1059,39 @@ class DescriptionsRecyclerViewAdapter() :
                 .into(binding.img)
             binding.nameCountry.text = currentList[TRANSLATE_KRC].language_krc
             binding.translateTxt.text = currentList[TRANSLATE_KRC].title_krc
+
+            if (currentList[TRANSLATE_KRC].audio_file_krc != null) {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                binding.playBtn.setOnClickListener {
+                    audioPlayKrc()
+                }
+            } else {
+                binding.playBtn.setImageResource(R.drawable.ic_group_disable)
+            }
+        }
+
+        private fun audioPlayKrc() {
+            if (mp.isPlaying) {
+                mp.stop()
+                mp.reset()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            } else {
+                mp = MediaPlayer.create(
+                    itemView.context,
+                    Uri.parse(currentList[TRANSLATE_KRC].audio_file_krc)
+                )
+                mp.start()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_enable)
+                isPlaying = true
+
+
+            }
+
+            mp.setOnCompletionListener {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            }
         }
 
         private fun getTranslatesKaa() {
@@ -210,6 +1100,40 @@ class DescriptionsRecyclerViewAdapter() :
                 .into(binding.img)
             binding.nameCountry.text = currentList[TRANSLATE_KAA].language_kaa
             binding.translateTxt.text = currentList[TRANSLATE_KAA].title_kaa
+
+            if (currentList[TRANSLATE_KAA].audio_file_kaa != null) {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                binding.playBtn.setOnClickListener {
+                    audioPlayKaa()
+                }
+            } else {
+                binding.playBtn.setImageResource(R.drawable.ic_group_disable)
+            }
+
+        }
+
+        private fun audioPlayKaa() {
+            if (mp.isPlaying) {
+                mp.stop()
+                mp.reset()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            } else {
+                mp = MediaPlayer.create(
+                    itemView.context,
+                    Uri.parse(currentList[TRANSLATE_KAA].audio_file_kaa)
+                )
+                mp.start()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_enable)
+                isPlaying = true
+
+
+            }
+
+            mp.setOnCompletionListener {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            }
         }
 
         private fun getTranslatesAsh() {
@@ -218,6 +1142,40 @@ class DescriptionsRecyclerViewAdapter() :
                 .into(binding.img)
             binding.nameCountry.text = currentList[TRANSLATE_ASH].language_ash
             binding.translateTxt.text = currentList[TRANSLATE_ASH].title_ash
+
+            if (currentList[TRANSLATE_ASH].audio_file_ash != null) {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                binding.playBtn.setOnClickListener {
+                    audioPlayAsh()
+                }
+            } else {
+                binding.playBtn.setImageResource(R.drawable.ic_group_disable)
+            }
+
+        }
+
+        private fun audioPlayAsh() {
+            if (mp.isPlaying) {
+                mp.stop()
+                mp.reset()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            } else {
+                mp = MediaPlayer.create(
+                    itemView.context,
+                    Uri.parse(currentList[TRANSLATE_ASH].audio_file_ash)
+                )
+                mp.start()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_enable)
+                isPlaying = true
+
+
+            }
+
+            mp.setOnCompletionListener {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            }
         }
 
         private fun getTranslatesCv() {
@@ -226,6 +1184,39 @@ class DescriptionsRecyclerViewAdapter() :
                 .into(binding.img)
             binding.nameCountry.text = currentList[TRANSLATE_CV].language_cv
             binding.translateTxt.text = currentList[TRANSLATE_CV].title_cv
+
+            if (currentList[TRANSLATE_CV].audio_file_cv != null) {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                binding.playBtn.setOnClickListener {
+                    audioPlayCv()
+                }
+            } else {
+                binding.playBtn.setImageResource(R.drawable.ic_group_disable)
+            }
+        }
+
+        private fun audioPlayCv() {
+            if (mp.isPlaying) {
+                mp.stop()
+                mp.reset()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            } else {
+                mp = MediaPlayer.create(
+                    itemView.context,
+                    Uri.parse(currentList[TRANSLATE_CV].audio_file_cv)
+                )
+                mp.start()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_enable)
+                isPlaying = true
+
+
+            }
+
+            mp.setOnCompletionListener {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            }
         }
 
         private fun getTranslatesBa() {
@@ -234,6 +1225,40 @@ class DescriptionsRecyclerViewAdapter() :
                 .into(binding.img)
             binding.nameCountry.text = currentList[TRANSLATE_BA].language_ba
             binding.translateTxt.text = currentList[TRANSLATE_BA].title_ba
+
+            if (currentList[TRANSLATE_BA].audio_file_ba != null) {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                binding.playBtn.setOnClickListener {
+                    audioPlayBa()
+                }
+            } else {
+                binding.playBtn.setImageResource(R.drawable.ic_group_disable)
+            }
+
+        }
+
+        private fun audioPlayBa() {
+            if (mp.isPlaying) {
+                mp.stop()
+                mp.reset()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            } else {
+                mp = MediaPlayer.create(
+                    itemView.context,
+                    Uri.parse(currentList[TRANSLATE_BA].audio_file_ba)
+                )
+                mp.start()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_enable)
+                isPlaying = true
+
+
+            }
+
+            mp.setOnCompletionListener {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            }
         }
 
         private fun getTranslatesKsk() {
@@ -244,6 +1269,39 @@ class DescriptionsRecyclerViewAdapter() :
             binding.nameCountry.text = currentList[TRANSLATE_KSK].language_ksk
             binding.translateTxt.text = currentList[TRANSLATE_KSK].title_ksk
 
+            if (currentList[TRANSLATE_KSK].audio_file_ksk != null) {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                binding.playBtn.setOnClickListener {
+                    audioPlayKsk()
+                }
+            } else {
+                binding.playBtn.setImageResource(R.drawable.ic_group_disable)
+            }
+
+        }
+
+        private fun audioPlayKsk() {
+            if (mp.isPlaying) {
+                mp.stop()
+                mp.reset()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            } else {
+                mp = MediaPlayer.create(
+                    itemView.context,
+                    Uri.parse(currentList[TRANSLATE_KSK].audio_file_ksk)
+                )
+                mp.start()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_enable)
+                isPlaying = true
+
+
+            }
+
+            mp.setOnCompletionListener {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            }
         }
 
         private fun getTranslatesKy() {
@@ -253,8 +1311,14 @@ class DescriptionsRecyclerViewAdapter() :
                 .into(binding.img)
             binding.nameCountry.text = currentList[TRANSLATE_KY].language_ky
             binding.translateTxt.text = currentList[TRANSLATE_KY].title_ky
-            binding.playBtn.setOnClickListener {
-                audioPlayKy()
+
+            if (currentList[TRANSLATE_KY].audio_file_ky != null) {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                binding.playBtn.setOnClickListener {
+                    audioPlayKy()
+                }
+            } else {
+                binding.playBtn.setImageResource(R.drawable.ic_group_disable)
             }
 
         }
@@ -265,12 +1329,16 @@ class DescriptionsRecyclerViewAdapter() :
                 mp.reset()
                 binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
                 isPlaying = false
-            }
-            else {
-                mp = MediaPlayer.create(itemView.context, Uri.parse(currentList[TRANSLATE_KY].audio_file_ky))
+            } else {
+                mp = MediaPlayer.create(
+                    itemView.context,
+                    Uri.parse(currentList[TRANSLATE_KY].audio_file_ky)
+                )
                 mp.start()
                 binding.playBtn.setImageResource(R.drawable.ic_play_btn_enable)
                 isPlaying = true
+
+
             }
 
             mp.setOnCompletionListener {
@@ -285,6 +1353,39 @@ class DescriptionsRecyclerViewAdapter() :
                 .into(binding.img)
             binding.nameCountry.text = currentList[TRANSLATE_TT].language_tt
             binding.translateTxt.text = currentList[TRANSLATE_TT].title_tt
+
+            if (currentList[TRANSLATE_TT].audio_file_tt != null) {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                binding.playBtn.setOnClickListener {
+                    audioPlayTt()
+                }
+            } else {
+                binding.playBtn.setImageResource(R.drawable.ic_group_disable)
+            }
+        }
+
+        private fun audioPlayTt() {
+            if (mp.isPlaying) {
+                mp.stop()
+                mp.reset()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            } else {
+                mp = MediaPlayer.create(
+                    itemView.context,
+                    Uri.parse(currentList[TRANSLATE_TT].audio_file_tt)
+                )
+                mp.start()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_enable)
+                isPlaying = true
+
+
+            }
+
+            mp.setOnCompletionListener {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            }
         }
 
         private fun getTranslatesTk() {
@@ -293,6 +1394,39 @@ class DescriptionsRecyclerViewAdapter() :
                 .into(binding.img)
             binding.nameCountry.text = currentList[TRANSLATE_TK].language_tk
             binding.translateTxt.text = currentList[TRANSLATE_TK].title_tk
+
+            if (currentList[TRANSLATE_TK].audio_file_tk != null) {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                binding.playBtn.setOnClickListener {
+                    audioPlayTk()
+                }
+            } else {
+                binding.playBtn.setImageResource(R.drawable.ic_group_disable)
+            }
+        }
+
+        private fun audioPlayTk() {
+            if (mp.isPlaying) {
+                mp.stop()
+                mp.reset()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            } else {
+                mp = MediaPlayer.create(
+                    itemView.context,
+                    Uri.parse(currentList[TRANSLATE_TK].audio_file_tk)
+                )
+                mp.start()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_enable)
+                isPlaying = true
+
+
+            }
+
+            mp.setOnCompletionListener {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            }
         }
 
         private fun getTranslatesUg() {
@@ -301,6 +1435,39 @@ class DescriptionsRecyclerViewAdapter() :
                 .into(binding.img)
             binding.nameCountry.text = currentList[TRANSLATE_UG].language_ug
             binding.translateTxt.text = currentList[TRANSLATE_UG].title_ug
+
+            if (currentList[TRANSLATE_UG].audio_file_ug != null) {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                binding.playBtn.setOnClickListener {
+                    audioPlayUg()
+                }
+            } else {
+                binding.playBtn.setImageResource(R.drawable.ic_group_disable)
+            }
+        }
+
+        private fun audioPlayUg() {
+            if (mp.isPlaying) {
+                mp.stop()
+                mp.reset()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            } else {
+                mp = MediaPlayer.create(
+                    itemView.context,
+                    Uri.parse(currentList[TRANSLATE_UG].audio_file_ug)
+                )
+                mp.start()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_enable)
+                isPlaying = true
+
+
+            }
+
+            mp.setOnCompletionListener {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            }
         }
 
         private fun getTranslatesKk() {
@@ -309,22 +1476,121 @@ class DescriptionsRecyclerViewAdapter() :
                 .into(binding.img)
             binding.nameCountry.text = currentList[TRANSLATE_KK].language_kk
             binding.translateTxt.text = currentList[TRANSLATE_KK].title_kk
+
+            if (currentList[TRANSLATE_KK].audio_file_kk != null) {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                binding.playBtn.setOnClickListener {
+                    audioPlayKk()
+                }
+            } else {
+                binding.playBtn.setImageResource(R.drawable.ic_group_disable)
+            }
+        }
+
+        private fun audioPlayKk() {
+            if (mp.isPlaying) {
+                mp.stop()
+                mp.reset()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            } else {
+                mp = MediaPlayer.create(
+                    itemView.context,
+                    Uri.parse(currentList[TRANSLATE_KK].audio_file_kk)
+                )
+                mp.start()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_enable)
+                isPlaying = true
+
+
+            }
+
+            mp.setOnCompletionListener {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            }
         }
 
         private fun getTranslatesUz() {
             Glide.with(binding.root).load(currentList[TRANSLATE_UZ].image_uz)
-                .error(ContextCompat.getDrawable(binding.root.context, R.drawable.uz))
+                .error(ContextCompat.getDrawable(binding.root.context, R.drawable.kg))
                 .into(binding.img)
             binding.nameCountry.text = currentList[TRANSLATE_UZ].language_uz
             binding.translateTxt.text = currentList[TRANSLATE_UZ].title_uz
+
+            if (currentList[TRANSLATE_UZ].audio_file_uz != null) {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                binding.playBtn.setOnClickListener {
+                    audioPlayUz()
+                }
+            } else {
+                binding.playBtn.setImageResource(R.drawable.ic_group_disable)
+            }
+        }
+
+        private fun audioPlayUz() {
+            if (mp.isPlaying) {
+                mp.stop()
+                mp.reset()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            } else {
+                mp = MediaPlayer.create(
+                    itemView.context,
+                    Uri.parse(currentList[TRANSLATE_UZ].audio_file_uz)
+                )
+                mp.start()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_enable)
+                isPlaying = true
+
+
+            }
+
+            mp.setOnCompletionListener {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            }
         }
 
         private fun getTranslatesAz() {
             Glide.with(binding.root).load(currentList[TRANSLATE_AZ].image_az)
-                .error(ContextCompat.getDrawable(binding.root.context, R.drawable.az))
+                .error(ContextCompat.getDrawable(binding.root.context, R.drawable.kg))
                 .into(binding.img)
             binding.nameCountry.text = currentList[TRANSLATE_AZ].language_az
             binding.translateTxt.text = currentList[TRANSLATE_AZ].title_az
+
+            if (currentList[TRANSLATE_AZ].audio_file_az != null) {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                binding.playBtn.setOnClickListener {
+                    audioPlayAz()
+                }
+            } else {
+                binding.playBtn.setImageResource(R.drawable.ic_group_disable)
+            }
+        }
+
+        private fun audioPlayAz() {
+            if (mp.isPlaying) {
+                mp.stop()
+                mp.reset()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            } else {
+                mp = MediaPlayer.create(
+                    itemView.context,
+                    Uri.parse(currentList[TRANSLATE_KY].audio_file_az)
+                )
+                mp.start()
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_enable)
+                isPlaying = true
+
+
+            }
+
+            mp.setOnCompletionListener {
+                binding.playBtn.setImageResource(R.drawable.ic_play_btn_disable)
+                isPlaying = false
+            }
         }
 
     }

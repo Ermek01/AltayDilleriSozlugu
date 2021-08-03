@@ -1,4 +1,4 @@
-package kg.kyrgyzcoder.altaydillerisozlugu.ui.profile
+    package kg.kyrgyzcoder.altaydillerisozlugu.ui.profile
 
 import android.content.Context
 import android.content.Intent

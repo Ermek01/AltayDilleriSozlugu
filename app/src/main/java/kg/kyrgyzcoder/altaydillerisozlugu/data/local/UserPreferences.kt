@@ -9,10 +9,11 @@ interface UserPreferences {
     val currentUserUsername: Flow<String?>
     val currentUserEmail: Flow<String?>
     val currentUserToken: Flow<String?>
+    val currentUserIsPremium: Flow<Boolean?>
     //val currentLanguages: Flow<List<List<String?>>?>
 
     suspend fun logoutUser()
 
     suspend fun saveUserData(
-        token : String, user_id : Int, username: String, email: String)
+        token : String, user_id : Int, username: String, email: String, is_premium: Boolean)
 }

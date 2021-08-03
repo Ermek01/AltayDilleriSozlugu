@@ -50,7 +50,8 @@ class AuthViewModel(
             value.token,
             value.user_id,
             value.username,
-            value.email
+            value.email,
+            value.is_premium
         )
         listener?.userDataSaved()
     }

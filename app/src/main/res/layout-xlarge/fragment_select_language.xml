@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.splash.utils.SelectLanguageFragment">
+
+    <LinearLayout
+        android:layout_width="450dp"
+        android:layout_height="545dp"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal|center_vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_select_language"
+            android:fontFamily="@font/montserrat_alternates"
+            android:textColor="@color/color_txt_select_language"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="60dp"
+            android:textSize="40sp"/>
+
+        <ScrollView
+            android:id="@+id/scrol"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:padding="10dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/row_country"
+                    android:paddingBottom="10dp"
+                    />
+
+        </ScrollView>
+
+    </LinearLayout>
+
+<!--    <RelativeLayout-->
+<!--        android:layout_width="320dp"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Тилди тандаңыз"-->
+<!--            android:fontFamily="@font/montserrat_alternates"-->
+<!--            android:textColor="@color/color_txt_select_language"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_marginTop="40dp"-->
+<!--            android:textSize="20sp"/>-->
+
+<!--        <androidx.core.widget.NestedScrollView-->
+<!--            android:id="@+id/nestedScrollView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
+
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/relativeLayout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent">-->
+
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/recyclerView_category_cards"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--                    android:layout_below=""-->
+<!--                    />-->
+
+<!--            </RelativeLayout>-->
+
+<!--        </androidx.core.widget.NestedScrollView>-->
+
+<!--    </RelativeLayout>-->
+
+</FrameLayout>

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="200dp"
+    android:layout_width="150dp"
     android:layout_height="120dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
-    android:background="@color/white"
-    android:layout_marginStart="10dp"
+    android:layout_marginStart="4dp"
     android:layout_marginEnd="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp">
@@ -13,16 +12,16 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         android:paddingEnd="10dp"
+        style="@style/BgCardFavorites"
         >
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_centerInParent="true"
             android:src="@drawable/def_image"
             />
@@ -34,7 +33,7 @@
             android:fontFamily="@font/philosopher"
             android:layout_below="@id/img"
             android:layout_marginTop="30dp"
-            android:textColor="@color/main_bg"
+            style="@style/BgText"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"

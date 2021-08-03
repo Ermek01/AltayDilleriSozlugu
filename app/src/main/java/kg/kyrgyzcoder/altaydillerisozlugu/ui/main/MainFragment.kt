@@ -15,7 +15,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelCategoryRes
@@ -29,7 +28,6 @@ import kg.kyrgyzcoder.altaydillerisozlugu.util.CODE_KEY
 import kg.kyrgyzcoder.altaydillerisozlugu.util.hide
 import kg.kyrgyzcoder.altaydillerisozlugu.util.hideKeyboard
 import kg.kyrgyzcoder.altaydillerisozlugu.util.show
-import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -51,6 +49,9 @@ class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecycler
 
     private var _binding: FragmentMainBinding? = null
     private val binding: FragmentMainBinding get() = _binding!!
+
+    var is_premium: Boolean? = null
+    var token: String? = null
 
     private var currentLanguages = listOf<List<String?>>()
 
@@ -77,6 +78,14 @@ class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecycler
         ).get(ItemViewModel::class.java)
 
         itemViewModel.getCategoryListener(this)
+
+        itemViewModel.is_premium.asLiveData().observe(viewLifecycleOwner, {
+            is_premium = it
+        })
+
+        itemViewModel.token.asLiveData().observe(viewLifecycleOwner, {
+            token = it
+        })
 
         val pref = requireActivity().getSharedPreferences("language",Context.MODE_PRIVATE)
         code = pref.getString(CODE_KEY, "")
@@ -164,7 +173,7 @@ class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecycler
     override fun getCategories(modelCategoryRes: ModelCategoryRes) {
         categories.clear()
         categories.addAll(modelCategoryRes)
-        adapter = CategoryRecyclerViewAdapter(this)
+        adapter = CategoryRecyclerViewAdapter(this, is_premium, token)
         binding.recyclerViewCategoryCards.adapter = adapter
         adapter.submitList(categories)
         binding.progressBar.hide()

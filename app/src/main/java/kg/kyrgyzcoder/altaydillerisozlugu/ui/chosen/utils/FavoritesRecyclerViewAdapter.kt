@@ -63,20 +63,7 @@ class FavoritesRecyclerViewAdapter(val activity: FragmentActivity) :
         fun onBind(position: Int) {
             current = getItemAtPos(position)
 
-            val pref = itemView.context.getSharedPreferences("language", Context.MODE_PRIVATE)
-            val code : String = pref.getString(CODE_KEY, "").toString()
-
-            if (code.isNotEmpty()){
-                when(code){
-                    "tr" -> {
-                        binding.nameCategory.text = current.category_title
-                    }
-                    "ky" -> {
-
-                        binding.nameCategory.text = current.category_title
-                    }
-                }
-            }
+            binding.nameCategory.text = current.category_title
 
             setupRecyclerView(binding, position, current)
             amount = current.category_id

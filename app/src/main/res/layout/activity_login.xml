@@ -90,20 +90,35 @@
                 android:layout_below="@id/edit_password"
                 android:layout_centerHorizontal="true"/>
 
-            <Button
+            <androidx.cardview.widget.CardView
                 android:id="@+id/btn_login"
                 android:layout_width="170dp"
                 android:layout_height="40dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/bg_login_btn"
-                android:text="@string/txt_signin"
-                android:textStyle="bold"
-                android:textAllCaps="false"
-                android:fontFamily="@font/montserrat_alternates"
-                android:layout_below="@id/edit_password"
                 android:layout_centerHorizontal="true"
-                android:textColor="@color/main_bg" />
+                android:layout_marginTop="50dp"
+                app:cardCornerRadius="10dp"
+                android:layout_below="@id/edit_password"
+                style="@style/BgCard"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/txt_signin"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_alternates"
+                        android:gravity="center"
+                        style="@style/BgText"
+                        />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
 
             <TextView
                 android:id="@+id/txt_forgot_password"
@@ -152,6 +167,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
+                        android:layout_margin="5dp"
                         android:src="@drawable/ic_facebook"/>
 
 

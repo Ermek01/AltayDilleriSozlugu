@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="main_bg">#00A5DD</color>
+    <color name="txt_btn">#484851</color>
+    <color name="nav_color">#4DB8DC</color>
+    <color name="txt_color">#C4C4C4</color>
+    <color name="bg_items_pay">#96A3A8</color>
+    <color name="color_textView">#00D36E</color>
+    <color name="color_items_card">#001886</color>
+    <color name="color_payment_method">#20C4FB</color>
+    <color name="color_payment_edittext">#636E72</color>
+    <color name="color_btn_pay">#00B377</color>
+    <color name="color_circle">#C0BFE0</color>
+    <color name="bg_payment">#D9E7EC</color>
+    <color name="color_txt_words">#34495E</color>
+    <color name="color_txt_error">#FF4D4D</color>
+    <color name="color_btn_cancel">#CCCDCE</color>
+    <color name="color_txt_select_language">#5A5A67</color>
+    <color name="color_txt_translate">#2C3A47</color>
+    <color name="color_words_choosen">#FCA951</color>
+    <color name="color_txt_username">#FF993A</color>
+    <color name="color_txt_getpremium">#C2AC68</color>
+    <color name="color_txt_favorites">#2C3E50</color>
+    <color name="color_txt_btn_text">#115B74</color>
+    <color name="color_txt_get_premium">#C5AF71</color>
+    <color name="color_bg_card">#F7F9FE</color>
+    <color name="color_bg_dark_mode">#2E394F</color>
+    <color name="color_txt_dark_mode">#002EFF</color>
+    <color name="vip_categories">#82589F</color>
+
+</resources>

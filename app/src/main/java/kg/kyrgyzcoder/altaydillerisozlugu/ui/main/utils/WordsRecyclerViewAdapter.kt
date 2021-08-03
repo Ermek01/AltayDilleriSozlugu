@@ -3,19 +3,12 @@ package kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.*
-import kg.kyrgyzcoder.altaydillerisozlugu.databinding.RowCategoryItemsBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.RowWordsItemsBinding
-import kg.kyrgyzcoder.altaydillerisozlugu.util.CODE_KEY
-import kg.kyrgyzcoder.altaydillerisozlugu.util.TRANSLATE_KY
-import kg.kyrgyzcoder.altaydillerisozlugu.util.TRANSLATE_TR
-import java.util.ArrayList
+import kg.kyrgyzcoder.altaydillerisozlugu.util.*
 
 class WordsRecyclerViewAdapter(
     private val listener: WordsClickListener
@@ -45,11 +38,50 @@ class WordsRecyclerViewAdapter(
                     "ky" -> {
                         binding.tvWordsName.text = current.languages[TRANSLATE_KY].title_ky
                     }
+                    "az" -> {
+                        binding.tvWordsName.text = current.languages[TRANSLATE_AZ].title_az
+                    }
+                    "uz" -> {
+                        binding.tvWordsName.text = current.languages[TRANSLATE_UZ].title_uz
+                    }
+                    "kk" -> {
+                        binding.tvWordsName.text = current.languages[TRANSLATE_KK].title_kk
+                    }
+                    "ug" -> {
+                        binding.tvWordsName.text = current.languages[TRANSLATE_UG].title_ug
+                    }
+                    "tk" -> {
+                        binding.tvWordsName.text = current.languages[TRANSLATE_TK].title_kk
+                    }
+                    "tt" -> {
+                        binding.tvWordsName.text = current.languages[TRANSLATE_TT].title_tt
+                    }
+                    "ba" -> {
+                        binding.tvWordsName.text = current.languages[TRANSLATE_BA].title_ba
+                    }
+                    "cv" -> {
+                        binding.tvWordsName.text = current.languages[TRANSLATE_CV].title_cv
+                    }
+                    "kaa" -> {
+                        binding.tvWordsName.text = current.languages[TRANSLATE_KAA].title_kaa
+                    }
+                    "krc" -> {
+                        binding.tvWordsName.text = current.languages[TRANSLATE_KRC].title_krc
+                    }
+                    "sah" -> {
+                        binding.tvWordsName.text = current.languages[TRANSLATE_SAH].title_sah
+                    }
+                    "crh" -> {
+                        binding.tvWordsName.text = current.languages[TRANSLATE_CRH].title_crh
+                    }
+                    "alt" -> {
+                        binding.tvWordsName.text = current.languages[TRANSLATE_ALT].title_alt
+                    }
                 }
             }
 
             binding.root.setOnClickListener {
-                listener.onWordsClick(position)
+                listener.onWordsClick(position, currentList[position])
             }
         }
 
@@ -65,7 +97,7 @@ class WordsRecyclerViewAdapter(
     }
 
     interface WordsClickListener {
-        fun onWordsClick(position: Int)
+        fun onWordsClick(position: Int, current: ModelDescriptions)
     }
 
     companion object {

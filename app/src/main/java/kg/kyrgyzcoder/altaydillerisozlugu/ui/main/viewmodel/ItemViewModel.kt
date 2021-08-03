@@ -1,10 +1,12 @@
 package kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kg.kyrgyzcoder.altaydillerisozlugu.data.local.UserPreferences
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.NetworkResponse
+import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelDescriptions
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelDescriptionsPag
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.repo.ItemRepository
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.CategoryListener
@@ -20,6 +22,10 @@ class ItemViewModel(
     private val itemRepository: ItemRepository
 ) : ViewModel() {
 
+    val is_premium = userPreferences.currentUserIsPremium
+    val token = userPreferences.currentUserToken
+
+    var mutableLiveData: MutableLiveData<MutableList<ModelDescriptions>> = MutableLiveData()
 
     private var listener: CategoryListener? = null
     private var wordsListener: WordsListener? = null

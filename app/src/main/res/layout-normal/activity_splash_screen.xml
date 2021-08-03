@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:clipToPadding="false"
+    tools:context=".ui.splash.SplashScreenActivity">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="155dp"
+        android:src="@drawable/flag" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/icon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        style="@style/BgSelectLanguage"
+        android:paddingStart="5dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:visibility="gone">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_flag"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:src="@drawable/flag_kg" />
+
+        <TextView
+            android:id="@+id/name_country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/img_flag"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/nunito"
+            android:text="Кыргызча"
+            android:textStyle="normal"
+            style="@style/BgCcp" />
+
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btn_login"
+        android:layout_width="284dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        app:cardCornerRadius="40dp"
+        style="@style/BgCard"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/txt_signin"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                android:fontFamily="@font/montserrat_alternates"
+                android:gravity="center"
+                style="@style/BgText"
+                />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/txt_without_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/continue_without_an_account"
+        android:textSize="17sp"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+
+
+    <ImageView
+        android:id="@+id/circle_240dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_circle_240dp"
+        android:visibility="gone"
+        android:layout_alignTop="@id/icon"
+        android:layout_alignBottom="@id/icon"
+        android:layout_alignStart="@id/icon"
+        android:layout_alignEnd="@id/icon"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        />
+
+    <ImageView
+        android:id="@+id/circle_350dp"
+        android:layout_width="392dp"
+        android:layout_height="357dp"
+        android:layout_alignStart="@id/circle_240dp"
+        android:layout_alignTop="@id/circle_240dp"
+        android:layout_alignEnd="@id/circle_240dp"
+        android:layout_alignBottom="@id/circle_240dp"
+        android:layout_marginStart="-50dp"
+        android:layout_marginTop="-50dp"
+        android:layout_marginEnd="-50dp"
+        android:layout_marginBottom="-50dp"
+        android:src="@drawable/ic_circle_350dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/circle_450dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_circle_450dp"
+        android:visibility="gone"
+        android:layout_alignStart="@id/circle_350dp"
+        android:layout_alignTop="@id/circle_350dp"
+        android:layout_alignEnd="@id/circle_350dp"
+        android:layout_alignBottom="@id/circle_350dp"
+        android:layout_marginTop="-50dp"
+        android:layout_marginBottom="-50dp"
+        android:layout_marginStart="-50dp"
+        android:layout_marginEnd="-50dp"/>
+
+    <ImageView
+        android:id="@+id/circle_550dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/circle_450dp"
+        android:layout_alignTop="@id/circle_450dp"
+        android:layout_alignEnd="@id/circle_450dp"
+        android:layout_alignBottom="@id/circle_450dp"
+        android:src="@drawable/ic_circle_550dp"
+        android:layout_marginTop="-50dp"
+        android:layout_marginBottom="-50dp"
+        android:layout_marginStart="-50dp"
+        android:layout_marginEnd="-50dp"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

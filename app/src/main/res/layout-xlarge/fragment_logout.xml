@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="30dp"
+    android:paddingBottom="35dp"
+    android:paddingEnd="15dp"
+    style="@style/BgDialog.Logout"
+    tools:context=".ui.profile.util.LogoutFragment">
+
+        <TextView
+            android:id="@+id/txt_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_signout"
+            android:textStyle="bold"
+            android:fontFamily="@font/philosopher"
+            android:textColor="@color/color_payment_edittext"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="15dp"
+            android:textSize="22sp"
+            />
+
+        <TextView
+            android:id="@+id/txt_logout_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_signout_confirm"
+            android:fontFamily="@font/philosopher"
+            android:textColor="@color/color_payment_edittext"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="15dp"
+            android:textSize="20sp"
+            android:layout_below="@id/txt_logout"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_logout_confirm"
+            android:layout_marginTop="40dp">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/color_btn_cancel"
+                app:cornerRadius="8dp"
+                android:text="@string/txt_cancel"
+                android:textColor="@color/color_payment_edittext"
+                android:textSize="18sp"
+                android:textAllCaps="false"
+                android:fontFamily="@font/philosopher"
+                android:layout_below="@id/txt_logout_confirm"
+                android:layout_marginStart="35dp"
+                tools:targetApi="lollipop" />
+
+
+            <Button
+                android:id="@+id/btn_logout"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/main_bg"
+                app:cornerRadius="8dp"
+                android:text="@string/txt_signout"
+                android:layout_toRightOf="@id/btn_cancel"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textAllCaps="false"
+                android:fontFamily="@font/philosopher"
+                android:layout_below="@id/txt_logout_confirm"
+                android:layout_marginStart="20dp"
+                tools:targetApi="lollipop" />
+
+
+        </LinearLayout>
+
+</RelativeLayout>

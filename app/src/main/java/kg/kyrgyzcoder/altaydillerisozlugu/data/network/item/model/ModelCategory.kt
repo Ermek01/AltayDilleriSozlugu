@@ -21,16 +21,6 @@ data class ModelCategory(
     val title_sah: String,
     val title_crh: String,
     val title_alt: String,
-    val is_free: Boolean
-
-
-
-
-
-
-
-
-
-
-
+    val is_free: Boolean,
+    val is_premium: Boolean
 )

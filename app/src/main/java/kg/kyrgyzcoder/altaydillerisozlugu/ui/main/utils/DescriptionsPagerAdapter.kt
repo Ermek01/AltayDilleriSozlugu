@@ -10,15 +10,10 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import kg.kyrgyzcoder.altaydillerisozlugu.R
-import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.Languages
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelDescriptions
-import kg.kyrgyzcoder.altaydillerisozlugu.util.CODE_KEY
-import kg.kyrgyzcoder.altaydillerisozlugu.util.TRANSLATE_KY
-import kg.kyrgyzcoder.altaydillerisozlugu.util.TRANSLATE_TR
-import kg.kyrgyzcoder.altaydillerisozlugu.util.hide
+import kg.kyrgyzcoder.altaydillerisozlugu.util.*
 import java.util.ArrayList
 
 class DescriptionsPagerAdapter(
@@ -46,16 +41,12 @@ class DescriptionsPagerAdapter(
         val pref = context.getSharedPreferences("language", Context.MODE_PRIVATE)
         val code: String = pref.getString(CODE_KEY, "").toString()
 
-        if (code.isNotEmpty()) {
-            when (code) {
-                "tr" -> {
-                    getTranslateTr(model, view)
-                }
-                "ky" -> {
-                    getTranslateKy(model, view)
-                }
-            }
-        }
+        if (!model.image.isNullOrEmpty())
+            Glide.with(view).load(model.image)
+                .error(ContextCompat.getDrawable(context, R.drawable.def_image))
+                .into(view.findViewById(R.id.img))
+
+        getData(code, model, view)
 
         if (model.favorite) {
             view.findViewById<ImageView>(R.id.favorite)
@@ -95,6 +86,56 @@ class DescriptionsPagerAdapter(
         return view
     }
 
+    @SuppressLint("CutPasteId")
+    private fun getData(code: String, model: ModelDescriptions, view: View) {
+        if (code.isNotEmpty()) {
+            when (code) {
+                "tr" -> {
+                    view.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_TR].title_tr
+                }
+                "ky" -> {
+                    view.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_KY].title_ky
+                }
+                "az" -> {
+                    view.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_AZ].title_az
+                }
+                "uz" -> {
+                    view.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_UZ].title_uz
+                }
+                "kk" -> {
+                    view.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_KK].title_kk
+                }
+                "ug" -> {
+                    view.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_UG].title_ug
+                }
+                "tk" -> {
+                    view.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_TK].title_tk
+                }
+                "tt" -> {
+                    view.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_TT].title_tt
+                }
+                "ba" -> {
+                    view.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_BA].title_ba
+                }
+                "cv" -> {
+                    view.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_CV].title_cv
+                }
+                "kaa" -> {
+                    view.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_KAA].title_kaa
+                }
+                "krc" -> {
+                    view.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_KRC].title_krc
+                }
+                "sah" -> {
+                    view.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_SAH].title_sah
+                }
+                "crh" -> {
+                    view.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_CRH].title_crh
+                }
+            }
+        }
+    }
+
     private fun setupRecyclerViewAdapter(view: View, position: Int) {
         words.clear()
         words.addAll(modelDescriptions)
@@ -102,25 +143,6 @@ class DescriptionsPagerAdapter(
         view.findViewById<RecyclerView>(R.id.recyclerView_category_cards).adapter = adapter
         adapter.submitList(words[position].languages)
     }
-
-    private fun getTranslateKy(model: ModelDescriptions, view: View?) {
-        if (!model.image.isNullOrEmpty())
-            Glide.with(view!!).load(model.image)
-                .error(ContextCompat.getDrawable(context, R.drawable.def_image))
-                .into(view.findViewById(R.id.img))
-
-        view?.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_KY].title_ky
-    }
-
-    private fun getTranslateTr(model: ModelDescriptions, view: View?) {
-        if (!model.image.isNullOrEmpty())
-            Glide.with(view!!).load(model.image)
-                .error(ContextCompat.getDrawable(context, R.drawable.def_image))
-                .into(view.findViewById(R.id.img))
-
-        view?.findViewById<TextView>(R.id.tv_name)?.text = model.languages[TRANSLATE_TR].title_tr
-    }
-
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         container.removeView(`object` as View)

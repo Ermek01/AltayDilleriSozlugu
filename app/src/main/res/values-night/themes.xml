@@ -1,0 +1,79 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.AltayDilleriSözlüğü" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/main_bg</item>
+        <item name="colorPrimaryVariant">@color/main_bg</item>
+        <item name="colorOnPrimary">@color/main_bg</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorSecondaryVariant">@color/white</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:fontFamily">@font/montserrat_alternates</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="BgCardCategory" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@drawable/bg_card_category</item>
+    </style>
+
+    <style name="BgText" >
+        <item name="android:textColor">#bab5b5</item>
+    </style>
+
+    <style name="BgCard" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="cardBackgroundColor">@color/color_bg_dark_mode</item>
+    </style>
+
+    <style name="BgTriangle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="background">@drawable/ic_vector</item>
+    </style>
+
+    <style name="BgBtn" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="cardBackgroundColor">@color/color_bg_dark_mode</item>
+    </style>
+
+    <style name="BgEditText" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/color_bg_dark_mode</item>
+        <item name="backgroundTint">@color/black</item>
+        <item name="android:textColorHint">@color/color_bg_dark_mode</item>
+    </style>
+
+    <style name="BgSelectLanguage" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@drawable/frame_dark</item>
+    </style>
+
+    <style name="BgCcp">
+        <item name="drawableEndCompat">@drawable/ccp_ic_dark</item>
+        <item name="android:textColor">#bab5b5</item>
+    </style>
+
+    <style name="ColorTextFavorites" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">#bab5b5</item>
+    </style>
+
+    <style name="BgCardFavorites" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@drawable/frame_favorites_dark</item>
+    </style>
+
+    <style name="ColorBtnRegister" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:backgroundTint">@color/color_bg_dark_mode</item>
+    </style>
+
+    <style name="BgCard.Dialog" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="cardBackgroundColor">#424242</item>
+    </style>
+
+    <style name="BgDialog.Logout" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@drawable/dialog_rounded_bg_dark</item>
+    </style>
+
+
+</resources>

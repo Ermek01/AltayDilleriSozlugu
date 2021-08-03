@@ -18,8 +18,8 @@
 
             <ImageView
                 android:id="@+id/icon"
-                android:layout_width="400dp"
-                android:layout_height="400dp"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/flag"
                 android:layout_centerHorizontal="true"
@@ -27,13 +27,13 @@
 
             <EditText
                 android:id="@+id/edit_username"
-                android:layout_width="400dp"
-                android:layout_height="80dp"
+                android:layout_width="500dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_alternates"
                 android:textStyle="bold"
                 android:hint="@string/txt_username"
+                android:textSize="26sp"
                 android:textColor="@color/white"
-                android:textSize="20sp"
                 android:backgroundTint="@color/white"
                 android:layout_marginTop="15dp"
                 android:textColorHint="@color/white"
@@ -42,12 +42,12 @@
 
             <TextView
                 android:id="@+id/usernameError"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_width="500dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/bg_button"
                 android:text="@string/pwdUserNameWrong"
                 android:textColor="@color/color_txt_error"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:paddingTop="2dp"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
@@ -58,18 +58,18 @@
 
             <EditText
                 android:id="@+id/edit_password"
-                android:layout_width="400dp"
-                android:layout_height="80dp"
+                android:layout_width="500dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_alternates"
                 android:textStyle="bold"
                 android:hint="@string/txt_password"
                 android:textColor="@color/white"
-                android:textSize="20sp"
                 android:backgroundTint="@color/white"
                 android:drawableEnd="@drawable/ic_visible_psw"
                 android:inputType="textPassword"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
+                android:textSize="26sp"
                 android:textColorHint="@color/white"
                 android:layout_below="@id/edit_username"
                 android:layout_centerHorizontal="true"/>
@@ -92,21 +92,36 @@
                 android:layout_below="@id/edit_password"
                 android:layout_centerHorizontal="true"/>
 
-            <Button
+            <androidx.cardview.widget.CardView
                 android:id="@+id/btn_login"
-                android:layout_width="300dp"
-                android:layout_height="70dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/bg_login_btn"
-                android:text="@string/txt_signin"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textAllCaps="false"
-                android:fontFamily="@font/montserrat_alternates"
-                android:layout_below="@id/edit_password"
+                android:layout_width="220dp"
+                android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
-                android:textColor="@color/main_bg" />
+                android:layout_marginTop="50dp"
+                app:cardCornerRadius="10dp"
+                android:layout_below="@id/edit_password"
+                style="@style/BgCard"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/txt_signin"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_alternates"
+                        android:gravity="center"
+                        style="@style/BgText"
+                        />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
 
             <TextView
                 android:id="@+id/txt_forgot_password"
@@ -128,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/txt_or_log_in_with"
                 android:textStyle="normal"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:layout_marginTop="25dp"
                 android:textColor="@color/white"
                 android:fontFamily="@font/montserrat_alternates"
@@ -155,6 +170,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
+                        android:layout_margin="5dp"
                         android:src="@drawable/ic_facebook"/>
 
 
@@ -173,8 +189,8 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
                             android:layout_centerInParent="true"
                             android:src="@drawable/ic_google" />
 
@@ -198,7 +214,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/txt_not_account"
                     android:textStyle="normal"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:fontFamily="@font/montserrat_alternates"
                     android:textColor="@color/white"
                     />
@@ -209,7 +225,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/txt_create_account"
                     android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:fontFamily="@font/montserrat_alternates"
                     android:textColor="@color/white"
                     android:layout_marginStart="5dp"

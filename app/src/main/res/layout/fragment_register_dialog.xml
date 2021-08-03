@@ -23,21 +23,22 @@
                 android:layout_width="214dp"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_access_account"
-                android:textColor="@color/main_bg"
+                style="@style/BgText"
                 android:layout_marginTop="20dp"
                 android:textAlignment="center"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/philosopher"
-                android:textSize="18dp"/>
+                android:textSize="18sp"/>
 
             <Button
                 android:id="@+id/register"
                 android:layout_width="215dp"
                 android:layout_height="55dp"
-                android:backgroundTint="@color/main_bg"
+                android:background="@color/main_bg"
                 app:cornerRadius="5dp"
                 android:text="@string/txt_register"
                 android:textSize="18sp"
+                android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:fontFamily="@font/montserrat_alternates"
                 android:layout_gravity="center_horizontal"

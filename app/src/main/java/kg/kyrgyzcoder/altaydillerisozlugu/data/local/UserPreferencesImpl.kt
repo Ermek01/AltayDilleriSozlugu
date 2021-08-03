@@ -6,10 +6,7 @@ import androidx.datastore.preferences.createDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import androidx.datastore.preferences.*
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.*
 
 class UserPreferencesImpl(context: Context) : UserPreferences {
 
@@ -21,13 +18,14 @@ class UserPreferencesImpl(context: Context) : UserPreferences {
 
     )
 
-    override suspend fun saveUserData(token: String, user_id : Int, username: String, email: String) {
+    override suspend fun saveUserData(token: String, user_id : Int, username: String, email: String, is_premium: Boolean) {
 
         dataStore.edit { prefs ->
             prefs[IS_USER_SIGNED_IN] = "is_user_signed_in"
             prefs[USER_TOKEN_KEY] = token
             prefs[USER_ID_KEY] = user_id
             prefs[USER_USERNAME_KEY] = username
+            prefs[IS_PREMIUM] = is_premium
             //prefs[USER_LANGUAGE_KEY] = languages
         }
     }
@@ -56,6 +54,11 @@ class UserPreferencesImpl(context: Context) : UserPreferences {
             pref[USER_TOKEN_KEY]
         }
 
+    override val currentUserIsPremium: Flow<Boolean?>
+        get() = dataStore.data.map { pref ->
+            pref[IS_PREMIUM]
+        }
+
 
     override suspend fun logoutUser() {
         dataStore.edit { prefs ->
@@ -72,6 +75,7 @@ class UserPreferencesImpl(context: Context) : UserPreferences {
         private val USER_EMAIL_KEY = stringPreferencesKey("user_email_key")
         private val USER_TOKEN_KEY = stringPreferencesKey("user_token_key")
         private val USER_ID_KEY = intPreferencesKey("user_id_key")
+        private val IS_PREMIUM = booleanPreferencesKey("is_premium")
         private val USER_LANGUAGE_KEY = stringPreferencesKey("user_language_key")
     }
 }

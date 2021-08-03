@@ -34,7 +34,6 @@ import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.viewmodel.ChosenViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.viewmodel.ChosenViewModelFactory
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.DescriptionsListener
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.DescriptionsPagerAdapter
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.WordsRecyclerViewAdapter
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModelFactory
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.words.WordsFragmentArgs

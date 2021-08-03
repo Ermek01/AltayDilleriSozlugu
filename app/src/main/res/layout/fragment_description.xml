@@ -82,18 +82,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
-        android:textColor="@color/color_items_card"
+        style="@style/ColorTextFavorites"
         android:fontFamily="@font/philosopher"
         android:textAlignment="center"
         android:layout_below="@id/appBar"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="20dp"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/name_cards"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_above="@+id/indicator"
         android:background="@color/white"
         android:paddingStart="35dp"
@@ -105,7 +105,7 @@
     <me.relex.circleindicator.CircleIndicator
         android:id="@+id/indicator"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="30dp"
         android:layout_alignParentBottom="true"
         app:ci_drawable="@drawable/indicator_color"
         />

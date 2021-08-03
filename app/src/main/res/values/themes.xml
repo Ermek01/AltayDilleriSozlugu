@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.AltayDilleriSözlüğü" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/main_bg</item>
+        <item name="colorPrimaryVariant">@color/main_bg</item>
+        <item name="colorOnPrimary">@color/main_bg</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorSecondaryVariant">@color/white</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
@@ -16,7 +16,65 @@
 
     <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:fontFamily">@font/montserrat_alternates</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="ToolbarThemeXLarge" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:fontFamily">@font/montserrat_alternates</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="BgText" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/main_bg</item>
+    </style>
+
+    <style name="BgCard" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="cardBackgroundColor">@color/color_bg_card</item>
+    </style>
+
+    <style name="BgTriangle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="background">@drawable/ic_vector</item>
+    </style>
+
+    <style name="BgCardView" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="cardCornerRadius">11dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="cardUseCompatPadding">true</item>
+    </style>
+
+    <style name="BgCardBtn" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="cardBackgroundColor">@color/white</item>
+    </style>
+
+    <style name="BgEditText" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+    </style>
+
+    <style name="BgSelectLanguage" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@drawable/frame</item>
+    </style>
+
+    <style name="BgCcp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="drawableEndCompat">@drawable/ccp_ic</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ColorTextFavorites" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/color_items_card</item>
+    </style>
+
+    <style name="ColorBtnRegister" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:backgroundTint">@color/main_bg</item>
+    </style>
+
+    <style name="BgDialog.Logout" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@drawable/dialog_rounded_bg</item>
     </style>
 
 </resources>

@@ -4,14 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
     tools:context=".ui.chosen.favorites.ChosenFragment">
 
     <RelativeLayout
         android:id="@+id/favoritesLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBar"
@@ -89,7 +88,7 @@
             android:layout_height="wrap_content"
             android:textSize="30sp"
             android:text="Favorites"
-            android:textColor="@color/color_items_card"
+            style="@style/ColorTextFavorites"
             android:fontFamily="@font/philosopher"
             android:textAlignment="center"
             android:layout_below="@id/appBar"

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="335dp"
+        android:layout_height="wrap_content"
+        style="@style/BgCardView">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/BgCardCategory"
+            >
+
+            <ImageView
+                android:id="@+id/img_items"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/def_image" />
+
+            <TextView
+                android:id="@+id/name_category"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@id/img_items"
+                android:background="@color/main_bg"
+                android:fontFamily="@font/philosopher"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Жаныбарлар"
+                android:textColor="@color/white"
+                android:textSize="36sp" />
+
+            <ImageView
+                android:id="@+id/padLock"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/ic_locked_padlock"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</RelativeLayout>

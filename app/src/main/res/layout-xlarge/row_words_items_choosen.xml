@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="8dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginStart="30dp">
+
+    <TextView
+        android:id="@+id/name_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/BgText"
+        android:text="Text"
+        android:textSize="40sp"
+        android:fontFamily="@font/philosopher"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name_category"
+        android:layout_marginTop="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"
+        tools:listitem="@layout/row_words_favorites"
+        />
+
+</RelativeLayout>

@@ -71,25 +71,11 @@ class FavoritesWordsRecyclerAdapter(val activity: FragmentActivity,private val f
             val pref = itemView.context.getSharedPreferences("language", Context.MODE_PRIVATE)
             val code : String = pref.getString(CODE_KEY, "").toString()
 
-            if (code.isNotEmpty()){
-                when(code){
-                    "tr" -> {
-                        Glide.with(binding.root).load(current.image)
-                            .error(ContextCompat.getDrawable(binding.root.context, R.drawable.def_image))
-                            .into(binding.img)
+            Glide.with(binding.root).load(current.image)
+                .error(ContextCompat.getDrawable(binding.root.context, R.drawable.def_image))
+                .into(binding.img)
 
-                        binding.nameWords.text = current.title
-
-                    }
-                    "ky" -> {
-                        Glide.with(binding.root).load(current.image)
-                            .error(ContextCompat.getDrawable(binding.root.context, R.drawable.def_image))
-                            .into(binding.img)
-
-                        binding.nameWords.text = current.title
-                    }
-                }
-            }
+            binding.nameWords.text = current.title
 
             if (current.favorite) {
                 binding.favorites.setImageResource(R.drawable.ic_favorite_enable)

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.register.RegisterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="18dp"
+            android:fitsSystemWindows="true"
+            android:layout_gravity="center_horizontal|top"
+            android:src="@drawable/flag"/>
+
+        <EditText
+            android:id="@+id/edit_username"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_alternates"
+            android:textStyle="bold"
+            android:hint="@string/txt_username"
+            android:textSize="26sp"
+            android:layout_gravity="center_horizontal"
+            android:fitsSystemWindows="true"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="16dp"
+            android:textColorHint="@color/white" />
+
+        <TextView
+            android:id="@+id/userNameError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:background="@drawable/bg_button"
+            android:text="@string/txt_write_username"
+            android:textColor="@color/color_txt_error"
+            android:layout_marginEnd="140dp"
+            android:textAlignment="center"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:textSize="20sp"
+            android:layout_gravity="end"
+            android:visibility="gone"
+            tools:ignore="RtlCompat,SmallSp" />
+
+        <EditText
+            android:id="@+id/edit_password"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_alternates"
+            android:textStyle="bold"
+            android:hint="@string/txt_password"
+            android:inputType="textPassword"
+            android:layout_gravity="center_horizontal"
+            android:fitsSystemWindows="true"
+            android:drawableEnd="@drawable/ic_visible_psw"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="20dp"
+            android:textSize="26sp"
+            android:textColorHint="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/passwordError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:background="@drawable/bg_button"
+            android:text="@string/txt_write_password"
+            android:textColor="@color/color_txt_error"
+            android:layout_marginEnd="140dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:layout_gravity="end"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:visibility="gone"
+            tools:ignore="RtlCompat,SmallSp" />
+
+        <EditText
+            android:id="@+id/edit_password_confirm"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_alternates"
+            android:textStyle="bold"
+            android:hint="@string/txt_confirm_password"
+            android:inputType="textPassword"
+            android:layout_gravity="center_horizontal"
+            android:fitsSystemWindows="true"
+            android:drawableEnd="@drawable/ic_visible_psw"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="20dp"
+            android:textColorHint="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/confirmPasswordError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:background="@drawable/bg_button"
+            android:text="@string/txt_write_password"
+            android:textColor="@color/color_txt_error"
+            android:layout_marginEnd="140dp"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:layout_gravity="end"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:visibility="gone"
+            tools:ignore="RtlCompat,SmallSp" />
+
+        <EditText
+            android:id="@+id/edit_email"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_alternates"
+            android:textStyle="bold"
+            android:hint="@string/txt_email"
+            android:textSize="26sp"
+            android:inputType="textEmailAddress"
+            android:layout_gravity="center_horizontal"
+            android:fitsSystemWindows="true"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="20dp"
+            android:textColorHint="@color/white" />
+
+        <TextView
+            android:id="@+id/emailError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_username"
+            android:layout_marginStart="32dp"
+            android:background="@drawable/bg_button"
+            android:text="@string/txt_write_email"
+            android:textColor="@color/color_txt_error"
+            android:layout_marginEnd="140dp"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:layout_gravity="end"
+            android:paddingTop="2dp"
+            android:visibility="gone"
+            tools:ignore="RtlCompat,SmallSp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btn_register"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="10dp"
+            style="@style/BgCard"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/txt_create"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:fontFamily="@font/montserrat_alternates"
+                    android:gravity="center"
+                    style="@style/BgText"
+                    />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginTop="85dp">
+
+            <TextView
+                android:id="@+id/txt_have_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_yes_account"
+                android:textStyle="normal"
+                android:textSize="24sp"
+                android:layout_gravity="bottom"
+                android:fontFamily="@font/montserrat_alternates"
+                android:textColor="@color/white"
+                />
+
+            <TextView
+                android:id="@+id/txt_login_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_login_account"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_gravity="bottom"
+                android:fontFamily="@font/montserrat_alternates"
+                android:textColor="@color/white"
+                android:layout_marginStart="7dp"
+                />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#63FFFFFF"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

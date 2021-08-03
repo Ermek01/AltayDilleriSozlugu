@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    tools:context=".ui.main.description.DescriptionFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/main_bg">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_back_white"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"/>
+
+            <RelativeLayout
+                android:id="@+id/main_icon"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible"
+                    android:src="@drawable/flag" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:visibility="visible"
+                android:src="@drawable/ic_search"/>
+
+            <EditText
+                android:id="@+id/edit_search"
+                android:layout_width="270dp"
+                android:layout_height="35dp"
+                android:hint="@string/txt_search"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_marginStart="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:drawableEnd="@drawable/ic_cancel"
+                android:fontFamily="@font/montserrat_alternates"
+                android:background="@drawable/bg_edit_text"
+                android:textColorHint="@color/txt_color"
+                android:visibility="gone"
+                android:textColor="@color/black"/>
+
+
+        </RelativeLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/name_cards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        style="@style/ColorTextFavorites"
+        android:fontFamily="@font/philosopher"
+        android:textAlignment="center"
+        android:layout_below="@id/appBar"
+        android:layout_marginTop="20dp"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/name_cards"
+        android:layout_marginTop="20dp"
+        android:layout_above="@+id/indicator"
+        android:background="@color/white"
+        android:paddingStart="35dp"
+        android:paddingEnd="35dp"
+        android:foregroundGravity="center"
+        android:overScrollMode="never"
+        android:clipToPadding="false"/>
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        app:ci_drawable="@drawable/indicator_color"
+        />
+
+    <RelativeLayout
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="#636E72"
+            />
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Altay Dilleri Sözlüğü</string>
-    <string name="txt_create_account"><u>Жаратуу</u></string>
+    <string name="txt_create_account"><u>Катталуу</u></string>
     <string name="txt_login_account"><u>Кирүү</u></string>
     <string name="pwdUserNameWrong">Аты-Жөнүнүз же сыр сөзүнүз туура эмес жазылды</string>
     <string name="txt_username">Аты-Жөнү</string>
@@ -45,4 +45,12 @@
     <string name="basic_language">Негизги тилиңиз</string>
     <string name="full_name">Толук атыңыз</string>
     <string name="txt_email_edit">Электрондук почтаныз</string>
+    <string name="txt_select_plan">Планды тандаңыз</string>
+    <string name="txt_month_plan">Айлык План</string>
+    <string name="txt_all_words">Бардык сөздөргө мүмкүнчүлүк</string>
+    <string name="txt_year_plan">Жылдык План</string>
+    <string name="txt_phrases">Бардык фразаларга мүмкүнчүлүк</string>
+    <string name="txt_payment_method">Төлөө ыкмалары</string>
+    <string name="txt_payyment_price">Төлөө акысы</string>
+    <string name="txt_accepted">кабыл алынат</string>
 </resources>
