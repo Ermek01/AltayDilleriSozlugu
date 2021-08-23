@@ -93,7 +93,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/continue_without_an_account"
         android:textSize="17sp"
-        android:textColor="@color/white"
+        style="@style/ColorTextWithoutAccount"
         android:visibility="gone" />
 
 

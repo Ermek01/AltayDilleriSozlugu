@@ -17,17 +17,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.CompositePageTransformer
-import androidx.viewpager2.widget.MarginPageTransformer
+
 import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.favorites.model.ModelFavorites
-import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelCategory
+import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.Languages
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelDescriptions
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.item.model.ModelDescriptionsPag
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentDescriptionBinding
-import kg.kyrgyzcoder.altaydillerisozlugu.databinding.FragmentMainBinding
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.utils.FavoriteListener
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.utils.RegisterDialogFragment
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.chosen.viewmodel.ChosenViewModel
@@ -36,18 +33,15 @@ import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.DescriptionsListener
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.utils.DescriptionsPagerAdapter
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModel
 import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel.ItemViewModelFactory
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.main.words.WordsFragmentArgs
-import kg.kyrgyzcoder.altaydillerisozlugu.ui.profile.util.LogoutFragment
 import kg.kyrgyzcoder.altaydillerisozlugu.util.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import java.lang.Exception
-import kotlin.math.abs
 
-class DescriptionFragment : Fragment(), KodeinAware, DescriptionsListener,
-    DescriptionsPagerAdapter.FavoriteClickListener, FavoriteListener {
+class DescriptionFragment : Fragment(), KodeinAware,
+    DescriptionsPagerAdapter.FavoriteClickListener, FavoriteListener, DescriptionsListener {
 
     override val kodein: Kodein by closestKodein()
     private val itemViewModelFactory: ItemViewModelFactory by instance()
@@ -56,7 +50,8 @@ class DescriptionFragment : Fragment(), KodeinAware, DescriptionsListener,
     private lateinit var itemViewModel: ItemViewModel
     private lateinit var chosenViewModel: ChosenViewModel
 
-    private val descriptions = arrayListOf<ModelDescriptions>()
+    private var descriptions = mutableListOf<ModelDescriptions>()
+    private var filteredList = mutableListOf<ModelDescriptions>()
 
     private lateinit var adapter: DescriptionsPagerAdapter
 
@@ -75,37 +70,6 @@ class DescriptionFragment : Fragment(), KodeinAware, DescriptionsListener,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.d("ololo", "onCreate")
-
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        Log.d("ololo", "onStart")
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        Log.d("ololo", "onCreateView")
-
-        _binding = FragmentDescriptionBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        Log.d("ololo", "onViewCreated")
-
-        val amount = args.id
-        position = args.position
-
         itemViewModel = ViewModelProvider(
             requireActivity(),
             itemViewModelFactory
@@ -116,23 +80,38 @@ class DescriptionFragment : Fragment(), KodeinAware, DescriptionsListener,
             chosenViewModelFactory
         ).get(ChosenViewModel::class.java)
 
-        binding.progressBar.show()
-        itemViewModel.getDescriptionsListener(this)
         chosenViewModel.addFavoriteListener(this)
+    }
 
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentDescriptionBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val amount = args.id
+        position = args.position
+        itemViewModel.liveData.observe(viewLifecycleOwner, Observer {
+            descriptions = it
+        })
         chosenViewModel.token.asLiveData().observe(viewLifecycleOwner, {
             token = it
+            getData()
         })
 
         val pref = requireActivity().getSharedPreferences("language", Context.MODE_PRIVATE)
         code = pref.getString(CODE_KEY, "")
 
-        itemViewModel.getDescriptionsList(code, amount, search)
-
-
+        //itemViewModel.getDescriptionsList(code, amount, search)
         binding.imgBack.setOnClickListener {
             Navigation.findNavController(binding.root).popBackStack(R.id.descriptionFragment, true)
-            //Navigation.findNavController(binding.root).navigate(R.id.action_wordsFragment_to_mainFragment)
         }
 
         binding.search.setOnClickListener {
@@ -200,68 +179,39 @@ class DescriptionFragment : Fragment(), KodeinAware, DescriptionsListener,
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                getDescriptionSearch(amount)
+                if (binding.editSearch.text.isNotEmpty()) {
+                    getDescriptionSearch(amount)
+                }
+                else {
+                    getData()
+                }
             }
 
             override fun afterTextChanged(s: Editable?) {
-
             }
-
-
         })
-
-
     }
 
-    private fun getDescriptionSearch(amount: Int) {
-        itemViewModel.getDescriptionsList(code, amount, binding.editSearch.text.toString())
-//        adapter = DescriptionsPagerAdapter(requireContext(), descriptions, this)
-//        binding.viewPager.adapter = adapter
-//        binding.indicator.setViewPager(binding.viewPager)
-//        adapter.notifyDataSetChanged()
-    }
-
-
-    override fun getDescriptionsSuccess(modelDescriptionsPag: ModelDescriptionsPag) {
-        descriptions.clear()
-        descriptions.addAll(modelDescriptionsPag)
-        adapter = DescriptionsPagerAdapter(requireContext(),token, descriptions, this)
+    private fun getData() {
+        adapter = DescriptionsPagerAdapter(requireContext(), token, descriptions, this)
         binding.viewPager.adapter = adapter
-        binding.progressBar.hide()
         adapter.notifyDataSetChanged()
         if (position != null) {
             binding.viewPager.currentItem = position!!
             binding.indicator.setViewPager(binding.viewPager)
         }
-
         binding.viewPager.getChildAt(0)
+        binding.nameCards.text = descriptions[0].category
 
-        if (code!!.isNotEmpty()) {
-
-            try {
-                when (code) {
-                    "tr" -> {
-                        binding.nameCards.text = modelDescriptionsPag[0].category
-                    }
-                    "ky" -> {
-                        binding.nameCards.text = modelDescriptionsPag[0].category
-                    }
-                }
-            } catch (e: Exception) {
-                Log.d("ololo", e.toString())
-            }
-
-
-        }
-        //binding.viewPager.offscreenPageLimit = descriptions.size
-
+        binding.viewPager.offscreenPageLimit = descriptions.size
 
         binding.viewPager.pageMargin = 50
+        binding.progressBar.hide()
     }
 
-    override fun getDescriptionsError(code: Int?) {
-        binding.progressBar.hide()
-        requireActivity().toast("$code")
+    private fun getDescriptionSearch(amount: Int) {
+        itemViewModel.getDescriptionsListener(this)
+        itemViewModel.getDescriptionsList(code, amount, binding.editSearch.text.toString())
     }
 
     override fun onAddFavoriteClick(position: Int) {
@@ -287,6 +237,37 @@ class DescriptionFragment : Fragment(), KodeinAware, DescriptionsListener,
     }
 
     override fun addFavoriteSuccess() {
+
+    }
+
+    override fun getDescriptionsSuccess(modelDescriptionsPag: ModelDescriptionsPag) {
+
+        filteredList.clear()
+        filteredList.addAll(modelDescriptionsPag)
+        try {
+            binding.nameCards.text = filteredList[0].category
+        }
+        catch (e: Exception) {
+            Log.e("ololo", e.toString())
+        }
+
+        adapter = DescriptionsPagerAdapter(requireContext(), token, filteredList, this)
+        binding.viewPager.adapter = adapter
+        adapter.notifyDataSetChanged()
+        if (position != null) {
+            binding.viewPager.currentItem = position!!
+            binding.indicator.setViewPager(binding.viewPager)
+        }
+        binding.viewPager.getChildAt(0)
+
+
+        binding.viewPager.offscreenPageLimit = filteredList.size
+
+        binding.viewPager.pageMargin = 50
+        binding.progressBar.hide()
+    }
+
+    override fun getDescriptionsError(code: Int?) {
 
     }
 

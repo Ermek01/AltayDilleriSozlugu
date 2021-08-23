@@ -25,7 +25,7 @@
     </style>
 
     <style name="BgText" >
-        <item name="android:textColor">#bab5b5</item>
+        <item name="android:textColor">#7787A6</item>
     </style>
 
     <style name="BgCard" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -52,7 +52,7 @@
 
     <style name="BgCcp">
         <item name="drawableEndCompat">@drawable/ccp_ic_dark</item>
-        <item name="android:textColor">#bab5b5</item>
+        <item name="android:textColor">#BFC6C8</item>
     </style>
 
     <style name="ColorTextFavorites" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -75,5 +75,8 @@
         <item name="android:background">@drawable/dialog_rounded_bg_dark</item>
     </style>
 
+    <style name="ColorTextWithoutAccount" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">#BFC6C8</item>
+    </style>
 
 </resources>

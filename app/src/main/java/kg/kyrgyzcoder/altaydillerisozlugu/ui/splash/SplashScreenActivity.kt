@@ -1,11 +1,12 @@
 package kg.kyrgyzcoder.altaydillerisozlugu.ui.splash
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.WindowInsets
@@ -13,8 +14,6 @@ import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -37,7 +36,6 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
-import java.lang.Exception
 import java.util.*
 
 
@@ -64,7 +62,7 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
     private var code: String? = ""
     private var defcode: String? = "ky"
     private var defNameCountry: String? = "Кыргызча"
-    private var defFlag: Int = 2131231165
+    private var defFlag: Int = R.drawable.kg
     private var name: String? = ""
     private var flag: Int = 0
     private var nameCountry = ""
@@ -90,8 +88,7 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
         loadLanguage()
         try {
             binding = ActivitySplashScreenBinding.inflate(layoutInflater)
-        }
-        catch (e : Exception) {
+        } catch (e: Exception) {
             Log.d("ololo", e.toString())
         }
         setContentView(binding.root)
@@ -218,19 +215,20 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
     private suspend fun delayFor(code: Int) {
 
         if (!mIsRecreate) {
-
             binding.circle240dp.visibility = View.VISIBLE
             binding.circle240dp.animation = circleAnim1
-            delay(800)
-            binding.circle350dp.visibility = View.VISIBLE
-            binding.circle350dp.animation = circleAnim2
-            delay(800)
-            binding.circle450dp.visibility = View.VISIBLE
-            binding.circle450dp.animation = circleAnim3
-            delay(800)
-            binding.circle550dp.visibility = View.VISIBLE
-            binding.circle550dp.animation = circleAnim4
-            delay(200)
+            Handler(Looper.getMainLooper()).postDelayed({
+                binding.circle350dp.visibility = View.VISIBLE
+                binding.circle350dp.animation = circleAnim2
+                Handler(Looper.getMainLooper()).postDelayed({
+                    binding.circle450dp.visibility = View.VISIBLE
+                    binding.circle450dp.animation = circleAnim3
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        binding.circle550dp.visibility = View.VISIBLE
+                        binding.circle550dp.animation = circleAnim4
+                    }, 500)
+                }, 500)
+            }, 500)
 
             if (code == 1) {
                 delay(2000)
@@ -244,11 +242,13 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
                     binding.circle450dp.visibility = View.GONE
                     binding.circle550dp.visibility = View.GONE
 
-                    binding.relativeLayout.visibility = View.VISIBLE
-                    binding.btnLogin.visibility = View.VISIBLE
-                    binding.txtWithoutAccount.visibility = View.VISIBLE
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        binding.relativeLayout.visibility = View.VISIBLE
+                        binding.btnLogin.visibility = View.VISIBLE
+                        binding.txtWithoutAccount.visibility = View.VISIBLE
+                    }, 200)
 
-                    val pref = getSharedPreferences("language",Context.MODE_PRIVATE)
+                    val pref = getSharedPreferences("language", Context.MODE_PRIVATE)
                     val code = pref.getString(CODE_KEY, "")
 
                     binding.relativeLayout.animation = bottomAnim
@@ -258,7 +258,10 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
                     binding.btnLogin.setOnClickListener {
 
                         if (code!!.isEmpty()) {
-                            val pref = applicationContext.getSharedPreferences("language", Context.MODE_PRIVATE)
+                            val pref = applicationContext.getSharedPreferences(
+                                "language",
+                                Context.MODE_PRIVATE
+                            )
                             val editor = pref.edit()
                             editor.putString(CODE_KEY, defcode)
                             editor.putInt(FLAG_KEY, defFlag)
@@ -273,7 +276,10 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware, LanguageListener 
                     binding.txtWithoutAccount.setOnClickListener {
 
                         if (code!!.isEmpty()) {
-                            val pref = applicationContext.getSharedPreferences("language", Context.MODE_PRIVATE)
+                            val pref = applicationContext.getSharedPreferences(
+                                "language",
+                                Context.MODE_PRIVATE
+                            )
                             val editor = pref.edit()
                             editor.putInt(FLAG_KEY, defFlag)
                             editor.putString(CODE_KEY, defcode)

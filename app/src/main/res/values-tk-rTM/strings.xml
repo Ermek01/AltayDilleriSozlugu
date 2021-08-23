@@ -53,4 +53,7 @@
     <string name="txt_payment_method">Töleg usuly</string>
     <string name="txt_payyment_price">Töleg bahasy</string>
     <string name="txt_accepted">kabul edildi</string>
+
+    <string name="facebook_app_id">690235429041312</string>
+    <string name="fb_login_protocol_scheme">fb690235429041312</string>
 </resources>

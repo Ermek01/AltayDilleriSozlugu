@@ -52,4 +52,7 @@
     <string name="txt_payment_method">Способ оплаты</string>
     <string name="txt_payyment_price">Цена оплаты</string>
     <string name="txt_accepted">принимаетя</string>
+
+    <string name="facebook_app_id">690235429041312</string>
+    <string name="fb_login_protocol_scheme">fb690235429041312</string>
 </resources>

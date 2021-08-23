@@ -1,6 +1,7 @@
 package kg.kyrgyzcoder.altaydillerisozlugu.ui.main.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,6 +17,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import java.util.ArrayList
 
 class ItemViewModel(
     private val userPreferences: UserPreferences,
@@ -25,7 +27,12 @@ class ItemViewModel(
     val is_premium = userPreferences.currentUserIsPremium
     val token = userPreferences.currentUserToken
 
-    var mutableLiveData: MutableLiveData<MutableList<ModelDescriptions>> = MutableLiveData()
+    val mutableLiveData = MutableLiveData<MutableList<ModelDescriptions>>()
+    val liveData: LiveData<MutableList<ModelDescriptions>> get() = mutableLiveData
+
+    fun liveData(words: MutableList<ModelDescriptions>) {
+        mutableLiveData.value = words
+    }
 
     private var listener: CategoryListener? = null
     private var wordsListener: WordsListener? = null

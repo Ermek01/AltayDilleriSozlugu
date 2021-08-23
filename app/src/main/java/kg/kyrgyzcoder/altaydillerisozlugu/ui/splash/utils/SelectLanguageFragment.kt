@@ -62,8 +62,6 @@ class SelectLanguageFragment(private val listener: LanguageListener) : DialogFra
 
         val list = ArrayList<Language>()
 
-
-
         for (i in 0 until size) {
             val drawable = when (i % 14) {
                 0 -> R.drawable.tr

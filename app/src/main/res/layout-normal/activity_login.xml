@@ -158,6 +158,7 @@
                 >
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/btn_facebook"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     app:cardCornerRadius="5dp"

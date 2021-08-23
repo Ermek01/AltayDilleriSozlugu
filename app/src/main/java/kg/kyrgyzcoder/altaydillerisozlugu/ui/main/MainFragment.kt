@@ -176,6 +176,7 @@ class MainFragment : Fragment(), KodeinAware, CategoryListener, CategoryRecycler
         adapter = CategoryRecyclerViewAdapter(this, is_premium, token)
         binding.recyclerViewCategoryCards.adapter = adapter
         adapter.submitList(categories)
+        adapter.notifyDataSetChanged()
         binding.progressBar.hide()
         binding.swipeRefresh.isRefreshing = false
     }

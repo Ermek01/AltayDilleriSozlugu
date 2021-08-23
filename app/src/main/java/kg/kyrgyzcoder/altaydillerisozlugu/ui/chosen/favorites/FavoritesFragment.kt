@@ -105,10 +105,8 @@ class FavoritesFragment : Fragment(), KodeinAware, GetDescFavoriteListener, Favo
 
         binding.editSearch.setOnTouchListener(View.OnTouchListener { v, event ->
 
-            val DRAWABLE_LEFT = 0
-            val DRAWABLE_TOP = 1
+
             val DRAWABLE_RIGHT = 2
-            val DRAWABLE_BOTTOM = 3
 
             if (event.action == MotionEvent.ACTION_UP) {
                 if (event.rawX >= binding.editSearch.right - binding.editSearch.compoundDrawables.get(

@@ -19,11 +19,11 @@ import java.util.ArrayList
 class DescriptionsPagerAdapter(
     private val context: Context,
     private val token: String?,
-    private val modelDescriptions: ArrayList<ModelDescriptions>,
+    private val modelDescriptions: MutableList<ModelDescriptions>,
     private val listener: FavoriteClickListener
 ) : PagerAdapter() {
 
-    private val words = arrayListOf<ModelDescriptions>()
+    private var words = arrayListOf<ModelDescriptions>()
     lateinit var adapter: DescriptionsRecyclerViewAdapter
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
@@ -36,17 +36,17 @@ class DescriptionsPagerAdapter(
         val view =
             LayoutInflater.from(context).inflate(R.layout.row_descriptions_page, container, false)
 
-        val model = modelDescriptions[position]
+        val model = modelDescriptions?.get(position)
 
         val pref = context.getSharedPreferences("language", Context.MODE_PRIVATE)
         val code: String = pref.getString(CODE_KEY, "").toString()
 
-        if (!model.image.isNullOrEmpty())
-            Glide.with(view).load(model.image)
+        if (!model?.image.isNullOrEmpty())
+            Glide.with(view).load(model?.image)
                 .error(ContextCompat.getDrawable(context, R.drawable.def_image))
                 .into(view.findViewById(R.id.img))
 
-        getData(code, model, view)
+        getData(code, model!!, view)
 
         if (model.favorite) {
             view.findViewById<ImageView>(R.id.favorite)

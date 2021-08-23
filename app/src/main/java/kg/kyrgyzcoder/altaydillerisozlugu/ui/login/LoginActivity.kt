@@ -3,17 +3,22 @@ package kg.kyrgyzcoder.altaydillerisozlugu.ui.login
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Base64
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+
 import kg.kyrgyzcoder.altaydillerisozlugu.R
 import kg.kyrgyzcoder.altaydillerisozlugu.data.network.login.model.ModelLoginUser
 import kg.kyrgyzcoder.altaydillerisozlugu.databinding.ActivityLoginBinding
@@ -26,6 +31,10 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
+import java.lang.Exception
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
+import java.util.*
 
 class LoginActivity : AppCompatActivity(), KodeinAware, AuthListener {
 
@@ -46,12 +55,13 @@ class LoginActivity : AppCompatActivity(), KodeinAware, AuthListener {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         window.statusBarColor = ContextCompat.getColor(this, R.color.main_bg)
 
         authViewModel = ViewModelProvider(this, authViewModelFactory).get(AuthViewModel::class.java)
         authViewModel.setListener(this)
 
-
+        printHashKey()
 
         binding.btnLogin.setOnClickListener {
 
@@ -95,7 +105,39 @@ class LoginActivity : AppCompatActivity(), KodeinAware, AuthListener {
             startActivity(intent)
         }
 
+//        binding.btnFacebook.setOnClickListener {
+//            LoginManager.getInstance().registerCallback(callbackManager, object :FacebookCallback<LoginResult>{
+//                override fun onSuccess(result: LoginResult?) {
+////                    val graphRequest =  GraphRequest.newMeRequest(result?.accessToken) {obj, response ->
+////                        getFace
+////                    }
+//                }
+//
+//                override fun onCancel() {
+//                }
+//
+//                override fun onError(error: FacebookException?) {
+//                }
+//
+//            })
+//        }
 
+    }
+
+    private fun printHashKey() {
+        try {
+            val info: PackageInfo = this.packageManager.getPackageInfo(this.packageName, PackageManager.GET_SIGNATURES)
+            for (signature in info.signatures) {
+                val md: MessageDigest = MessageDigest.getInstance("SHA")
+                md.update(signature.toByteArray())
+                val hashKey = String(Base64.encode(md.digest(), 0))
+                Log.d("ololo", "printHashKey(): $hashKey ")
+            }
+        } catch (e: NoSuchAlgorithmException) {
+            Log.d("ololo", "printHashKey()", e)
+        } catch (e: Exception) {
+            Log.d("ololo", "printHashKey()", e)
+        }
     }
 
     private fun showPassword(isShow: Boolean){

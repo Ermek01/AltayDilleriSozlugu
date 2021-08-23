@@ -56,5 +56,4 @@ class AuthViewModel(
         listener?.userDataSaved()
     }
 
-
 }

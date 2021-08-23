@@ -35,7 +35,6 @@ class FavoritesDescRecyclerViewAdapter :
         private var isPlaying = false
 
         fun onBind(holder: ViewHolder, position: Int) {
-            val current = getItemAtPos(position)
 
             val pref = itemView.context.getSharedPreferences("language", Context.MODE_PRIVATE)
             val code: String = pref.getString(CODE_KEY, "").toString()

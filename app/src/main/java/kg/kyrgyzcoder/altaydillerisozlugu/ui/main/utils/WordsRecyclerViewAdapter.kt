@@ -81,7 +81,8 @@ class WordsRecyclerViewAdapter(
             }
 
             binding.root.setOnClickListener {
-                listener.onWordsClick(position, currentList[position])
+                listener.onWordsClick(position)
+
             }
         }
 
@@ -97,7 +98,7 @@ class WordsRecyclerViewAdapter(
     }
 
     interface WordsClickListener {
-        fun onWordsClick(position: Int, current: ModelDescriptions)
+        fun onWordsClick(position: Int)
     }
 
     companion object {

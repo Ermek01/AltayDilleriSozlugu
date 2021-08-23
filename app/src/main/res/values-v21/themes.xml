@@ -71,4 +71,8 @@
         <item name="android:background">@drawable/dialog_rounded_bg</item>
     </style>
 
+    <style name="ColorTextWithoutAccount" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

@@ -117,11 +117,6 @@ class FavoritesPagerAdapter(
 
     }
 
-    private fun getTranslateTr(model: ModelDescFavoritesItem, view: View?) {
-
-
-
-    }
 
     interface FavoriteClickListener {
         fun onAddFavoriteClick(position: Int)
